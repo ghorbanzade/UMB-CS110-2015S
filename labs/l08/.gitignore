@@ -1,0 +1,6 @@
+images
+*.tex
+*.log
+*.aux
+*.out
+Makefile
