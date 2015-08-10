@@ -1,6 +1,5 @@
 # Introduction to Computing, Spring 2015
 
-## Introduction
 This repository contains course material developed for *CS110: Introduction to Computing* course at [University of Massachusetts Boston](www.umb.edu) as taught by [Pejman Ghorbanzade](http://www.ghorbanzade.com). The material is released in hope that they will be useful for anyone interested in learning fundamentals of computer programming using Java.
 
 ## Syllabus
