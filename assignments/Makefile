@@ -1,6 +1,8 @@
-TARGETS = assignments
+NUMS = 1
+DIRS = ${NUMS:%=hw0%}
 TARGETS_CODE =
-TARGETS_DOCS = $(TARGETS)
+TARGETS_DOCS = ${DIRS:%=%/assignment}
+TARGETS = $(TARGETS_CODE) $(TARGETS_DOCS)
 TARGETS_CLEAN = $(addsuffix .clean,$(TARGETS))
 
 .PHONY: all

@@ -1,7 +1,7 @@
-template
-textbooks
-submission
-summary
-grades
-mails
-docs
+**/*.class
+**/*.o
+**/*.out
+**/*.log
+**/*.aux
+**/*.tex
+**/hw*/**/images
