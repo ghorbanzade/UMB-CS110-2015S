@@ -1,4 +1,4 @@
-NUMS = 1
+NUMS = 1 2 3 4
 DIRS = ${NUMS:%=hw0%}
 TARGETS_CODE =
 TARGETS_DOCS = ${DIRS:%=%/assignment}
