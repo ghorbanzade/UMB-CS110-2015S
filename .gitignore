@@ -9,3 +9,6 @@ slides/**/*.nav
 slides/**/*.snm
 slides/**/*.vrb
 slides/**/*.pyg
+slides/fonts
+slides/style
+slides/theme
