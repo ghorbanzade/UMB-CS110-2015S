@@ -4,9 +4,8 @@
 **/*.log
 **/*.aux
 **/*.tex
-**/hw*/**/images
+**/images
 slides/**/*.nav
 slides/**/*.snm
 slides/**/*.vrb
 slides/**/*.pyg
-slides/**/images
