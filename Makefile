@@ -1,28 +1,13 @@
-TARGETS = assignments
-TARGETS_CODE =
-TARGETS_DOCS = $(TARGETS)
-TARGETS_CLEAN = $(addsuffix .clean,$(TARGETS))
+DIRS = assignments
 
-.PHONY: all
+.PHONY: clean code docs all
 all: code
 
-.PHONY: docs
-docs: $(TARGETS_DOCS)
+docs: code
+	$(foreach DIR, $(DIRS), @$(MAKE) --no-print-directory -C $(DIR) $@;)
 
-.PHONY: $(TARGETS_DOCS)
-$(TARGETS_DOCS): code
-	@$(MAKE) --no-print-directory -C $@ docs
+code:
+	$(foreach DIR, $(DIRS), @$(MAKE) --no-print-directory -C $(DIR) $@;)
 
-.PHONY: code
-code: $(TARGETS_CODE)
-
-.PHONY: $(TARGETS_CODE)
-$(TARGETS_CODE):
-	@$(MAKE) --no-print-directory -C $@ all
-
-.PHONY: clean
-clean: $(TARGETS_CLEAN)
-
-.PHONY: $(TARGETS_CLEAN)
-$(TARGETS_CLEAN):
-	@$(MAKE) --no-print-directory -C $(basename $@) clean
+clean:
+	$(foreach DIR, $(DIRS), @$(MAKE) --no-print-directory -C $(DIR) $@;)
