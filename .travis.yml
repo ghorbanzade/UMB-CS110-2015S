@@ -1,2 +1,8 @@
 language: java
 script: make code
+notifications:
+  email:
+    recipients:
+      - mail@ghorbanzade.com
+    on_success: always
+    on_failure: always
