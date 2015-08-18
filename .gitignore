@@ -4,7 +4,6 @@
 **/*.log
 **/*.aux
 **/*.tex
-**/images
 slides/**/*.nav
 slides/**/*.snm
 slides/**/*.vrb
