@@ -1,5 +1,7 @@
 # Introduction to Computing, Spring 2015
 
+[![Build Status](https://secure.travic-ci.org/UMB-CS110-2015S/Course-Materials.svg?branch=master)](http://travic-ci.org/UMB-CS110-2015S/Course-Materials)
+
 This repository contains course material developed for *CS110: Introduction to Computing* course at [University of Massachusetts Boston] as taught by [Pejman Ghorbanzade] in Spring 2015. The material is released in hope that they will be useful for anyone interested in learning fundamentals of computer programming using Java.
 
 ## Syllabus
