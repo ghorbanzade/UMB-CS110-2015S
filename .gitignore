@@ -3,12 +3,8 @@
 **/*.out
 **/*.log
 **/*.aux
-**/*.tex
-slides/**/*.nav
-slides/**/*.snm
-slides/**/*.vrb
-slides/**/*.pyg
-slides/**/*.toc
-slides/fonts
-slides/style
-slides/theme
+**/*.nav
+**/*.snm
+**/*.vrb
+**/*.pyg
+**/*.toc
