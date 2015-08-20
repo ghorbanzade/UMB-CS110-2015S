@@ -1,0 +1,214 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\section*{Question 1}
+Write a program \texttt{ShapeDiamond.java} that asks for an integer number \texttt{n} and using \texttt{*} characters, prints a diamond in \texttt{2n-1} rows, such that there is one \texttt{*} character in first row, three \texttt{*} characters in second row and $2n-1$ characters in $n$th row.
+Figure \ref{fig1} shows a sample diamond created when user has entered 4 as input integer.
+\begin{verbbox}
+   *
+  ***
+ *****
+*******
+ *****
+  ***
+   *
+\end{verbbox}
+\begin{figure}[H]\centering
+\theverbbox
+\caption{Sample diamond generated in 7 rows} \label{fig1}
+\end{figure}
+
+\subsection*{Solution}
+\lstset{language=Java}
+\lstset{tabsize=2}
+\begin{lstlisting}
+import java.util.Scanner;
+public class ShapeDiamond {
+	public static void main (String[] args) {
+		Scanner input = new Scanner(System.in);
+		// ask user for row number
+		System.out.print("Enter number of rows: ");
+		int numRows = input.nextInt();
+		// close the Scanner as we no longer need it
+		input.close();
+		int i; // outer loop counter
+		int j; // inner loop counter
+		for (i=1 ; i <= 2*numRows-1; i++) {
+			if (i <= numRows) {
+				for (j = numRows; j > i; j--)
+					System.out.print(" ");
+				for (j = 0; j < 2*i-1; j++)
+					System.out.print("*");
+				System.out.println("");
+			}
+			else {
+				for (j = 0; j < i-numRows; j++)
+					System.out.print(" ");
+				for (j = 0; j < 2*(2*numRows-i)-1 ; j++)
+					System.out.print("*");
+				System.out.println("");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\section*{Question 2}
+Remember the Dalton Brothers? Neglecting their original heights, write a program \texttt{Daltons2.java} that asks for heights of Joe, William, Jack and Averell, as well as the order in which they have to be sorted in terms of height. The order is either \texttt{ASC} for shortest to tallest or \texttt{DESC} for tallest to shortest. The program should give names of the brothers in order of their heights as specified.
+
+\subsection*{Solution}
+\begin{lstlisting}
+import java.util.Scanner;
+public class Daltons2 {
+	public static void main(String[] args) {
+		int i; // loop counter
+		int j; // loop counter
+		// sorting order: true for ASC, false for DESC
+		boolean orderAsc;
+		// String array for names of Dalton Brothers
+		String[] names = {"Joe", "William", "Jack", "Averell"};
+		// Double array for heights of Dalton brothers
+		// length of heights[] is determined by number of brothers
+		double[] heights = new double[names.length];
+		// declaring a Scanner object to get inputs from user
+		Scanner input = new Scanner(System.in);
+
+		// Getting height of each brother
+		for (i = 0; i < names.length; i++) {
+			System.out.print("What is the height of "+names[i]+"? ");
+			heights[i] = input.nextDouble();
+		}
+		// Get order from user
+		// a while(true) loop is used to ensure user inserts desired input
+		// (This is not the best method to solve this problem, as will be discussed later in class)
+		while (true) {
+			System.out.print("In which order do you want to sort the Daltons [ASC, DESC]? ");
+			// Get a String from user
+			String orderName = input.next();
+			// check if value of given String matches 'ASC'
+			if (orderName.equals("ASC")) {
+				orderAsc = true;
+				// end while(true) loop
+				break;
+			}
+			// check if value of given String matches 'DESC'
+			else if (orderName.equals("DESC")) {
+				orderAsc = false;
+				// end while(true) loop
+				break;
+			}
+			// if value of String is neither 'ASC' nor 'DESC'
+			// prompt user that his input is unacceptable
+			// note that the while(true) loop continues after this condition
+			else {
+				System.out.println("Invalid input.");
+			}
+		}
+		// Close Scanner object as we don't need it anymore
+		input.close();
+		// if we wanted to show heights we could do it in one line: Arrays.sort(heights)
+		// since we are asked to show names sorted based on heights
+		// we'll find indices of the sorted heights array.
+		double min;
+		int[] indices = new int[heights.length];
+		boolean[] counted = new boolean[heights.length];
+		for (i = 0; i < heights.length; i++)
+			counted[i] = false;
+		for (i = 0; i < heights.length; i++) {
+			min = Double.MAX_VALUE;
+			for (j = 0; j < heights.length; j++) {
+				if (!counted[j] && heights[j] <= min) {
+					min = heights[j];
+					indices[i] = j;
+				}
+			}
+			counted[indices[i]] = true;
+		}
+		// now indices are found, show names based on indices
+		for (i = 0; i < heights.length; i++) {
+			System.out.println(orderAsc ? names[indices[i]] : names[indices[3-i]]);
+		}
+	}
+}
+\end{lstlisting}
+
+\section*{Question 3}
+
+Minnie and Mannie are students of mathematics. Their area of interest is prime numbers. They also work part time in a restaurant. To fight the extreme boredom of their routine tasks at work, they have invented a little somewhat-challenging game between themselves.
+
+Minnie, the waitress, has numbered each item in the menu with a unique \textbf{random} prime number. When Minnie takes orders of a table, she will multiply the menu numbers of all orders placed by that table and gives the final multiplication to Mannie, the chef.
+
+Thanks to his brilliant mind, Mannie will in less than two seconds decompose the given number to its prime factors and prepares the menu numbers corresponding to those factors.
+
+Unfortunately, Mannie is absent this week and you have to replace him. As it is likely that you cannot decompose a number as fast as Mannie, you are requested to write a program \texttt{PrimeMenu.java} that asks for an integer number and prints all prime factors that number is divisible by. Obviously, your program should also indicate how many times the number is divisible by each prime number.
+
+\subsection*{Solution}
+\begin{lstlisting}
+import java.util.Scanner;
+public class PrimeMenu {
+	public static void main(String[] args) {
+		int i; // loop counter
+		int j; // loop counter
+		int[] primeList = new int[100000]; // array of primes
+		int counter = 0; // counter for array of primes
+		boolean definitelyNotPrime; // flag for prime checking
+		Scanner input = new Scanner(System.in);
+
+		System.out.print("What is the number? ");
+		// ask Minnie the number
+		int number = input.nextInt();
+		// close scanner since we don't need it anymore
+		input.close();
+		// Now find all prime numbers less than or equal to half that number
+		System.out.print("Calculating...");
+		for (i = 2; i <= number/2; i++) {
+			// check if a number is prime
+			// a number is prime if is not divisible by any smaller prime number
+			// note that we can't afford to check if any smaller number divides our number
+			definitelyNotPrime = false;
+			for (j = 0; j < counter; j++) {
+				if (i % primeList[j] == 0) {
+					definitelyNotPrime = true;
+				}
+			}
+			if (!definitelyNotPrime) {
+				primeList[counter++] = i;
+			}
+		}
+		System.out.println(" OK.");
+		System.out.println("Prime\tNumber");
+		// Now we know all prime lists to check for
+		for (i = 0; i < counter; i++) {
+			j = 0;
+			while ( number % primeList[i] == 0) {
+				number /= primeList[i];
+				j++;
+			}
+			if (j != 0) {
+				System.out.println(primeList[i]+"\t"+j);
+			}
+		}
+	}
+}
+\end{lstlisting}

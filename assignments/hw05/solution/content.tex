@@ -1,0 +1,359 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\section*{Question 1}
+
+Write a program \texttt{FlightTest.java} that controls two airplanes, one \texttt{plane1} a commercial plane from \texttt{Eagle} company and one \texttt{plane2}, a fighter-bomber from \texttt{Dragon} company.  All airplanes fly at some altitude and with some speed. They take off and land. Just as bombers may drop bomb (if they have any) while they are in sky, commercials can board passengers (as much as their capacity allows) while grounded.
+
+Assuming all planes made by \texttt{Eagle} have 300 seats, fly at 39000 ft and 550 mph and all planes made by \texttt{Dragon} have 2 bomb bays and fly at 30000 ft and 1000 mph, develop classes \texttt{Aircraft}, \texttt{Bomber}, \texttt{Commercial}, \texttt{Eagle} and \texttt{Dragon} and use them in a program \texttt{FlightTest.java}.
+
+\section*{Solution}
+
+\begin{enumerate}
+\item Class \texttt{Aircraft.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public abstract class Aircraft {
+	// attributes
+	private double flyAltitude;
+	private double flySpeed;
+	private double altitude;
+	private double speed;
+	private boolean grounded;
+	// methods
+	public void takeOff() {
+		this.grounded = false;
+		this.altitude = this.flyAltitude;
+		this.speed = this.flySpeed;
+		System.out.println("Plane took off.");
+	}
+	public void land() {
+		this.grounded = true;
+		this.altitude = 0;
+		this.speed = 0;
+		System.out.println("Plane landed.");
+	}
+	// constructor
+	public Aircraft(double altitude, double speed) {
+		this.flyAltitude = altitude;
+		this.flySpeed = speed;
+		this.land();
+		System.out.println("New Aircraft Made.");
+	}
+	// getters and setters
+	public boolean isGrounded() {
+		return grounded;
+	}
+	public double getAltitude() {
+		return altitude;
+	}
+	public double getSpeed() {
+		return speed;
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Bomber.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public abstract class Bomber extends Aircraft {
+	// attributes
+	private int numBombs;
+	// methods
+	public void dropBomb() {
+		if (!this.isGrounded() && numBombs > 0) {
+			numBombs--;
+			System.out.println("Bomb dropped.");
+		}
+	}
+	// constructor
+	public Bomber(double altitude, double speed, int bombs) {
+		super(altitude, speed);
+		this.numBombs = bombs;
+		System.out.println("A new bomber!");
+	}
+	// getters and setters
+	public int getNumBombs() {
+		return numBombs;
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Commercial.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public abstract class Commercial extends Aircraft {
+	// attributes
+	private int numPassenger;
+	// methods
+	public void board(int num) {
+		if (this.isGrounded()) {
+			numPassenger += num;
+			System.out.println(num + " passenger(s) aboard.");
+		}
+	}
+	// constructor
+	public Commercial(double altitude, double speed) {
+		super(altitude, speed);
+		numPassenger = 0;
+		System.out.println("A new commercial!");
+	}
+	// getters and setters
+	public int getNumPassenger() {
+		return numPassenger;
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Eagle.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class Eagle extends Commercial {
+	// attributes
+	private static int maxPassenger = 300;
+	private static double altitude = 39000;
+	private static double speed = 550;
+	// methods
+	public void board() {
+		this.board(1);
+	}
+	public void board(int num) {
+		if (this.getNumPassenger() + num < maxPassenger) {
+			super.board(num);
+		}
+	}
+	// constructor
+	public Eagle() {
+		super(altitude, speed);
+		System.out.println("A new eagle!");
+	}
+	// getters and setters
+}
+\end{lstlisting}
+
+\item Class \texttt{Dragon.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class Dragon extends Bomber {
+	// attributes
+	private static int maxNumBombs = 2;
+	private static double altitude = 30000;
+	private static double speed = 1000;
+	// methods
+	// constructor
+	public Dragon() {
+		super(altitude, speed, maxNumBombs);
+		System.out.println("A new dragon!");
+	}
+	// getters and setter
+}
+\end{lstlisting}
+
+\item Class \texttt{FlightTest.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class FlightTest {
+	public static void main(String[] args) {
+		// instantiate planes
+		// For the commercial plane
+		Eagle plane1 = new Eagle();
+		// when plane is created, it's grounded
+		// and boarding 10 passengers is possible
+		plane1.board(10);
+		// if the plane takes off
+		plane1.takeOff();
+		// we can't board passengers anymore
+		plane1.board(10);
+		// and there will only be 10 passengers aboard
+		System.out.println("Num Passengers: "+plane1.getNumPassenger());
+		// it flies in 39000 ft
+		System.out.println("Altitude: "+plane1.getAltitude());
+		// and its speed is 550 mph
+		System.out.println("Speed: "+plane1.getSpeed());
+		// if the plane lands again
+		plane1.land();
+		// its altitude becomes 0
+		System.out.println("Altitude: "+plane1.getAltitude());
+		// as well as its speed
+		System.out.println("Speed: "+plane1.getSpeed());
+		// As for the bomber plane
+		Dragon plane2 = new Dragon();
+		// when plane is created, it's grounded
+		// and loaded with 2 bombs
+		System.out.println("Num Bombs: "+plane2.getNumBombs());
+		// but it cannot drop bomb while grounded
+		plane2.dropBomb();
+		// if the plane takes off
+		plane2.takeOff();
+		// it can drop bombs
+		plane2.dropBomb();
+		// until its bomb bays are empty
+		plane2.dropBomb();
+		// that's when it cannot drop bomb anymore
+		plane2.dropBomb();
+		// it flies at 30000 ft
+		System.out.println("Altitude: "+plane2.getAltitude());
+		// and its speed is 1000 mph
+		System.out.println("Speed: "+plane2.getSpeed());
+		// until it lands
+		plane2.land();
+		// its altitude becomes 0
+		System.out.println("Altitude: "+plane1.getAltitude());
+		// as well as its speed
+		System.out.println("Speed: "+plane1.getSpeed());
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}
+
+\section*{Question 2}
+
+Your manager has just learned basic concepts of interfaces and abstraction in Java and has asked you to implement the methods in the following interface in a class \texttt{ArraySort.java}. Write a program \texttt{ArraySortTest.java} to show him how to use your class to initialize, shuffle and sort an array. Attach a file \texttt{note.txt} to briefly explain why this is not a good practice and recommend a better alternative.
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public interface sortAndUnsort {
+	// sorts the array using insertion sort
+	public int[] sortInsertion(int[] array);
+	// shuffles the array
+	public int[] shuffle(int[] array);
+	// prints the array elements
+	public void print(int[] array);
+	// initialize array from firstElement to lastElement
+	public int[] init(int firstElement, int lastElement);
+}
+\end{lstlisting}
+
+\section*{Solution}
+
+\begin{enumerate}
+\item Class \texttt{ArraySort.java}
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class ArraySort implements sortAndUnsort {
+	// sorts the array using insertion sort
+	@Override
+	public int[] sortInsertion(int[] array) {
+		for (int i = 0; i < array.length; i++) {
+			int minIndex = i;
+			int min = array[i];
+			for (int j = i; j < array.length; j++) {
+				if (array[j] < min) {
+					min = array[j];
+					minIndex = j;
+				}
+			}
+			if (i != minIndex) {
+				int temp = array[i];
+				array[i] = array[minIndex];
+				array[minIndex] = temp;
+			}
+		}
+		return array;
+	}
+	// shuffles the array
+	@Override
+	public int[] shuffle(int[] array) {
+		for (int i = 0; i < array.length; i++) {
+			int j = (int) (i + (array.length - i)*Math.random());
+			int temp = array[j];
+			array[j] = array[i];
+			array[i] = temp;
+		}
+		return array;
+	}
+	// prints the array elements
+	@Override
+	public void print(int[] array) {
+		for (int i = 0; i < array.length; i++) {
+			System.out.printf("%2d ", array[i]);
+		}
+		System.out.println();
+	}
+	// initialize array from firstElement to lastElement
+	@Override
+	public int[] init(int firstElement, int lastElement) {
+		int[] array = new int[lastElement - firstElement + 1];
+		for (int i = 0; i < array.length; i++) {
+			array[i] = firstElement + i;
+		}
+		return array;
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{ArraySortTest.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class ArraySortTest {
+	public static void main(String[] args) {
+		ArraySort instance = new ArraySort();
+		// initialize array from 1 to 10
+		int[] array = instance.init(1, 10);
+		// prints the initialized array
+		instance.print(array);
+		// shuffles the array
+		array = instance.shuffle(array);
+		// prints the shuffled array
+		instance.print(array);
+		// sorts array using insertion sort
+		array = instance.sortInsertion(array);
+		// prints the sorted array
+		instance.print(array);
+	}
+}
+\end{lstlisting}
+
+The disadvantage of using an interface for the proposed objective is that given methods should be implemented in a separate class. Calling these methods require instantiation from \texttt{ArraySort} class. One possible alternative is to develop all desired methods as static methods of normal class \texttt{ArraySort.java} whose constructor is made private, eliminating the need for an interface. This way, the following code snippet can replace the previous \texttt{ArraySortTest.java} file.
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class ArraySortTestV2 {
+	public static void main(String[] args) {
+		// initialize array from 1 to 10
+		int[] array = ArraySort.init(1, 10);
+		// prints the initialized array
+		ArraySort.print(array);
+		// shuffles the array
+		array = ArraySort.shuffle(array);
+		// prints the shuffled array
+		ArraySort.print(array);
+		// sorts array using insertion sort
+		array = ArraySort.sortInsertion(array);
+		// prints the sorted array
+		ArraySort.print(array);
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}

@@ -1,5 +1,9 @@
 language: java
-script: make code
+script:
+  - make clean
+  - make code
+  - cd assignments
+  - make docs
 notifications:
   email:
     recipients:

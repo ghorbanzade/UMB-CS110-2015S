@@ -1,0 +1,233 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\section*{Question 1}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{\topDirectory/template/images/zombies.png}
+\end{wrapfigure}
+
+The 1st International Conference on Cool Programming Questions (CPQ2015) was held in Boston, MA in a rectangular-shaped conference room of 30 meters width, 50 meters length and seats in 6 rows and 10 columns. 50 people (including organizers and keynote speakers) registered for the conference and were seated in the conference room for the opening ceremony, when suddenly the author in row 2 and column 4 turned into a Zombie.
+
+Reports suggest that at the time of incident, all attendees began to run for their lives but all doors were unfortunately locked. Sadly, they were all bitten eventually and turned into zombies.
+
+Write a program \texttt{Simulation.java} that, using the following assumptions, simulates how long it took (in seconds) for all authors to turn into Zombies. Develop as many additional classes as you think best fits the objective.
+
+\begin{itemize}[itemsep=1mm]\parskip=0pt
+\item[] Seats are scattered evenly in the room.
+\item[] Seats do not block the way for authors or zombies.
+\item[] Authors not yet bitten move randomly in the conference room.
+\item[] Authors within 1 meter proximity of a zombie will be bitten.
+\item[] Authors will turn into zombies, once bitten.
+\item[] Zombies move towards the author closest to them.
+\item[] Zombies bite in an instant.
+\item[] All attendees walk 5 meters per second.
+\item[] Time granularity is 0.2 second.
+\end{itemize}
+
+\section*{Solution}
+
+\begin{enumerate}
+\item Class \texttt{Person.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public abstract class Person {
+	// attributes
+	private double posX;
+	private double posY;
+	// abstract methods
+	public abstract void walk();
+	// methods
+	public boolean walkTo(double posX, double posY) {
+		if (posX < Room.getRoomLength() && posX >= 0 && posY < Room.getRoomWidth() && posY >= 0) {
+			this.posX = posX;
+			this.posY = posY;
+			return true;
+		}
+		return false;
+	}
+	// constructor
+	public Person(double posX, double posY) {
+		this.posX = posX;
+		this.posY = posY;
+	}
+	// getter and setter
+	public double getPosX() {
+		return posX;
+	}
+	public double getPosY() {
+		return posY;
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Human.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class Human extends Person {
+	// attributes
+	private double speed = 1;
+	// constructor
+	public Human(double posX, double posY) {
+		super(posX, posY);
+	}
+	// methods
+	@Override
+	public void walk() {
+		double direction;
+		while (true) {
+			direction = Math.random()*2*Math.PI;
+			double newPosX = this.getPosX() + Math.cos(direction) * speed;
+			double newPosY = this.getPosY() + Math.sin(direction) * speed;
+			if (walkTo(newPosX, newPosY))
+				break;
+		}
+	}
+	public void turn() {
+		int index = Room.humans.indexOf(this);
+		double posX = Room.humans.get(index).getPosX();
+		double posY = Room.humans.get(index).getPosY();
+		Room.zombies.add(new Zombie(posX, posY));
+		Room.humans.remove(index);
+		System.out.printf("H(%d) turned.\n", index);
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Zombie.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class Zombie extends Person {
+	// attribute
+	private double speed = 1;
+	private double range = 1;
+	// constructors
+	public Zombie(double posX, double posY) {
+		super(posX, posY);
+	}
+	// methods
+	@Override
+	public void walk() {
+		if (Room.humans.size() > 0) {
+			double closestDistX = 0;
+			double closestDistY = 0;
+			double minDistance = 2*Room.getRoomLength();
+			for (int i = 0; i < Room.humans.size(); i++) {
+				double distX = this.getPosX() - Room.humans.get(i).getPosX();
+				double distY = this.getPosY() - Room.humans.get(i).getPosY();
+				double distance = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
+				if (distance < minDistance) {
+					minDistance = distance;
+					closestDistX = distX;
+					closestDistY = distY;
+				}
+			}
+			double direction = Math.atan2(closestDistY, closestDistX);
+			double newPosX = this.getPosX() + Math.cos(direction) * speed;
+			double newPosY = this.getPosY() + Math.sin(direction) * speed;
+			walkTo(newPosX, newPosY);
+		}
+	}
+	public void bite() {
+		for (int i = 0; i < Room.humans.size(); i++) {
+			double distX = this.getPosX() - Room.humans.get(i).getPosX();
+			double distY = this.getPosY() - Room.humans.get(i).getPosY();
+			double distance = Math.sqrt(Math.pow(distX, 2) + Math.pow(distY, 2));
+			if (distance < range) {
+				Room.humans.get(i).turn();
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\item Class \texttt{Room.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+import java.util.ArrayList;
+public class Room {
+	// fields
+	private static int time = 0;
+	private static int numRows = 5;
+	private static int numCols = 10;
+	private static double roomLength = 50;
+	private static double roomWidth = 30;
+	public static ArrayList<Human> humans = new ArrayList<Human>(numRows*numCols);
+	public static ArrayList<Zombie> zombies = new ArrayList<Zombie>(numRows*numCols);
+	// methods
+	public static void initialize() {
+		for (int i = 0; i < numRows; i++) {
+			for (int j = 0; j < numCols; j++) {
+				double posX = (roomLength/numCols)*j + (roomLength/numCols/2);
+				double posY = (roomWidth/numRows)*i + (roomWidth/numRows/2);
+				humans.add(new Human(posX, posY));
+			}
+		}
+	}
+	public static void nextTime() {
+		for (int i = 0; i < zombies.size(); i++)
+			zombies.get(i).bite();
+		for (int i = 0; i < zombies.size(); i++)
+			zombies.get(i).walk();
+		for (int i = 0; i < humans.size(); i++)
+			humans.get(i).walk();
+		time++;
+	}
+	// getters and setters
+	public static double getRoomLength() {
+		return roomLength;
+	}
+	public static double getRoomWidth() {
+		return roomWidth;
+	}
+	public static int getTime() {
+		return time/5;
+	}
+	// constructor
+	private Room() {}
+}
+\end{lstlisting}
+
+\item Class \texttt{Simulation.java}
+
+\lstset{language=java,tabsize=2}
+\begin{lstlisting}
+public class Simulation {
+	public static void main(String[] args) {
+		Room.initialize();
+		Room.humans.get(13).turn();
+		while (Room.humans.size() > 0) {
+			System.out.printf("Time: %6d numZ: %2d numH: %2d\n", Room.getTime(), Room.zombies.size(), Room.humans.size());
+			Room.nextTime();
+		}
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}

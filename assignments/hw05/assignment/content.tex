@@ -1,0 +1,47 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\section*{Question 1}
+
+Write a program \texttt{FlightTest.java} that controls two airplanes, one \texttt{plane1} a commercial plane from \texttt{Eagle} company and one \texttt{plane2}, a fighter-bomber from \texttt{Dragon} company.  All airplanes fly at some altitude and with some speed. They take off and land. Just as bombers may drop bomb (if they have any) while they are in sky, commercials can board passengers (as much as their capacity allows) while grounded.
+
+Assuming all planes made by \texttt{Eagle} have 300 seats, fly at 39000 ft and 550 mph and all planes made by \texttt{Dragon} have 2 bomb bays and fly at 30000 ft and 1000 mph, develop classes \texttt{Aircraft}, \texttt{Bomber}, \texttt{Commercial}, \texttt{Eagle} and \texttt{Dragon} and use them in a program \texttt{FlightTest.java}.
+
+\section*{Question 2}
+
+Your manager has just learned basic concepts of interfaces and abstraction in Java and has asked you to implement the methods in the following interface in a class \texttt{ArraySort.java}. Write a program \texttt{ArraySortTest.java} to show him how to use your class to initialize, shuffle and sort an array. Attach a file \texttt{note.txt} to briefly explain why this is not a good practice and recommend a better alternative.
+
+\lstset{language=java}
+\begin{lstlisting}
+public interface sortAndUnsort {
+	// sorts the array using insertion sort
+	public int[] sortInsertion(int[] array);
+	// shuffles the array
+	public int[] shuffle(int[] array);
+	// prints the array elements
+	public void print(int[] array);
+	// initialize array from firstElement to lastElement
+	public int[] init(int firstElement, int lastElement);
+}
+\end{lstlisting}
