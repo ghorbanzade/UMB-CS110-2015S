@@ -29,8 +29,8 @@ docs: code $(PDF)
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
-	pdflatex $(@F:.pdf=.tex) > /dev/null && \
-	pdflatex $(@F:.pdf=.tex) > /dev/null
+	pdflatex $(@F:.pdf=.tex) && \
+	pdflatex $(@F:.pdf=.tex)
 	@echo "Done."
 
 code: $(CLASS)
