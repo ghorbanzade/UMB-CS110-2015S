@@ -174,9 +174,9 @@
         \textbf{ \large \docTitle }
       \end{center}
       \begin{flushright}
-      Release Date: \docDatePub
+      \@ifundefined{docDatePub}{}{Release Date: \docDatePub}
 
-      Due Date: \docDateDue
+      \@ifundefined{docDateDue}{}{Due Date: \docDateDue}
       \end{flushright}
       \vspace{10pt}
       \setlength{\parskip}{0pt}
