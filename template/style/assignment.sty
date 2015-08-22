@@ -39,86 +39,6 @@
 \usepackage{tikz}
 \usepackage{hyperref}
 
-\newcommand{\course}[2]{
-  \def \argId {id}
-  \def \argName {name}
-  \def \argVenue {venue}
-  \def \argSemester {semester}
-  \def \argDepartment {department}
-  \def \argUniversity {university}
-  \def \argGiven {#1}
-  \ifx\argGiven\argId
-    \def \courseId {#2}
-  \fi
-  \ifx\argGiven\argName
-    \def \courseName {#2}
-  \fi
-  \ifx\argGiven\argVenue
-    \def \courseVenue {#2}
-  \fi
-  \ifx\argGiven\argSemester
-    \def \courseSemester {#2}
-  \fi
-  \ifx\argGiven\argDepartment
-    \def \courseDepartment {#2}
-  \fi
-  \ifx\argGiven\argUniversity
-    \def \courseUniversity {#2}
-  \fi
-}
-
-\newcommand{\instructor}[2]{
-  \def \argName {name}
-  \def \argPosition {position}
-  \def \argEmail {email}
-  \def \argPhone {phone}
-  \def \argOffice {office}
-  \def \argOfficeHours {office-hours}
-  \def \argAddress {address}
-  \def \argGiven {#1}
-  \ifx\argGiven\argName
-    \def \instructorName {#2}
-  \fi
-  \ifx\argGiven\argPosition
-    \def \instructorPosition {#2}
-  \fi
-  \ifx\argGiven\argEmail
-    \def \instructorEmail {#2}
-  \fi
-  \ifx\argGiven\argPhone
-    \def \instructorPhone {#2}
-  \fi
-  \ifx\argGiven\argOffice
-    \def \instructorOffice {#2}
-  \fi
-  \ifx\argGiven\argOfficeHours
-    \def \instructorOfficeHours {#2}
-  \fi
-  \ifx\argGiven\argAddress
-    \def \instructorAddress {#2}
-  \fi
-}
-
-\newcommand{\doc}[2]{
-  \def \argTitle {title}
-  \def \argDatePub {date-pub}
-  \def \argDateDue {date-due}
-  \def \argPoints {points}
-  \def \argGiven {#1}
-  \ifx\argGiven\argTitle
-    \def \docTitle {#2}
-  \fi
-  \ifx\argGiven\argDatePub
-    \def \docDatePub {#2}
-  \fi
-  \ifx\argGiven\argDateDue
-    \def \docDateDue {#2}
-  \fi
-  \ifx\argGiven\argPoints
-    \def \docPoints {#2}
-  \fi
-}
-
 \title{\docTitle}
 \author{\instructorName}
 \newgeometry{hmargin=4cm,vmargin=3cm}
@@ -134,20 +54,20 @@
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 \lstset{frame=tb,
-  aboveskip=3mm,
-  belowskip=3mm,
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=left,
-  numbersep=10pt,
-  numberstyle=\tiny\color{black},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=5
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=left,
+	numbersep=10pt,
+	numberstyle=\tiny\color{black},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=5
 }
 \setlength{\parskip}{0pt}
 \setlength{\parindent}{0pt}
@@ -160,38 +80,38 @@
 	\def\argHeader{header}
 	\def\argFooter{footer}
 	\ifx\argGiven\argHeader
-    \begingroup
-      \begin{center}
-        { \Large \courseId: \courseName }
+		\begingroup
+			\begin{center}
+				{ \Large \courseId: \courseName }
 
-        \vspace{5pt}
+				\vspace{5pt}
 
-        { \courseSemester, \courseVenue }\\
-        {\small Instructor:\ \instructorName}
+				{ \courseSemester, \courseVenue }\\
+				{\small Instructor:\ \instructorName}
 
-        \vspace{10pt}
+				\vspace{10pt}
 
-        \textbf{ \large \docTitle }
-      \end{center}
-      \begin{flushright}
-      \@ifundefined{docDatePub}{}{Release Date: \docDatePub}
+				\textbf{ \large \docTitle }
+			\end{center}
+			\begin{flushright}
+			\@ifundefined{docDatePub}{}{Release Date: \docDatePub}
 
-      \@ifundefined{docDateDue}{}{Due Date: \docDateDue}
-      \end{flushright}
-      \vspace{10pt}
-      \setlength{\parskip}{0pt}
-    \endgroup
-  \fi
+			\@ifundefined{docDateDue}{}{Due Date: \docDateDue}
+			\end{flushright}
+			\vspace{10pt}
+			\setlength{\parskip}{0pt}
+		\endgroup
+	\fi
 	\ifx\argGiven\argFooter
-    \begingroup
-    \section*{Submission Guidelines}
-    All submissions should be made on-line through {\href{http://ghorbanzade.com}{course website}}.
-    All solutions should be typed.
-    No paper copies are accepted.
-    Please pack all your solution codes together with your prepared text files into a single \texttt{zip} file.
-    You are expected to include a header containing your name and email address for each programming file.
-    \section*{Late Submission Policy}
-    Solutions may be submitted late by up to two days; the penalty for late submission increasing linearly from 20\% to 100\% of the total score.
-    \endgroup
+		\begingroup
+		\section*{Submission Guidelines}
+		All submissions should be made on-line through {\href{http://ghorbanzade.com}{course website}}.
+		All solutions should be typed.
+		No paper copies are accepted.
+		Please pack all your solution codes together with your prepared text files into a single \texttt{zip} file.
+		You are expected to include a header containing your name and email address for each programming file.
+		\section*{Late Submission Policy}
+		Solutions may be submitted late by up to two days; the penalty for late submission increasing linearly from 20\% to 100\% of the total score.
+		\endgroup
 	\fi
 }
