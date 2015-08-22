@@ -1,0 +1,297 @@
+\section*{Question 1}
+The following code snippets either do not compile or do not run as expected. There are five \textbf{distinct} problems in each code snippet. You are expected to find and fix all errors so that given command-line arguments will lead to expected output as indicated.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Execution Script \hfill Expected Output\\
+\texttt{java HelloWorld President} \hfill \texttt{Hello President!}
+\begin{lstlisting}
+public class HelloWorld {
+	public static void main(String args) {
+		System.out.printn("Hello" + args[0]!)
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Divisible 15 4} \hfill \texttt{15 not divisible by 4}
+
+\begin{lstlisting}
+public class Divisible.java {
+	public static void main(String args) {
+		int b;
+		int a = args[0];
+		b = args[1];
+		if (a % b = 0) {
+			System.out.println(a + " divisible by " + b);
+		}
+		elseif {
+			System.out.print(a + " not divisible by " + b);
+		}
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Quadratic 1 -2 -4} \hfill \texttt{-1.236 and 3.237}
+
+\begin{lstlisting}
+public class Quadratic {
+	public static void main(String[] args) {
+		int a = Integer.parseInt(args[0]);
+		int b = Integer.parseInt(args[1]);
+		int c = Integer.parseInt(args[2]);
+		double discriminant = b^2 - 4*a*c;
+		if (double discriminant > 0) {
+			double 1sol = (- b + sqrt(discriminant))/(2*a);
+			double 2sol = (- b - sqrt(discriminant))/(2*a);
+			System.out.printf("%f and %f\n", sol1, sol2);
+		}
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java IdentityMatrix 2} \hfill \texttt{1 0}\\ \raggedleft \texttt{0 1}
+
+\begin{lstlisting}
+public class IdentityMatrix {
+	public static void main(String[] args) {
+		int i, j;
+		int row = Integer.parseInt(args[0]);
+		int[][] matrix = int[row][row];
+		for (i = 1; i < row; i++) {
+			matrix[i,i] = 1;
+		}
+		for (i = 1; i < row; i++) {
+			for (j = 1; j < row; j++) {
+				System.out.print(matrix[i,j] + " ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Factorial 5} \hfill \texttt{5! is 120}
+
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (i = a: i >= 0: i--) {
+			product *= a;
+		}
+		System.out.println(a! + " is " + product );
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}
+
+\subsection*{Solution}
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Execution Script \hfill Expected Output\\
+\texttt{java HelloWorld President} \hfill \texttt{Hello President!}
+\begin{lstlisting}
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello " + args[0] + "!");
+	}
+}
+\end{lstlisting}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 2: data type specified for arguments of main method is inconsistent with data type for command-line arguments. \texttt{String} was changed to \texttt{String[]}.
+\item Line 3: There was a typo in \texttt{println} method.
+\item Line 3: Based on expected output, one space should be printed between word \texttt{Hello} and command-line argument. String literal \texttt{"Hello"} was changed to \texttt{"Hello "}.
+\item Line 3: \texttt{!} should be enclosed with double quotation marks to be printed as output. \texttt{!} was changed to \texttt{"!"}. A \texttt{+} operand is also used to concatenate strings.
+\item Line 3: All statements in Java should end with character \texttt{;}. Character \texttt{;} was added to the end of statement.
+\end{enumerate}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Divisible 15 4} \hfill \texttt{15 not divisible by 4}
+
+\begin{lstlisting}
+public class Divisible {
+	public static void main(String[] args) {
+		int b;
+		int a = Integer.parseInt(args[0]);
+		b = Integer.parsseInt(args[1]);
+		if (a % b == 0) {
+			System.out.println(a + " divisible by " + b);
+		}
+		else {
+			System.out.print(a + " not divisible by " + b);
+		}
+	}
+}
+\end{lstlisting}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 1: Class names should be specified without \texttt{.java} extension.
+\item Line 2: data type specified for arguments of main method is inconsistent with data type for command-line arguments. \texttt{String} was changed to \texttt{String[]}.
+\item Line 4, 5: Command-line arguments are of type \texttt{String}. They should first be parsed into type \texttt{Integer} and then be assigned to \texttt{a} and \texttt{b} variables.
+\item Line 6: Relational operator for equality in Java is \texttt{==}. As condition for \texttt{if} condition should be a boolean statement, \texttt{=} was changed to \texttt{==}.
+\item Line 9: To execute a block when \texttt{if} condition fails, \texttt{else} should be used. \texttt{elseif} cannot be used without specifying another condition. Keyword \texttt{elseif} was changed to \texttt{else}.
+\end{enumerate}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Quadratic 1 -2 -4} \hfill \texttt{-1.236 and 3.237}
+
+\begin{lstlisting}
+public class Quadratic {
+	public static void main(String[] args) {
+		int a = Integer.parseInt(args[0]);
+		int b = Integer.parseInt(args[1]);
+		int c = Integer.parseInt(args[2]);
+		double discriminant = Math.pow(b,2) - 4*a*c;
+		if (discriminant > 0) {
+			double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+			double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+			System.out.printf("%f and %f\n", sol1, sol2);
+		}
+	}
+}
+\end{lstlisting}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 6: Character \texttt{\^} in Java is an \texttt{XOR} bitwise operand. To raise a number to a power, method \texttt{pow()} of class \texttt{Math} should be called. Operator \texttt{\^} was replaced by operator \texttt{Math.pow()}.
+\item Line 7: Variable \texttt{discriminant} is already declared as \texttt{double} in line 6. In Java, all variable can be declared only once. Keyword \texttt{double} was removed.
+\item Line 8, 9: Identifiers may not begin with digits. Variables \texttt{1sol} and \texttt{2sol} are changed to \texttt{sol1} and \texttt{sol2}.
+\item Line 8, 9: Method \texttt{sqrt()} is undefined in \texttt{Java.lang} class. To compute square root of a number, Method \texttt{sqrt()} of class \texttt{Math} should be called. \texttt{sqrt()} was replaced by \texttt{Math.sqrt()}.
+\item Line 10: Expected output is in 3 digits. \texttt{"\%f"} was changed to \texttt{"\%.3f"}.
+\end{enumerate}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java IdentityMatrix 2} \hfill \texttt{1 0}\\ . \hfill \texttt{0 1}
+
+\begin{lstlisting}
+public class IdentityMatrix {
+	public static void main(String[] args) {
+		int i, j;
+		int row = Integer.parseInt(args[0]);
+		int[][] matrix = new int[row][row];
+		for (i = 0; i < row; i++)
+			for (j = 0; j < row; j++)
+				matrix[i][j] = 0;
+		for (i = 0; i < row; i++) {
+			matrix[i][i] = 1;
+		}
+		for (i = 0; i < row; i++) {
+			for (j = 0; j < row; j++) {
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+}
+\end{lstlisting}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 5: Keyword \texttt{new} should be used to allocate memory for array of specified size. Keyword \texttt{new} was added.
+\item Line 6: Array \texttt{matrix} is never initialized. Lines 6 to 8 are added to initialize all elements of array to 0.
+\item Line 9, 12, 13: Since \texttt{i} starts from $1$, $1$ would not be assigned to the first element of array. Variables \texttt{i} and \texttt{j} are initialized to $0$ instead of $1$.
+\item Line 10, 14: Elements of array are called by using their indices in each dimension, enclosing each inside brackets. \texttt{matrix[i,j]} was changed to \texttt{matrix[i][j]}.
+\item After execution of innermost loop, a feed line should be printed so that elements of next row is printed in next line. Line 16 is added to produce the feed line.
+\end{enumerate}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Factorial 5} \hfill \texttt{5! is 120}
+
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (int i = a; i > 0; i--) {
+			product *= i;
+		}
+		System.out.println(a + "! is " + product );
+	}
+}
+\end{lstlisting}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 5: Variable \texttt{i} is not declared. All variables should first be declared before use. Keyword \texttt{int} was added to Initialization component of the \texttt{for} loop.
+\item Line 5: Components of the \texttt{for} loop in Java are separated by character \texttt{;}. Character \texttt{:} was replaced by character \texttt{;}.
+\item Line 5: Specifying condition of \texttt{for} loop as \texttt{i >= 0} will always cause \texttt{0} to be printed in output. Condition was changed to \texttt{i > 0}.
+\item Line 6: Variable \texttt{a} is constant and the statement will produce $a^a$ instead of $a!$. \texttt{product *= a} was changed to \texttt{product *= i}.
+\item Line 9: \texttt{!} should be enclosed with double quotation marks to be printed as output. \texttt{!} was changed to \texttt{"!"}. A \texttt{+} operand is also used to concatenate strings.
+\end{enumerate}
+
+\end{enumerate}
+
+\section*{Question 2}
+Determine the output of the following code snippet and support your answer by explaining how the program works. No assumption about user input can be made except that the input is an integer.\\[10pt]
+
+Execution Script \hfill \texttt{java CoolArray}
+
+\begin{lstlisting}
+import java.util.Scanner;
+public class CoolArray {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter array size: ");
+		int size = input.nextInt();
+		input.close();
+		double array[] = new double[2*size];
+		for (int i = 0; i < size; i++) {
+			int num = (int) (Math.random() * 10);
+			array[i] = num;
+			array[2*size - i - 1] = 10 - num;
+		}
+		double sum = 0;
+		for (int i = 0; i < 2*size; i++) {
+			sum += array[i];
+		}
+		System.out.println(sum/size/2);
+		System.out.println();
+	}
+}
+
+\end{lstlisting}
+
+\subsection*{Solution}
+
+Regardless of user's choice of \texttt{size}, the size of array would always be \texttt{2*size}. First \texttt{for} loop will be executed \texttt{size} times and each time will generate a random floating number between 0 to 10. Interestingly, for each iteration \texttt{i}, sum of elements \texttt{array[i]} and \texttt{array[2*size-i-1]} will always be 10. Thus, sum of all elements will be \texttt{size*10} while there are \texttt{2*size} elements. Thus the output would always be $5$.
+
+\section*{Question 3}
+Write a program \texttt{GPAcalculator.java} that asks a student for \texttt{N} grades - where \texttt{N} is given by student - and number of credits corresponding to each and prints his GPA based on entered information. You are expected to use Class Scanner to get input from user.
+
+\subsection*{Solution}
+
+\begin{lstlisting}
+import java.util.Scanner;
+public class GPAcalculator {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter number of courses: ");
+		int num = input.nextInt();
+		double grades[] = new double[num];
+		int credits[] = new int[num];
+		double product = 0;
+		int sumCredits = 0;
+		for (int i = 0; i < num; i++) {
+			System.out.printf("Grade for course %d: ", i);
+			grades[i] = input.nextDouble();
+			System.out.printf("Number of credits for course %d: ", i);
+			credits[i] = input.nextInt();
+			sumCredits += credits[i];
+			product += grades[i] * credits[i];
+		}
+		input.close();
+		System.out.printf("Your GPA is %.2f\n", product / sumCredits);
+	}
+}
+\end{lstlisting}

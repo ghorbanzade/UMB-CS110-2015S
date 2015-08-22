@@ -1,0 +1,100 @@
+\subsection*{Question 1}
+The following code snippet either do not compile or do not run as expected. There are five \textbf{distinct} problems. You are expected to find and fix all errors so that given command-line argument will lead to expected output as indicated.
+
+%\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (i = a: i >= 0: i--) {
+			product *= a;
+		}
+		System.out.println(a! + " is " + product );
+	}
+}
+\end{lstlisting}
+
+\newpage
+\subsection*{Question 2}
+The following code snippet compiles and runs without error. Determine the output of the program and support your answer by explaining how the program works.
+
+\begin{enumerate}[label=(\alph*)]
+\item \texttt{Loops.java}
+%\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Loops {
+	public static void main(String[] args) {
+		int num = 0;
+		for (int i = 1; i <= 4; i++) {
+			for (int j = 1; j <= i; j++) {
+				System.out.print(++num +" ");
+			}
+			System.out.println();
+		}
+	}
+}
+\end{lstlisting}
+\item \texttt{Arrays.java}
+%\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Arrays {
+	public static void main(String[] args) {
+		int[][] array = new int[5][4];
+		for (int i = 0; i < array.length; i++)
+			for (int j = 0; j < array[0].length; j++)
+				array[i][j] = i*j;
+		for (int i = 0; i < array[0].length; i++)
+			System.out.print(array[i][2]*array[2][i]+" ");
+	}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\newpage
+\subsection*{Question 3}
+Your manager has called for an urgent meeting to announce that a recent patch to the project code was reported to have caused several crashes to the project software in some cases.
+
+%\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+import java.util.Scanner;
+public class Patch {
+	public static void main(String[] args) {
+		Scanner scnr = new Scanner(System.in);
+		int num = scnr.nextInt();
+		scnr.close();
+		int[] matrix = new int[num];
+		for (int i = 0; i <= num; i++)
+			matrix[i] = i;
+		System.out.println((Math.sqrt(matrix[num/2]));
+	}
+}
+\end{lstlisting}
+
+He has asked you to explain the cause(s) of error and attach a new version of the patch that maintains control flow of the program regardless of user inputs.
+
+\newpage
+\subsection*{Question 4}
+Develop a simple method \texttt{findPow(int num, int pow)} that can recursively calculate any power of a given number \texttt{num} by using built-in Java arithmetic operators.
+
+\newpage
+\subsection*{Question 5}
+
+A fridge can be plugged or unplugged and can be set to operate at a desired temperature between $43$F to $68$F. You can store items as much as its capacity allows (assuming dimensions of items can be changed as desired). You can also take items out (based on their capacity) as long as the fridge is not empty.
+You can always read a fridge's inner temperature and set your desired temperature. The inner temperature is fixed on the desired temperature while plugged and on room temperature (68F) while unplugged.
+
+\begin{enumerate}[label=(\alph*)]
+\item Draw the UML diagram for class \texttt{Fridge.java}.
+\item Develop the class \texttt{Fridge.java} based on assumptions provided in question, respecting all object-oriented concepts.
+\item Develop a class \texttt{FridgeTest.java} to instantiate a fridge of capacity 15 cubic feet and keep 5 cubic feet of food in 50F.
+\end{enumerate}
+
+\newpage
+\subsection*{Question 6}
+
+Researchers at Winko Inc. have invented a new generation of cellphone batteries that discharge only during phone calls and at a rate of 0.1\% per minute. To make most out of this technology, Winko has decided to manufacture its own phones, called \textit{Winkophone}. Like any other phone, you can \texttt{call()} with a \textit{Winkophone} while its \texttt{battery} is not empty. Upon purchase, the battery of Winkophone is fully charged.
+
+\begin{enumerate}[label=(\alph*)]
+\item Develop two classes \texttt{Phone.java} and \texttt{Winkophone.java} to be used in another class in which one can instantiate a Winkophone and use it.
+\item Draw the UML diagram for classes \texttt{Phone.java} and \texttt{Winkophone.java} and show relations between the two classes.
+\end{enumerate}
