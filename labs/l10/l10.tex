@@ -1,0 +1,45 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\def \topDirectory {../..}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\topDirectory/template/style/assignment}
+
+\begin{document}
+
+\input{\topDirectory/template/config}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 10}
+\hfill \textbf{April 23, 2015}
+
+A company has some employees some of which are interns. Employees work 5 days a week and are paid 200 dollars every day. Interns are paid on an hourly basis, \$20 per hour. Develop classes \texttt{Employee.java} and \texttt{Intern.java} such that both have a method \texttt{findSalary()} that outputs their pay for a 30-day month period. Use your classes in another program \texttt{TestCompany.java} to find salaries of 5 employees and 5 interns who work a random number of hours (between 3 to 8 hours) every day. Respect all object-oriented design principles (encapsulation, inheritance, abstraction, polymorphism).
+Propose a design in which additional methods can be developed for employees that are not intern, i.e. your additional methods should not be visible by interns. Make any modifications to your original design as you deem necessary.
+
+\end{document}
