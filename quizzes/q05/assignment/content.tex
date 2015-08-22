@@ -1,0 +1,14 @@
+\section*{Question 1}
+
+Write a program \texttt{QuadraticSolver.java} that asks for three real numbers $a$, $b$ and $c$ from the user and uses a method \texttt{findSolution()} with given method signature to solve for $x$ with three digits of precision, the quadratic expression shown in Equation \ref{eq2}.
+\begin{equation}
+ax^2+bx+c=0
+\label{eq2}
+\end{equation}
+
+\lstset{language=java,tabsize=2,numbers=none}
+\begin{lstlisting}
+private static double[] findSolution(double[] coefficients) throws NegativeDiscriminantException, ArithmeticException;
+\end{lstlisting}
+
+Your program is expected to maintain its control flow regardless of the user entries. User should be asked for inputs as long as his previous entries are not acceptable or result in a negative discriminant.
