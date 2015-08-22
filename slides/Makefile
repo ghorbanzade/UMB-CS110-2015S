@@ -1,18 +1,26 @@
 SLIDES= 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19
+FONT_DIR= ../template/fonts
 FILES = $(foreach NUM, $(SLIDES), ls$(NUM)/ls$(NUM))
 PDF   = $(addsuffix .pdf, $(FILES))
 TEX   = $(addsuffix .tex, $(FILES))
 
-.PHONY: clean code docs all
+.PHONY: clean code prepare docs all
 
 all: code ;
 
-docs: code $(PDF)
+docs: code prepare
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
 	xelatex -shell-escape $(@F:.pdf=.tex) > /dev/null && \
 	xelatex -shell-escape $(@F:.pdf=.tex) > /dev/null
+	@echo "Done."
+
+prepare:
+	@rm -rf "$(FONT_DIR)"
+	@echo -n " Extracting fonts..."
+	@mkdir -p $(FONT_DIR)
+	@tar -zxf $(FONT_DIR).tar.gz -C $(FONT_DIR) --strip-component=1
 	@echo "Done."
 
 code: ;
@@ -27,3 +35,4 @@ clean:
 	@find . -name '*.vrb' -delete
 	@find . -name '*.snm' -delete
 	@find . -name '*.toc' -delete
+	@rm -rf "$(FONT_DIR)"
