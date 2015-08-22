@@ -1,0 +1,391 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\def \topDirectory {../..}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\topDirectory/template/style/directives}
+\input{\topDirectory/template/config}
+\usepackage{\topDirectory/template/style/beamerthemeUmassLecture}
+\usepackage[school]{\topDirectory/template/style/pgf-umlcd}
+\doc{number}{11}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+Assignment 4 released. Due on April 16, 2015 at 17:30 PM.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Overview}
+  \begin{itemize}
+    \item[] Array of Objects
+    \item[] Class Arrays
+    \item[] Class ArrayList
+  \end{itemize}
+\end{frame}
+
+\section{Array of Objects}
+
+\begin{frame}[fragile]
+  \frametitle{Array of Objects}
+  \begin{block}{Review}
+    An array is a simple data structure that holds a \textbf{fixed} number of elements of a \textbf{certain} data type.
+
+    Each array element is identified by its \textbf{numerical index}.
+
+    An array is stored based on position of its \textbf{first} element.
+
+    First element of an array has index \textbf{0}.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array of Objects}
+  \begin{block}{\texttt{SimpleArray.java}}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class SimpleArray {
+  public static void main(String[] args) {
+    boolean[][] seats = new boolean[5][10];
+    for (int i = 0; i < seats.length; i++)
+      for (int j = 0; j < seats[0].length; j++)
+        seats[i][j] = false;
+    seats[3][7] = true;
+    for (int i = 0; i < seats.length; i++) {
+      for (int j = 0; j < seats[0].length; j++)
+        System.out.print(seats[i][j]+" ");
+      System.out.println();
+    }
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array of Objects}
+  \begin{block}{Objective}
+    Write a program \texttt{Circles.java} that constructs an array of size 10 in whose \texttt{i}th index there is a \texttt{Circle} of radius \texttt{i}, and find perimeter of each Circle.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array of Objects}
+  \begin{block}{\texttt{Circle.java}}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Circle {
+  private int radius;
+  public double getPerimeter() {
+    return 2 * Math.PI * this.radius;
+  }
+  public Circle(int someRadius) {
+    radius = someRadius;
+  }
+  public int getRadius() {
+    return radius;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array of Objects}
+  \begin{block}{\texttt{Circles.java}}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Circles {
+  public static void main(String[] args) {
+    Circle[] array = new Circle[10];
+    for (int i = 0; i < array.length; i++) {
+      array[i] = new Circle(i);
+    }
+    for (int i = 0; i < array.length; i++) {
+      System.out.println(array[i].getPerimeter());
+    }
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\section{Class Arrays}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{Objective}
+    Write a program \texttt{arraySort.java} that asks for elements of an array of size 10 and sorts all elements in ascending order.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{\texttt{arraySort.java} (v1.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+import java.util.Scanner;
+public class arraySort {
+  private static int[] array;
+  public static void main(String[] args) {
+    array = new int[10];
+    getElements();// getting elements from user
+    sortArray(array);// sort the array
+    printArray(array);// print sorted array
+  }//end of main method
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{\texttt{arraySort.java} (v1.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+  private static void printArray(int[] array) {
+    for (int i = 0; i < array.length; i++)
+      System.out.printf("%2d, ",array[i]);
+  }// end of printArray method
+  private static void getElements() {
+    Scanner input = new Scanner(System.in);
+    for (int i = 0; i < array.length; i++) {
+      System.out.printf("Element in index %2d: ", i);
+      array[i] = input.nextInt();
+    }
+    input.close();
+  }//end of getElements method
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{\texttt{arraySort.java} (v1.0) (Part 3)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+  private static void sortArray(int[] array) {
+    //insertion sort
+    for (int i = 0; i < array.length; i++)
+      for (int j = i; j < array.length; j++)
+        if (array[j] < array[i])
+          array = swap(array, i, j);
+  }//end of sortArray method
+  public static int[] swap(int[] array, int i, int j) {
+    int temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+    return array;
+  }//end of swap method
+}
+
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{Problem Statement}
+    Sorting is very common in almost any application and is widely taken advantage of.
+  \end{block}
+  \begin{block}{Proposed Solution}
+    Use a pre-developed class that provides methods for commonly-used operations on arrays.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{\texttt{arraySort.java} (v1.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+package arrays;
+import java.util.Arrays;
+import java.util.Scanner;
+public class arraySort2 {
+  private static int[] array;
+  public static void main(String[] args) {
+    array = new int[10];
+    getElements();// getting elements from user
+    Arrays.sort(array);// sort the array
+    printArray(array);// print sorted array
+  }//end of main method
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{\texttt{arraySort.java} (v1.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+  private static void printArray(int[] array) {
+    for (int i = 0; i < array.length; i++) {
+      System.out.printf("%2d, ",array[i]);
+    }
+  }// end of printArray method
+  private static void getElements() {
+    Scanner input = new Scanner(System.in);
+    for (int i = 0; i < array.length; i++) {
+      System.out.printf("Element in index %2d: ", i);
+      array[i] = input.nextInt();
+    }
+    input.close();
+  }//end of getElements method
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class Arrays}
+  \begin{block}{Formal Introduction}
+    the Class \texttt{java.util.Arrays} provides static computing-efficient methods for accessing and manipulating arrays.
+  \end{block}
+  \begin{block}{Methods}
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] binarySearch()
+          \item[] copyOf()
+          \item[] copyOfRange()
+          \item[] equals()
+          \item[] deepEquals()
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] setAll()
+          \item[] fill()
+          \item[] hashCode()
+          \item[] sort()
+          \item[] parallelSort()
+        \end{itemize}
+      \end{column}
+    \end{columns}
+  \end{block}
+\end{frame}
+
+\section{Class ArrayList}
+
+\begin{frame}[fragile]
+  \frametitle{Class ArrayList}
+  \begin{block}{Remember}
+    Arrays hold a \textbf{fixed} number of elements of a \textbf{certain} data type.
+  \end{block}
+  \begin{block}{Problem Statement}
+    Once declared, size of an array cannot be modified.
+  \end{block}
+  \begin{block}{Proposed Solution}
+    \texttt{List}: A more advanced data structure with no limitation on size.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class ArrayList}
+  \begin{block}{List Data Structure}
+    Lists are ordered collections with possibly duplicate elements.
+  \end{block}
+  \begin{block}{Java Implementation}
+    \texttt{java.util.List<E>} is a generic \alert{interface} that is implemented by following widely-used classes.
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] AbstractList
+          \item[] AbstractSequentialList
+          \item[] ArrayList
+          \item[] AttributeList
+          \item[] CopyOnWriteArrayList
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] LinkedList
+          \item[] RoleList
+          \item[] RoleUnresolvedList
+          \item[] Stack
+          \item[] Vector
+        \end{itemize}
+      \end{column}
+    \end{columns}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class ArrayList}
+  \begin{block}{Class ArrayList}
+    ArrayList is a special implementation of List that realizes dynamically-resizable arrays and provides computing-efficient methods for maintaining them.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class ArrayList}
+  \begin{block}{Methods}
+    \begin{columns}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] add()
+          \item[] remove()
+          \item[] size()
+          \item[] clear()
+          \item[] clone()
+          \item[] contains()
+        \end{itemize}
+      \end{column}
+      \begin{column}{0.5\textwidth}
+        \begin{itemize}
+          \item[] ensureCapacity()
+          \item[] get()
+          \item[] indexOf()
+          \item[] lastIndexOf()
+          \item[] remove()
+          \item[] trimToSize()
+        \end{itemize}
+      \end{column}
+    \end{columns}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Class ArrayList}
+  \begin{block}{\texttt{ArrayListTest.java}}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+import java.util.ArrayList;
+public class arraySort3 {
+  public static void main(String[] args) {
+    ArrayList<Integer> array = new ArrayList<Integer>(2);
+    array.add(9);
+    array.add(5);
+    array.add(8);
+    System.out.println(array + " size: "+array.size());
+    array.remove(1);
+    System.out.println(array);
+    array.remove(array.indexOf(8));
+    System.out.println(array);
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Think Object-Oriented}
+
+\end{document}

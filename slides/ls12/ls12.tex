@@ -1,0 +1,585 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\def \topDirectory {../..}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\topDirectory/template/style/directives}
+\input{\topDirectory/template/config}
+\usepackage{\topDirectory/template/style/beamerthemeUmassLecture}
+\usepackage[school]{\topDirectory/template/style/pgf-umlcd}
+\doc{number}{12}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+Assignment 4 released. Due on April 16, 2015 at 17:30 PM.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Overview}
+  \begin{itemize}
+    \item[] Abstraction
+    \begin{itemize}
+      \item[] Introduction
+      \item[] Abstract Classes and Methods
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\plain{}{Abstraction}
+
+\section{Introduction}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{How Do We Think?}
+    \begin{quote}
+      - Hi Sara! What's up?\\
+      + Hey Mike! What's up?
+    \end{quote}
+  \end{block}
+  \begin{block}{How Do We Really Think?}
+    \begin{quote}
+      What did you do today?
+    \end{quote}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Objective}
+    Write a program \texttt{Geometry.java} in which you can create cricles and squares and get their area, perimeter, color and whether they are filled or not.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{UML Diagram for Class \texttt{Shape}}
+  \begin{figure}
+  \centering
+    \begin{tikzpicture}
+      \begin{class}[]{Shape}{0, 0}
+        \attribute{- numShapes: int}
+        \attribute{- filled: boolean}
+        \attribute{- color: String}
+        \operation{+ Shape()}
+        \operation{+ getNumShape(): int}
+        \operation{+ isFilled(): boolean}
+        \operation{+ setFilled(boolean filled)}
+        \operation{+ getColor(): String}
+        \operation{+ setColor(String color)}
+      \end{class}
+    \end{tikzpicture}
+  \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{UML Diagram for Class \texttt{Circle}}
+  \begin{figure}
+  \centering
+    \begin{tikzpicture}
+      \begin{class}[]{Circle}{0, 0}
+        \attribute{- numCircles: int}
+        \attribute{- radius: double}
+        \operation{+ Circle()}
+        \operation{+ getPerimeter(): double}
+        \operation{+ getArea(): double}
+        \operation{+ getNumCircles(): int}
+        \operation{+ getRadius(): double}
+        \operation{+ setRadius(double radius)}
+      \end{class}
+    \end{tikzpicture}
+  \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{UML Diagram for Class \texttt{Square}}
+  \begin{figure}
+  \centering
+    \begin{tikzpicture}
+      \begin{class}[]{Square}{0, 0}
+        \attribute{- numSquares: int}
+        \attribute{- length: double}
+        \operation{+ Square()}
+        \operation{+ getPerimeter(): double}
+        \operation{+ getArea(): double}
+        \operation{+ getNumSquares(): int}
+        \operation{+ getLength(): double}
+        \operation{+ setLength(double radius)}
+      \end{class}
+    \end{tikzpicture}
+  \end{figure}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Shape.java} (v2.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Shape {
+  // attributes and fields
+  private static int numShapes = 0;
+  private String color;
+  private boolean filled;
+  // constructors
+  public Shape() {
+    numShapes++;
+  }
+  // setter and getter for color
+  public void setColor(String someColor) {
+    this.color = someColor;
+  }
+  public String getColor() {
+    return color;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Shape.java} (v2.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=17]{java}
+  // setter and getter for filled
+  public void setFilled(boolean state) {
+    this.filled = state;
+  }
+  public boolean isFilled() {
+    return filled;
+  }
+  // setter and getter for numShapes
+  public static int getNumShapes() {
+    return numShapes;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Circle.java} (v2.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Circle extends Shape {
+  // fields and attributes
+  private static int numCircles = 0;
+  private double radius;
+  // methods
+  public double getArea() {
+    return Math.PI*Math.pow(radius,2);
+  }
+  public double getPerimeter() {
+    return 2*Math.PI*radius;
+  }
+  // constructors
+  public Circle(double someRadius) {
+    radius = someRadius;
+    numCircles++;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Circle.java} (v2.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=17]{java}
+  // setter and getter for radius
+  public void setRadius(double someRadius) {
+    this.radius = someRadius;
+  }
+  public double getRadius() {
+    return radius;
+  }
+  // setter and getter for numCircles
+  public static int getNumCircles() {
+    return numCircles;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Square.java} (v2.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Square extends Shape {
+  // fields and attributes
+  private static int numSquares = 0;
+  private double length;
+  // methods
+  public double getArea() {
+    return Math.pow(length,2);
+  }
+  public double getPerimeter() {
+    return length*4;
+  }
+  // constructors
+  public Square(double someLength) {
+    length = someLength;
+    numSquares++;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Square.java} (v2.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=17]{java}
+  // setter and getter for length
+  public void setLength(double someLength) {
+    this.length = someLength;
+  }
+  public double getLength() {
+    return length;
+  }
+  // setter and getter for numSquares
+  public static int getNumSquares() {
+    return numSquares;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Geometry.java} (v2.0)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Geometry {
+  public static void main(String[] args) {
+    Circle myCircle = new Circle(5);
+    myCircle.setColor("Red");
+    myCircle.setFilled(true);
+    double result1 = myCircle.getPerimeter();
+    System.out.println("Perimeter of circle: "+result1);
+    Square mySquare = new Square(4);
+    mySquare.setColor("Blue");
+    mySquare.setFilled(false);
+    double result2 = mySquare.getArea();
+    System.out.println("Area of square: "+result2);
+    System.out.println(Shape.getNumShapes());
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{UML Diagram (v2.0)}}
+  \begin{figure}
+  \centering
+    \begin{tikzpicture}
+      \begin{class}[]{Shape}{0, 0}
+        \attribute{numShapes: int}
+        \attribute{filled: boolean}
+        \attribute{color: String}
+        \operation{Shape()}
+      \end{class}
+      \begin{class}[]{Circle}{-3, -3.25}
+        \inherit{Shape}
+        \attribute{numCircles: int}
+        \attribute{radius: double}
+        \operation{Circle()}
+        \operation{getPerimeter(): double}
+        \operation{getArea(): double}
+      \end{class}
+      \begin{class}[]{Square}{3, -3.25}
+        \inherit{Shape}
+        \attribute{numSquares: int}
+        \attribute{length: double}
+        \operation{Square()}
+        \operation{getPerimeter(): double}
+        \operation{getArea(): double}
+      \end{class}
+    \end{tikzpicture}
+  \end{figure}
+  \end{block}
+\end{frame}
+
+\section{Abstract Classes and Methods}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Problem Statement}
+    \begin{itemize}
+      \item[] Superclass can be instantiated.
+      \item[] Subclasses may not implement \texttt{getPerimeter()} and \texttt{getArea()} methods.
+    \end{itemize}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Evil {
+  public static void main(String[] args) {
+    Shape myShape = new Shape();
+    myShape.setColor("Red");
+    myShape.setFilled(true);
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Proposed Solution}
+    Disallow instantiation of the \texttt{Shape} class.
+
+    Force all subclasses of \texttt{Shape} class to implement \texttt{getArea()} and \texttt{getPerimeter()} methods.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Definition}
+    Abstraction is the act of hiding internal details of implementation of behaviors of object and providing functionalities of the object instead.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Abstract Methods}
+    Abstract methods define signature of methods that must be implemented in subclasses.
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public abstract void getArea();
+public abstract void getPerimeter();
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Abstract Classes}
+    Classes declared as abstract may not be instantiated.
+
+    Abstract classes may or may not have abstract methods.
+
+    Classes with abstract methods must be declared as abstract.
+  \end{block}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public abstract class Shape {
+  public abstract double getArea();
+  public abstract double getPerimeter();
+  // other class members
+}
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{Remember}
+    Subclasses extending an abstract class must implement its abstract methods or be declared as abstract.
+  \end{block}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Circle {
+  private double radius;
+  @Override
+  public double getArea() {
+    return Math.PI*Math.pow(radius,2);
+  }
+  @Override
+  public double getPerimeter() {
+    return this.radius*Math.PI*2;
+  }
+  // other class members
+}
+    \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Shape.java} (v3.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public abstract class Shape {
+  // fields
+  private static int numShapes = 0;
+  // attributes
+  private String color;
+  private boolean filled;
+  // constructors
+  public Shape() {
+    numShapes++;
+  }
+  // abstract methods
+  public abstract double getPerimeter();
+  public abstract double getArea();
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Shape.java} (v3.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=14]{java}
+  // setters and getters
+  public static int getNumShapes() {
+    return numShapes;
+  }
+  public void setColor(String someColor) {
+    this.color = someColor;
+  }
+  public String getColor() {
+    return color;
+  }
+  public void setFilled(boolean state) {
+    this.filled = state;
+  }
+  public boolean isFilled() {
+    return filled;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Circle.java} (v3.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Circle extends Shape {
+  // fields
+  private static int numCircles = 0;
+  // attributes
+  private double radius;
+  // methods
+  @Override
+  public double getArea() {
+    return Math.PI*Math.pow(radius,2);
+  }
+  @Override
+  public double getPerimeter() {
+    return 2*Math.PI*radius;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Circle.java} (v3.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=15]{java}
+  // constructors
+  public Circle(double someRadius) {
+    radius = someRadius;
+    numCircles++;
+  }
+  // setter and getter for radius
+  public void setRadius(double someRadius) {
+    this.radius = someRadius;
+  }
+  public double getRadius() {
+    return radius;
+  }
+  // setter and getter for numCircles
+  public static int getNumCircles() {
+    return numCircles;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Square.java} (v3.0) (Part 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Square extends Shape {
+  // fields and attributes
+  private static int numSquares = 0;
+  private double length;
+  // methods
+  @Override
+  public double getArea() {
+    return Math.pow(length,2);
+  }
+  @Override
+  public double getPerimeter() {
+    return length*4;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Square.java} (v3.0) (Part 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=15]{java}
+  // constructors
+  public Square(double someLength) {
+    length = someLength;
+    numSquares++;
+  }
+  // setters and getters
+  public void setLength(double someLength) {
+    this.length = someLength;
+  }
+  public double getLength() {
+    return length;
+  }
+  public static int getNumSquares() {
+    return numSquares;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Abstraction}
+  \begin{block}{\texttt{Geometry.java} (v3.0)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Geometry {
+  public static void main(String[] args) {
+    Circle myCircle = new Circle(5);
+    myCircle.setColor("Red");
+    myCircle.setFilled(true);
+    double result1 = myCircle.getPerimeter();
+    System.out.println("Perimeter of circle: "+result1);
+    Square mySquare = new Square(4);
+    mySquare.setColor("Blue");
+    mySquare.setFilled(false);
+    double result2 = mySquare.getArea();
+    System.out.println("Area of square: "+result2);
+    System.out.println(Shape.getNumShapes());
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Think Object-Oriented}
+
+\end{document}

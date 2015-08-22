@@ -1,0 +1,565 @@
+% -----------------------------------------------------------------------------
+% The MIT License (MIT)
+%
+% Copyright (c) 2015 Pejman Ghorbanzade
+%
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+%
+% The above copyright notice and this permission notice shall be included in
+% all copies or substantial portions of the Software.
+%
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+% THE SOFTWARE.
+% -----------------------------------------------------------------------------
+
+\def \topDirectory {../..}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\topDirectory/template/style/directives}
+\input{\topDirectory/template/config}
+\usepackage{\topDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{9}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+Assignment 3 to due April 02 at 5:30 PM.
+
+Final Exam to be held May 19 at 6:30 PM.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Overview}
+	\begin{itemize}
+		\item[] Constructors
+		\item[] Access Modifiers
+		\item[] Encapsulation
+	\end{itemize}
+\end{frame}
+
+\section{Constructors}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Objective}
+		Write a program \texttt{Cat1Dtest.java} that controls position of a cat named kitty on the x-axis.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{\texttt{Cat.java} (v1.3)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	// class variables (fields):
+	public static int numCats = 0;
+	// instance variables (states):
+	public String name;
+	public double position;
+	// methods:
+	public void move(int dist) {
+		this.position += dist;
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Instantiation}
+	Once we define our blueprints, we need to instantiate objects from the class.
+	\end{block}
+	\begin{block}{\texttt{Cat1Dtest.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat1Dtest {
+	public static void main(String[] args) {
+		Cat mycat = new Cat();
+		// rest of the code
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Closer Look}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+		Cat mycat = new Cat();
+		\end{minted}
+		\begin{description}
+		\item[Cat] is a reference data type.
+		\item[mycat] is the identifier for our object.
+		\item[new] is the keyword to instantiate an object from class \texttt{Cat}, allocating memory for the object.
+		\item[Cat()] is a constructor to initialize states of the object.
+		\end{description}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Problem Statement}
+		What is the name and position of \texttt{mycat} after it is created?
+
+		Upon instantiation, values of attributes of the object are not initialized.
+	\end{block}
+	\begin{block}{Possible Solution}
+		Initialize states of the object after instantiation.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{\texttt{Cat1Dtest.java} (v1.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat1Dtest {
+	public static void main(String[] args) {
+		Cat myCat = new Cat();
+		myCat.position = 0;
+		myCat.name = "Kitty";
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{How do we think?}
+		\begin{quote}
+		Aliens visited the International Space Station last night and drank a cup of tea with Scott Kelly.
+		\end{quote}
+	\end{block}
+	\begin{block}{Problem Statement}
+		Initializing states of an object after instantiation is inconsistent with how we think.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Definition}
+		A constructor is a block of code that is automatically invoked upon instantiation.
+	\end{block}
+	\begin{block}{Closer Look}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+		Cat mycat = new Cat();
+		\end{minted}
+		If no constructor is declared in a class, JVM will append a default no-argument constructor of the following form and will invoke it each time an object is instantiated from that class.
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=11]{java}
+		public Cat() {
+		}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Syntax}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=11]{java}
+		public Cat(String catName, double catPosition) {
+			name = catName;
+			position = catPosition;
+			numCats++;
+			System.out.println("A new Cat is born!");
+		}
+		\end{minted}
+	\end{block}
+	\begin{block}{Structure}
+	\begin{itemize}
+		\item[] modifier
+		\item[] \emph{parameter list}
+		\item[] constructor body
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{\texttt{Cat.java} (v1.4)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	public String name;
+	public double position;
+	public void move(int dist) {
+		this.position += dist;
+	}
+	public Cat(String catName, double catPosition) {
+		name = catName;
+		position = catPosition;
+		numCats++;
+		System.out.println("A new Cat is born!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{\texttt{Cat1Dtest.java} (v1.2)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat1Dtest {
+	public void showPosition(Cat theCat) {
+		System.out.println(theCat.name +" is in "+ theCat.position);
+	}
+	public static void main(String[] args) {
+		Cat myCat = new Cat("Kitty", 0);
+		showPosition(Cat myCat);
+		myCat.move(2);
+		showPosition(Cat myCat);
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Constructors}
+	\begin{block}{Signature}
+		Java can distinguish between constructors with different signatures. Signature of a constructor is defined by its parameter list.
+	\end{block}
+	\begin{block}{Syntax}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=11]{java}
+		public Cat(String catName) {
+			name = catName;
+			position = 0;
+			System.out.println("A new Cat is born!");
+		}
+		public Cat(String catName, double catPosition) {
+			name = catName;
+			position = catPosition;
+			numCats++;
+			System.out.println("A new Cat is born!");
+		}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Access Modifiers}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{Definition}
+		Access modifiers specify scope of classes or class members (data memebrs, methods, constructors). Access modifiers determine whether other classes can use a particular data member or invoke a particular method.
+	\end{block}
+	\begin{block}{Types}
+		\begin{columns}
+		\column{0.5\textwidth}
+			\begin{itemize}
+				\item[] public
+				\item[] default (no modifier)
+			\end{itemize}
+		\column{0.5\textwidth}
+			\begin{itemize}
+			\item[] protected
+			\item[] private
+			\end{itemize}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{\texttt{Cat.java} (v1.4) Revisited}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	public String name;
+	public double position;
+	public void move(int dist) {
+		this.position += dist;
+	}
+	public Cat(String catName, double catPosition) {
+		name = catName;
+		position = catPosition;
+		numCats++;
+		System.out.println("A new Cat is born!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{\texttt{public} modifier}
+		Classes or class members may be declared as \alert{public} in which case they are accessible to all classes everywhere.
+	\end{block}
+	\begin{block}{\texttt{default} modifier}
+		Classes or class members may be declared with no explicit modifiers, in which case they are only accessible within their package.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{\texttt{protected} modifier}
+		Class members may be declared as \alert{protected} in which case they are accessible within their package.
+	\end{block}
+	\begin{block}{\texttt{default} modifier}
+		Class members may be declared as \alert{private} in which case they are only accessible within their class.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{Remember}
+		\begin{itemize}
+		\item[] Always use the most restrictive access level that makes sense for a particular member.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{\texttt{Cat.java} (v1.4) Revisited}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	public String name;
+	public double position;
+	public void move(int dist) {
+		this.position += dist;
+	}
+	public Cat(String catName, double catPosition) {
+		name = catName;
+		position = catPosition;
+		numCats++;
+		System.out.println("A new Cat is born!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Access Modifers}
+	\begin{block}{Problem Statement}
+		Class and class members of \texttt{Cat.java} (v1.4) all have public modifiers. This makes it possible for everyone to access and modify data in \texttt{Cat.java} class or data of its objects, as they please.
+	\end{block}
+	\begin{block}{\texttt{Evil.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Evil {
+	public static void harm(Cat someCat) {
+		someCat.position = 500;
+		someCat.name = "HACKED";
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Encapsulation}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Objective}
+		Write a program \texttt{Cat1Dtest.java} that controls position of a cat named kitty on the x-axis from -100 to 100.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{\texttt{Evil.java} (v1.0) Revisited}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Evil {
+	public static void harm(Cat someCat) {
+		someCat.position = 500;
+		someCat.name = "HACKED";
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Definition}
+	Encapsulation is one of the fundamental principles of object oriented programming which promotes controlling data of an object by restricting its access to methods of its class.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Motivation}
+	To encapsulate data attributes of an object are declared \textit{private} and methods are proposed to make object in control of how the outside world is allowed to use it.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Advantages}
+	\begin{description}
+	\item[Modularity] Objects are passed to classes instead of data.
+	\item[Data Hiding] Details of internal implementation are not disclosed.
+	\item[Code Re-Use] Once verified, a developed class can be trusted.
+	\item[Pluggability] Problems will be specific to classes.
+	\end{description}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Approach}
+	\begin{enumerate}
+	\item[] Use private access modifier for data members
+	\item[] Develop accessors and mutators for data members
+	\item[] Impose restrictions for accessors and mutators
+	\item[] Develop additional methods for data modification if required
+	\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{\texttt{Cat.java} (v1.5)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	private static int numCats = 0;
+	private String name;
+	private double position;
+	// develop accessors
+	// develop mutators
+	public void move(int dist) {
+		this.position += dist;
+	}
+	public Cat(String catName, double catPosition) {
+		name = catName;
+		position = catPosition;
+		numCats++;
+		System.out.println("A new Cat is born!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Accessors}
+	Accessors (getters) return some property of an object.
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=5]{java}
+	public double getPosition() {
+		return position;
+	}
+	public String getName() {
+		return name;
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Mutators}
+	Mutators (setters) change some property of an object.
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=11]{java}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setPosition(double position) {
+		this.position = position;
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Naming}
+	There is no limit in how you name your accessors and mutators. By convention however, we usually use \texttt{getPropertyName} and \texttt{setPropertyName} to name accessors and mutators respectively. For properties with \texttt{boolean} data type, \texttt{isPropertyName} is used by convention.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{Remember}
+	Accessors and mutators often are declared public and used to access the property outside the object.
+	\end{block}
+	\begin{block}{Immutable Properties}
+	Mutators can be omitted to prohibit modifications of certain attributes.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{\texttt{Cat.java} (v1.6) (Part 1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	private static int numCats = 0;
+	private String name;
+	private double position;
+	public double getPosition() {
+		return position;
+	}
+	public String getName() {
+		return name;
+	}
+	public static int getNumCats() {
+		return numCats;
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{\texttt{Cat.java} (v1.6) (Part 2)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=14]{java}
+	public void setPosition(double position) {
+		this.position = position;
+	}
+	public void move(int dist) {
+		this.position += dist;
+	}
+	public Cat(String catName, double catPosition) {
+		name = catName;
+		position = catPosition;
+		numCats++;
+		System.out.println("A new Cat is born!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Encapsulation}
+	\begin{block}{\texttt{Cat1Dtest.java} (v1.3)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat1Dtest {
+	public void showPosition(Cat theCat) {
+		System.out.print(theCat.getName() +" is in ");
+		System.out.println(theCat.getPosition());
+	}
+	public static void main(String[] args) {
+		Cat myCat = new Cat("Kitty", 0);
+		showPosition(Cat myCat);
+		myCat.move(2);
+		showPosition(Cat myCat);
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Think Object-Oriented}
+
+\end{document}
