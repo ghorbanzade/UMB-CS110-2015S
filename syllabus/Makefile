@@ -1,6 +1,8 @@
-FILES  = syllabus
-PDF   = $(addsuffix .pdf, $(FILES))
-TEX   = $(addsuffix .tex, $(FILES))
+TOP_DIR = ..
+
+FILES = syllabus
+PDF = $(addsuffix .pdf, $(FILES))
+TEX = $(addsuffix .tex, $(FILES))
 
 .PHONY: clean code docs all
 
@@ -13,6 +15,7 @@ $(PDF): $(TEX)
 	pdflatex $(@F:.pdf=.tex) > /dev/null && \
 	pdflatex $(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
+	@cp $(PDF) $(TOP_DIR)/syllabus.pdf
 
 code: ;
 

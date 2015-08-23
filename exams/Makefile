@@ -1,3 +1,5 @@
+TOP_DIR = ..
+
 ASSIGNMENTS = m01 f01 f02
 SOLUTIONS = m01 f01
 FILES = $(foreach NUM, $(ASSIGNMENTS), $(NUM)/assignment/$(NUM))
@@ -16,6 +18,10 @@ JAVA = $(addsuffix .java, $(CODES))
 all: code ;
 
 docs: code $(PDF)
+	@echo -n "  Binding documents... "
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(TOP_DIR)/exams.pdf $(PDF)
+	@echo "Done."
+
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
@@ -36,3 +42,4 @@ clean:
 	@find . -name '*.pdf' -delete
 	@find . -name '*.out' -delete
 	@find . -name '*.class' -delete
+	@rm -f $(BIND_DIR)/exams.pdf

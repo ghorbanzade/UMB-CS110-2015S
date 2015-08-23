@@ -1,3 +1,5 @@
+TOP_DIR = ..
+
 ASSIGNMENTS = 01a 01b 02a 02b 03a 03b 04 05
 SOLUTIONS = 01a 01b 02a 02b 03a 03b 04 05
 FILES = $(foreach NUM, $(ASSIGNMENTS), q$(NUM)/assignment/q$(NUM))
@@ -30,6 +32,10 @@ JAVA = $(addsuffix .java, $(CODES))
 all: code ;
 
 docs: code $(PDF)
+	@echo -n "  Binding documents... "
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(TOP_DIR)/quizzes.pdf $(PDF)
+	@echo "Done."
+
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
@@ -50,3 +56,4 @@ clean:
 	@find . -name '*.pdf' -delete
 	@find . -name '*.out' -delete
 	@find . -name '*.class' -delete
+	@rm -f $(BIND_DIR)/quizzes.pdf

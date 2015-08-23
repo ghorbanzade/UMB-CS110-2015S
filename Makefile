@@ -1,7 +1,16 @@
+DOCS = syllabus assignments quizzes labs exams slides
+PDF = $(addsuffix .pdf, $(FILES))
+
 .PHONY: clean code docs all
 all: code
 
-docs: code
+docs: code $(PDF)
+	@echo -n "  Binding documents... "
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=course-material.pdf $(PDF)
+	@echo "Done."
+	@rm -f $(PDF)
+
+$(PDF):
 	@$(MAKE) --no-print-directory docs -C assignments;
 	@$(MAKE) --no-print-directory docs -C quizzes;
 	@$(MAKE) --no-print-directory docs -C labs;

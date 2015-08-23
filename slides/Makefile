@@ -1,3 +1,5 @@
+TOP_DIR = ..
+
 SLIDES= 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19
 FONT_DIR= ../template/fonts
 FILES = $(foreach NUM, $(SLIDES), ls$(NUM)/ls$(NUM))
@@ -9,6 +11,10 @@ TEX   = $(addsuffix .tex, $(FILES))
 all: code ;
 
 docs: code prepare $(PDF)
+	@echo -n "  Binding documents... "
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(TOP_DIR)/slides.pdf $(PDF)
+	@echo "Done."
+
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
@@ -35,4 +41,5 @@ clean:
 	@find . -name '*.vrb' -delete
 	@find . -name '*.snm' -delete
 	@find . -name '*.toc' -delete
+	@rm -f $(BIND_DIR)/slides.pdf
 	@rm -rf "$(FONT_DIR)"
