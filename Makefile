@@ -2,18 +2,20 @@
 all: code
 
 docs: code
-	@$(MAKE) --no-print-directory docs -C assignments docs;
-	@$(MAKE) --no-print-directory docs -C quizzes docs;
-	@$(MAKE) --no-print-directory docs -C labs docs;
-	@$(MAKE) --no-print-directory docs -C exams docs;
-	@$(MAKE) --no-print-directory docs -C slides docs;
+	@$(MAKE) --no-print-directory docs -C assignments;
+	@$(MAKE) --no-print-directory docs -C quizzes;
+	@$(MAKE) --no-print-directory docs -C labs;
+	@$(MAKE) --no-print-directory docs -C exams;
+	@$(MAKE) --no-print-directory docs -C slides;
+	@$(MAKE) --no-print-directory docs -C syllabus;
 
 code:
-	@$(MAKE) --no-print-directory code -C assignments code;
-	@$(MAKE) --no-print-directory code -C quizzes code;
-	@$(MAKE) --no-print-directory code -C labs code;
-	@$(MAKE) --no-print-directory code -C exams code;
-	@$(MAKE) --no-print-directory code -C slides code;
+	@$(MAKE) --no-print-directory code -C assignments;
+	@$(MAKE) --no-print-directory code -C quizzes;
+	@$(MAKE) --no-print-directory code -C labs;
+	@$(MAKE) --no-print-directory code -C exams;
+	@$(MAKE) --no-print-directory code -C slides;
+	@$(MAKE) --no-print-directory code -C syllabus;
 
 clean:
 	@$(MAKE) --no-print-directory clean -C assignments;
@@ -21,3 +23,4 @@ clean:
 	@$(MAKE) --no-print-directory clean -C labs;
 	@$(MAKE) --no-print-directory clean -C exams;
 	@$(MAKE) --no-print-directory clean -C slides;
+	@$(MAKE) --no-print-directory clean -C syllabus;
