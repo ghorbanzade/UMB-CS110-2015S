@@ -4,6 +4,9 @@
 
 This repository contains course material developed for *CS110: Introduction to Computing* course at [University of Massachusetts Boston] as taught by [Pejman Ghorbanzade] in Spring 2015. The material include 600+ lecture slides, 150+ pages of problem sets and their solutions as well as 1850 source lines of Java code which are released in hope that they will be useful for anyone interested in learning fundamentals of computer programming using Java.
 
+## Release
+Version v1.0 of this repository was released in Aug 26, 2015. A binary PDF of the entire course material can be found [here](https://github.com/ghorbanzade/UMB-CS110-2015S/releases/download/v1.0/course-material.pdf).
+
 ## Syllabus
 The course syllabus, as thought in Spring 2015, can be found in [`Syllabus`] directory.
 
