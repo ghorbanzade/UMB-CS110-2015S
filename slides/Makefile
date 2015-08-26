@@ -18,13 +18,13 @@ docs: code prepare $(PDF)
 $(PDF): $(TEX)
 	@echo -n "  $(@D)... "
 	@cd $(@D) && \
-	xelatex -shell-escape $(@F:.pdf=.tex) > /dev/null && \
-	xelatex -shell-escape $(@F:.pdf=.tex) > /dev/null
+	xelatex -halt-on-error -shell-escape $(@F:.pdf=.tex) > /dev/null && \
+	xelatex -halt-on-error -shell-escape $(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 
 prepare:
 	@rm -rf "$(FONT_DIR)"
-	@echo -n "  Extracting fonts..."
+	@echo -n "  Extracting fonts... "
 	@mkdir -p $(FONT_DIR)
 	@tar -zxf $(FONT_DIR).tar.gz -C $(FONT_DIR) --strip-component=1
 	@echo "Done."

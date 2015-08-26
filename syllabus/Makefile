@@ -12,8 +12,8 @@ docs: code $(PDF)
 $(PDF): $(TEX)
 	@echo -n "  $(@F)... "
 	@cd $(@D) && \
-	pdflatex $(@F:.pdf=.tex) > /dev/null && \
-	pdflatex $(@F:.pdf=.tex) > /dev/null
+	pdflatex -halt-on-error $(@F:.pdf=.tex) > /dev/null && \
+	pdflatex -halt-on-error $(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 	@cp $(PDF) $(TOP_DIR)/syllabus.pdf
 
