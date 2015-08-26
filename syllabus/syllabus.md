@@ -76,3 +76,10 @@ Section 504 of the Americans with Disabilities Act of 1990 offers guidelines for
 
 ## Student Conduct
 Students are required to adhere to the University Policy on Academic Standards and Cheating, to the University Statement on Plagiarism and the Documentation of Written Work, and to the [Code of Student Conduct] as delineated in the catalog of Undergraduate Programs, pp. 44-45, and 48-52.
+
+[Ross Center for Disability Services]: http://www.umb.edu/academics/vpass/disability
+[Math Placement Exam]: http://www.umb.edu/academics/vpass/uac/testing_services/math
+[Code of Student Conduct]: http://www.umb.edu/life_on_campus/policies/community/code
+[MA130: Precalculus]: http://www.math.umb.edu/courses/course_page.php?id=6
+[WISER]: http://www.umb.edu/it/getting_services/wiser
+[Introduction to Programming in Java: An Interdisciplinary Approach]: http://introcs.cs.princeton.edu/java/home/

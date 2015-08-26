@@ -26,12 +26,6 @@ For questions or further information please contact [Pejman Ghorbanzade].
 
 [University of Massachusetts Boston]: www.umb.edu
 [Pejman Ghorbanzade]: http://www.ghorbanzade.com
-[Ross Center for Disability Services]: http://www.umb.edu/academics/vpass/disability
-[Math Placement Exam]: http://www.umb.edu/academics/vpass/uac/testing_services/math
-[Code of Student Conduct]: http://www.umb.edu/life_on_campus/policies/community/code
-[MA130: Precalculus]: http://www.math.umb.edu/courses/course_page.php?id=6
-[WISER]: http://www.umb.edu/it/getting_services/wiser
-[Introduction to Programming in Java: An Interdisciplinary Approach]: http://introcs.cs.princeton.edu/java/home/
 [Dependencies]: https://github.com/ghorbanzade/UMB-CS110-2015S/wiki/Dependencies
 [MIT License]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
 [`Syllabus`]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/syllabus
