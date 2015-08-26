@@ -16,7 +16,7 @@ addons:
     packages:
     - texlive-latex-base
     - texlive-latex-extra
-    - texlive-latex-fonts-recommended
+    - texlive-fonts-recommended
     - texlive-xetex
     - texlive-humanities
     - latex-beamer
