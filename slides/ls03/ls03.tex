@@ -38,17 +38,17 @@
 \section{Course Administration}
 
 \begin{frame}[fragile]
-\frametitle{Course Administration}
-	50/64 student account so far at \href{http://ghorbanzade.com/}{course website}.
-
-	12/64 online questionnaire submissions so far.
-
-	Assignment 1 released. Due on Feb 19 at 5:30 PM.
-
-	Course Forum now available. Use it. Please.
+	\frametitle{Course Administration}
+	\begin{itemize}
+		\item[] 50/64 student account so far at \href{http://ghorbanzade.com/}{course website}.
+		\item[] 12/64 online questionnaire submissions so far.
+		\item[] Assignment 1 released. Due on Feb 19 at 5:30 PM.
+		\item[] Course Forum now available. Use it. Please.
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Overview}
+	\frametitle{Course Administration}
 	\begin{itemize}
 		\item[] Hello Java Program
 		\item[] Command-line Arguments
@@ -63,11 +63,11 @@
 	\frametitle{Hello Java Program}
 	\begin{block}{HelloWorld.java}
 		\begin{minted}[fontsize=\small,tabsize=8]{java}
-		public class HelloWorld {
-				public static void main(String[] args) {
-						System.out.println("Hello World!");
-				}
-		}
+			public class HelloWorld {
+			    public static void main(String[] args) {
+			        System.out.println("Hello World!");
+			    }
+			}
 		\end{minted}
 	\end{block}
 	\begin{block}{Key Words}
@@ -92,17 +92,17 @@
 	\frametitle{Hello Java Program}
 	\begin{block}{HelloWorld.java}
 		\begin{minted}[fontsize=\small,tabsize=8]{java}
-		public class HelloWorld {
-				public static void main(String[] args) {
-						System.out.println("Hello World!");
-				}
-		}
+			public class HelloWorld {
+			    public static void main(String[] args) {
+			        System.out.println("Hello World!");
+			    }
+			}
 		\end{minted}
 	\end{block}
 	\begin{block}{Terminal}
 		\begin{minted}[fontsize=\small,tabsize=8]{bash}
-		> javac HelloWorld.java
-		> java HelloWorld
+			\$ javac HelloWorld.java
+			\$ java HelloWorld
 			Hello World!
 		\end{minted}
 	\end{block}
@@ -114,17 +114,17 @@
 	\frametitle{Command-line Arguments}
 	\begin{block}{SayHello.java}
 		\begin{minted}[fontsize=\small,tabsize=8]{java}
-		public class SayHello {
-				public static void main(String[] args) {
-						System.out.println("Hello! How are you?");
-				}
-		}
+			public class SayHello {
+			    public static void main(String[] args) {
+			        System.out.println("Hello! How are you?");
+			    }
+			}
 		\end{minted}
 	\end{block}
 	\begin{block}{Terminal}
 		\begin{minted}[fontsize=\small,tabsize=8]{bash}
-		> javac SayHello.java
-		> java SayHello
+			\$ javac SayHello.java
+			\$ java SayHello
 			Hello! How are you?
 		\end{minted}
 	\end{block}
@@ -134,20 +134,20 @@
 	\frametitle{Command-line Arguments}
 	\begin{block}{SayHello.java}
 		\begin{minted}[fontsize=\small,tabsize=8]{java}
-		public class SayHello {
-				public static void main(String[] args) {
-						System.out.println("Hello " + args[0] + "! ");
-						System.out.println("How are you?");
-				}
-		}
+			public class SayHello {
+			    public static void main(String[] args) {
+			        System.out.println("Hello " + args[0] + "! ");
+			        System.out.println("How are you?");
+			    }
+			}
 		\end{minted}
 	\end{block}
 	\begin{block}{Terminal}
 		\begin{minted}[fontsize=\small,tabsize=8]{bash}
-		> javac SayHello.java
-		> java SayHello Pejman
+			\$ javac SayHello.java
+			\$ java SayHello Pejman
 			Hello Pejman! How are you?
-		> java SayHello 12@#1
+			\$ java SayHello 12@#1
 			Hello 12@#1! How are you?
 		\end{minted}
 	\end{block}
@@ -339,7 +339,7 @@
 				Subtraction & A - B & -15\\
 				Multiplication & A * B & 250\\
 				Division & B / A & 2\\
-				Modulus & B \% A & 0\\
+				Modulus & B \% A & 5\\
 				Increment & A++ & 11\\
 				Decrement & B-{}- & 24\\
 				\bottomrule
