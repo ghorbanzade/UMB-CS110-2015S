@@ -20,6 +20,7 @@ $(PDF_TARGET):
 	@$(MAKE) --no-print-directory docs -C syllabus;
 
 code:
+	@ant -silent;
 	@$(MAKE) --no-print-directory code -C assignments;
 	@$(MAKE) --no-print-directory code -C quizzes;
 	@$(MAKE) --no-print-directory code -C labs;
@@ -28,6 +29,7 @@ code:
 	@$(MAKE) --no-print-directory code -C syllabus;
 
 clean:
+	@ant clean -silent;
 	@$(MAKE) --no-print-directory clean -C assignments;
 	@$(MAKE) --no-print-directory clean -C quizzes;
 	@$(MAKE) --no-print-directory clean -C labs;

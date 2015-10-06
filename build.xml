@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<project default="compile" basedir=".">
+
+	<property name="hw01.dir" value="assignments/hw01/code" />
+	<property name="hw02.dir" value="assignments/hw02/code" />
+	<property name="hw03.dir" value="assignments/hw03/code" />
+	<property name="hw04.dir" value="assignments/hw04/code" />
+	<property name="hw05.dir" value="assignments/hw05/code" />
+	<property name="hw06.dir" value="assignments/hw06/code" />
+	<property name="q01a.dir" value="quizzes/q01a/code" />
+	<property name="q01b.dir" value="quizzes/q01b/code" />
+	<property name="q02a.dir" value="quizzes/q02a/code" />
+	<property name="q02b.dir" value="quizzes/q02b/code" />
+	<property name="q03a.dir" value="quizzes/q03a/code" />
+	<property name="q03b.dir" value="quizzes/q03b/code" />
+	<property name="q04.dir" value="quizzes/q04/code" />
+	<property name="q05.dir" value="quizzes/q05/code" />
+	<property name="f01.dir" value="exams/f01/code" />
+
+	<path id="classpath.hw01">
+		<pathelement location="${hw01.dir}" />
+	</path>
+	<path id="classpath.hw02">
+		<pathelement location="${hw02.dir}" />
+	</path>
+	<path id="classpath.hw03">
+		<pathelement location="${hw03.dir}" />
+	</path>
+	<path id="classpath.hw04">
+		<pathelement location="${hw04.dir}" />
+	</path>
+	<path id="classpath.hw05">
+		<pathelement location="${hw05.dir}" />
+	</path>
+	<path id="classpath.hw06">
+		<pathelement location="${hw06.dir}" />
+	</path>
+	<path id="classpath.q01a">
+		<pathelement location="${q01a.dir}" />
+	</path>
+	<path id="classpath.q01b">
+		<pathelement location="${q01b.dir}" />
+	</path>
+	<path id="classpath.q02a">
+		<pathelement location="${q02a.dir}" />
+	</path>
+	<path id="classpath.q02b">
+		<pathelement location="${q02b.dir}" />
+	</path>
+	<path id="classpath.q03a">
+		<pathelement location="${q03a.dir}" />
+	</path>
+	<path id="classpath.q03b">
+		<pathelement location="${q03b.dir}" />
+	</path>
+	<path id="classpath.q04">
+		<pathelement location="${q04.dir}" />
+	</path>
+	<path id="classpath.q05">
+		<pathelement location="${q05.dir}" />
+	</path>
+	<path id="classpath.m01">
+		<pathelement location="${m01.dir}" />
+	</path>
+	<path id="classpath.f01">
+		<pathelement location="${f01.dir}" />
+	</path>
+	<path id="classpath.f02">
+		<pathelement location="${f02.dir}" />
+	</path>
+
+	<target name="compile">
+		<javac srcdir="${hw01.dir}" destdir="${hw01.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw01"/>
+		</javac>
+		<javac srcdir="${hw02.dir}" destdir="${hw02.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw02"/>
+		</javac>
+		<javac srcdir="${hw03.dir}" destdir="${hw03.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw03"/>
+		</javac>
+		<javac srcdir="${hw04.dir}" destdir="${hw04.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw04"/>
+		</javac>
+		<javac srcdir="${hw05.dir}" destdir="${hw05.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw05"/>
+		</javac>
+		<javac srcdir="${hw06.dir}" destdir="${hw06.dir}" includeantruntime="false">
+			<classpath refid="classpath.hw06"/>
+		</javac>
+		<javac srcdir="${q01a.dir}" destdir="${q01a.dir}" includeantruntime="false">
+			<classpath refid="classpath.q01a"/>
+		</javac>
+		<javac srcdir="${q01b.dir}" destdir="${q01b.dir}" includeantruntime="false">
+			<classpath refid="classpath.q01b"/>
+		</javac>
+		<javac srcdir="${q02a.dir}" destdir="${q02a.dir}" includeantruntime="false">
+			<classpath refid="classpath.q02a"/>
+		</javac>
+		<javac srcdir="${q02b.dir}" destdir="${q02b.dir}" includeantruntime="false">
+			<classpath refid="classpath.q02b"/>
+		</javac>
+		<javac srcdir="${q03a.dir}" destdir="${q03a.dir}" includeantruntime="false">
+			<classpath refid="classpath.q03a"/>
+		</javac>
+		<javac srcdir="${q03b.dir}" destdir="${q03b.dir}" includeantruntime="false">
+			<classpath refid="classpath.q03b"/>
+		</javac>
+		<javac srcdir="${q04.dir}" destdir="${q04.dir}" includeantruntime="false">
+			<classpath refid="classpath.q04"/>
+		</javac>
+		<javac srcdir="${q05.dir}" destdir="${q05.dir}" includeantruntime="false">
+			<classpath refid="classpath.q05"/>
+		</javac>
+		<javac srcdir="${f01.dir}" destdir="${f01.dir}" includeantruntime="false">
+			<classpath refid="classpath.f01"/>
+		</javac>
+	</target>
+
+	<target name="clean">
+		<delete>
+			<fileset dir="${hw01.dir}" includes="**/*.class" />
+			<fileset dir="${hw02.dir}" includes="**/*.class" />
+			<fileset dir="${hw03.dir}" includes="**/*.class" />
+			<fileset dir="${hw04.dir}" includes="**/*.class" />
+			<fileset dir="${hw05.dir}" includes="**/*.class" />
+			<fileset dir="${hw06.dir}" includes="**/*.class" />
+			<fileset dir="${q01a.dir}" includes="**/*.class" />
+			<fileset dir="${q01b.dir}" includes="**/*.class" />
+			<fileset dir="${q02a.dir}" includes="**/*.class" />
+			<fileset dir="${q02b.dir}" includes="**/*.class" />
+			<fileset dir="${q03a.dir}" includes="**/*.class" />
+			<fileset dir="${q03b.dir}" includes="**/*.class" />
+			<fileset dir="${q04.dir}" includes="**/*.class" />
+			<fileset dir="${q05.dir}" includes="**/*.class" />
+			<fileset dir="${f01.dir}" includes="**/*.class" />
+		</delete>
+	</target>
+
+</project>
