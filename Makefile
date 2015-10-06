@@ -2,7 +2,7 @@ DOCS = syllabus assignments quizzes labs exams slides
 PDF_TARGET = course-material.pdf
 PDF = $(addsuffix .pdf, $(DOCS))
 
-.PHONY: clean code documents docs all
+.PHONY: clean-code clean code documents docs all
 all: code
 
 docs: code $(PDF_TARGET)
@@ -20,7 +20,7 @@ $(PDF_TARGET):
 	@$(MAKE) --no-print-directory docs -C syllabus;
 
 code:
-	@ant -silent;
+	@ant;
 	@$(MAKE) --no-print-directory code -C assignments;
 	@$(MAKE) --no-print-directory code -C quizzes;
 	@$(MAKE) --no-print-directory code -C labs;
@@ -28,8 +28,7 @@ code:
 	@$(MAKE) --no-print-directory code -C slides;
 	@$(MAKE) --no-print-directory code -C syllabus;
 
-clean:
-	@ant clean -silent;
+clean: clean-code
 	@$(MAKE) --no-print-directory clean -C assignments;
 	@$(MAKE) --no-print-directory clean -C quizzes;
 	@$(MAKE) --no-print-directory clean -C labs;
@@ -37,3 +36,6 @@ clean:
 	@$(MAKE) --no-print-directory clean -C slides;
 	@$(MAKE) --no-print-directory clean -C syllabus;
 	@rm -f $(PDF) $(PDF_TARGET)
+
+clean-code:
+	@ant clean;

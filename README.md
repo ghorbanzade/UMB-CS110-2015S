@@ -1,6 +1,6 @@
 # Introduction to Computing, Spring 2015
 [![Build Status](https://secure.travis-ci.org/ghorbanzade/UMB-CS110-2015S.svg?branch=master)](http://travis-ci.org/ghorbanzade/UMB-CS110-2015S)
-[![Coverity Scan Build Status]](https://img.shields.io/coverity/scan/6146.svg)](https://scan.coverity.com/projects/ghorbanzade-umb-cs110-2015s)
+[![Coverity Status](https://img.shields.io/coverity/scan/6146.svg)](https://scan.coverity.com/projects/ghorbanzade-umb-cs110-2015s)
 
 This repository contains course material developed for *CS110: Introduction to Computing* course at [University of Massachusetts Boston] as taught by [Pejman Ghorbanzade] in Spring 2015. The material include 600+ lecture slides, 150+ pages of problem sets and their solutions as well as 1850 source lines of Java code which are released in hope that they will be useful for anyone interested in learning fundamentals of computer programming using Java.
 
@@ -29,5 +29,4 @@ For questions or further information please contact [Pejman Ghorbanzade].
 [Dependencies]: https://github.com/ghorbanzade/UMB-CS110-2015S/wiki/Dependencies
 [MIT License]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
 [`Syllabus`]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/syllabus
-[java-101]: https://github.com/ghorbanzade/java-101/
 [Introduction to Java]: https://github.com/ghorbanzade/UMB-CS114-2015F/
