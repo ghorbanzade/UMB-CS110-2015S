@@ -1,0 +1,825 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{6}
+%\setbeamertemplate{footline}[text line]{}
+
+\usepackage{wrapfig}
+\usepackage{verbatimbox}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+	Quiz 1(a) Released for Section 5 and 7 Students.
+
+	Due Feb 24 at 11:00 PM. Submission is online.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Overview}
+	\begin{itemize}
+		\item[] Conditionals
+			\begin{itemize}
+				\item[] \texttt{if} Statement
+				\item[] \texttt{if else} Statement
+				\item[] \texttt{switch} Statement
+			\end{itemize}
+		\item[] Loops
+			\begin{itemize}
+				\item[] \texttt{while} Statement
+				\item[] \texttt{do while} Statement
+				\item[] \texttt{for} Statement
+				\item[] Nested Loops
+			\end{itemize}
+		\item[] Branches
+			\begin{itemize}
+				\item[] \texttt{break} Statement
+				\item[] \texttt{continue} Statement
+				\item[] \texttt{return} Statement
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\plain{}{Conditionals}
+
+\section{\texttt{if} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{Objective}
+		Write a program \texttt{Quadratic.java} that takes three integers \texttt{a}, \texttt{b} and \texttt{c} as command line arguments and solves for \texttt{x} with three digits of precision the quadratic expression shown below.
+		\begin{equation*}\label{eq1}
+			a^2 x + b x + c = 0
+		\end{equation*}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Quadratic {
+	public static void main(String[] args) {
+		double a = Double.parseDouble(args[0]);
+		double b = Double.parseDouble(args[1]);
+		double c = Double.parseDouble(args[2]);
+		double discriminant = Math.pow(b,2) - 4 * a * c;
+		double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+		double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+		System.out.printf("Solutions are %.3f and %.3f\n",
+				sol1,sol2);
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{Problem Statement}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Solutions are -1.236 and 3.237
+		> java Quadratic 9 12 4
+			Solutions are -0.667 and -0.667
+		> java Quadratic 3 4 2
+			Solutions are NaN and NaN
+		\end{minted}
+	\end{block}
+	\begin{block}{Proposed Solution}
+		What if we could make the program decide what to print based on value of discriminant?
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+double a = Double.parseDouble(args[0]);
+double b = Double.parseDouble(args[1]);
+double c = Double.parseDouble(args[2]);
+double discriminant = Math.pow(b,2) - 4 * a * c;
+if (discriminant > 0 ) {
+	double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+	double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+	System.out.printf("Solutions are %.3f and %.3f\n",
+		sol1, sol2);
+}
+		\end{minted}
+	\end{block}
+	\texttt{if-then} conditionals helps us develope more flexible programs.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{Problem Statement}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Solutions are -1.236 and 3.237
+		> java Quadratic 9 12 4
+		> java Quadratic 3 4 2
+		\end{minted}
+	\end{block}
+	\begin{block}{Proposed Solution}
+		Use more \texttt{if-then} conditionals to cover different conditions.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.2)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=6]{java}
+double discriminant = Math.pow(b,2) - 4 * a * c;
+if (discriminant > 0 ) {
+	double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+	double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+	System.out.printf("Solutions are %.3f and %.3f\n",
+		sol1, sol2);
+}
+if (discriminant == 0) {
+	double sol1 = (- b )/(2*a);
+	System.out.printf("Solution is %.3f\n", sol1);
+}
+if (discriminant < 0)
+	System.out.printf("No real solution exists.");
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{Problem Statement}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Solutions are -1.236 and 3.237
+		> java Quadratic 9 12 4
+			Solution is -0.667
+		> java Quadratic 3 4 2
+			No real solution exists.
+		\end{minted}
+		No problem... Oh, Really?
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.2.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=7]{java}
+if (discriminant > 0 ) {
+	System.out.println("Inside 1st loop.");
+	double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+	double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+	System.out.printf("Solutions are %.3f and %.3f\n",
+		sol1, sol2);
+}
+if (discriminant == 0) {
+	System.out.println("Inside 2nd loop.");
+	double sol1 = (- b )/(2*a);
+	System.out.printf("Solution is %.3f\n", sol1);
+}
+if (discriminant < 0) {
+	System.out.println("Inside 3rd loop.");
+	System.out.printf("No real solution exists.");
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if} Statement}
+	\begin{block}{Problem Statement}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Inside 1st Loop.
+			Solutions are -1.236 and 3.237
+			Inside 2nd Loop.
+			Inside 3rd Loop.
+		\end{minted}
+	\end{block}
+	\begin{block}{Proposed Solution}
+		\texttt{if-then-else} conditionals helps us avoid unnecessary checks.
+	\end{block}
+\end{frame}
+
+\section{\texttt{if else} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if else} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.3)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=7]{java}
+if (discriminant > 0 ) {
+	System.out.println("Inside 1st loop.");
+	double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+	double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+	System.out.printf("Solutions are %.3f and %.3f\n",
+		sol1, sol2);
+}
+else if (discriminant == 0) {
+	System.out.println("Inside 2nd loop.");
+	double sol1 = (- b )/(2*a);
+	System.out.printf("Solution is %.3f\n", sol1);
+}
+else {
+	System.out.println("Inside 3rd loop.");
+	System.out.printf("No real solution exists.");
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if else} Statement}
+	\begin{block}{Result}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Inside 1st Loop.
+			Solutions are -1.236 and 3.237
+		> java Quadratic 9 12 4
+			Inside 2nd Loop.
+			Solution is -0.667
+		> java Quadratic 3 4 2
+			Inside 3rd Loop.
+			No real solution exists.
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if else} Statement}
+	\begin{block}{\texttt{Quadratic.java} (v1.3.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=7]{java}
+double sol1 = (- b + Math.sqrt(discriminant))/(2*a);
+double sol2 = (- b - Math.sqrt(discriminant))/(2*a);
+if (discriminant > 0 )
+	System.out.printf("Solutions are %.3f and %.3f\n",
+		sol1, sol2);
+else if (discriminant == 0)
+	System.out.printf("Solution is %.3f\n", sol1);
+else
+	System.out.printf("No real solution exists.");
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{if else} Statement}
+	\begin{block}{Result}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac Quadratic.java
+		> java Quadratic 1 -2 -4
+			Solutions are -1.236 and 3.237
+		> java Quadratic 9 12 4
+			Solution is -0.667
+		> java Quadratic 3 4 2
+			No real solution exists.
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{\texttt{switch} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{switch} Statement}
+	\begin{block}{Objective}
+		Write a program \texttt{Grade.java} that takes a letter grade and converts it to its numerical equivalent, based on the table given below.
+		\begin{table}[H]
+			\begin{tabular}{c|c}
+				Letter Grade & Numerical Grade\\
+				\hline
+				A & 4\\
+				B & 3\\
+				C & 2\\
+				D & 1\\
+				E & 0\\
+			\end{tabular}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{switch} Statement}
+	\begin{block}{\texttt{Grade.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Grade {
+	public static void main (String[] args) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Insert a letter grade: ");
+		String letter = input.nextLine();
+		if (letter.equals("A"))
+			System.out.println("GPA is 4");
+		else if (letter.equals("B"))
+			System.out.println("GPA is 3");
+		else if (letter.equals("C"))
+			System.out.println("GPA is 2");
+		else if (letter.equals("D"))
+			System.out.println("GPA is 1");
+		else
+			System.out.println("GPA is 0");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{switch} Statement}
+	\begin{block}{Problem Statement}
+	Not smart enough to earn accolade. We were lucky grade letters end in \texttt{F}.
+	\end{block}
+	\begin{block}{Disagree?}
+	Write a program \texttt{Month.java} that takes a number between 1 to 12 and prints full name of the month of the year corresponding to that number.
+	\end{block}
+	\begin{block}{Proposed Solution}
+		\texttt{switch} conditionals help us avoid repetitive \texttt{if-then-else} conditionals.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{switch} Statement}
+	\begin{block}{\texttt{Grade.java} (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+Scanner input = new Scanner(System.in);
+System.out.print("Insert a letter grade: ");
+String letter = input.nextLine();
+input.close();
+double num;
+switch (letter.charAt(0)) {
+	case 'A': num = 4; break;
+	case 'B': num = 3; break;
+	case 'C': num = 2; break;
+	case 'D': num = 1; break;
+	default: num = 0; break;
+}
+System.out.printf("GPA is %.2f\n", num);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{switch} Statement}
+	\begin{block}{Remember}
+		\begin{itemize}
+			\item[] \texttt{switch} is not always an alternative for the \texttt{if-then-else} conditional. \texttt{switch} is a very special case of more general \texttt{if-then-else} conditionals.
+			\item[] It is always necessary to use \texttt{break} for cases when we want to prevent other cases to be checked.
+			\item[] The \texttt{default} section handles all values that are not explicitly handled by one of the \texttt{case} sections.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\plain{}{Loops}
+
+\section{\texttt{while} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{while} Statement}
+	\begin{block}{\texttt{HelloWorld.java}}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+		\end{minted}
+	\end{block}
+	\begin{block}{Objective}
+		Write a program \texttt{HelloWorld100.java} so that it prints \texttt{Hello World!} a hundred times.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{while} Statement}
+	\begin{block}{\texttt{HelloWorld100.java}}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class HelloWorld {
+	public static void main(String[] args) {
+		int i = 0;
+		while (i < 100) {
+			System.out.println("Hello World!");
+			i++;
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{while} Statement}
+	\begin{block}{\texttt{while} Loop}
+		The \texttt{while} statement continually executes a block of statements while a particular condition is \texttt{true}.
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+			while (condition) {
+				statement(s);
+			}
+		\end{minted}
+	\end{block}
+	\begin{block}{Remember}
+		Condition is always evaluated first.
+
+		Statements are executed \textbf{while} condition is evaluated as \texttt{true}.
+
+		Condition will be reevaluated once \textbf{all} statements are executed.
+	\end{block}
+\end{frame}
+
+\section{\texttt{do while} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{do while} Statement}
+	\begin{block}{Objective}
+		Write a program \texttt{twoSix.java} that keeps rolling two dice until you get two six.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{do while} Statement}
+	\begin{block}{\texttt{TwoSix.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class TwoSix {
+	public static void main(String[] args) {
+		boolean roll = true;
+		int dice1, dice2;
+		while (roll) {
+			dice1 = (int) Math.ceil( Math.random() * 6 );
+			dice2 = (int) Math.ceil( Math.random() * 6 );
+			System.out.printf("Dice 1: %d\tDice2: %d\n",
+				dice1, dice2);
+			if (dice1 + dice2 == 12)
+				roll = false;
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{do while} Statement}
+	\begin{block}{\texttt{TwoSix.java} (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class TwoSix {
+	public static void main(String[] args) {
+		int dice1, dice2;
+		do {
+			dice1 = (int) Math.ceil( Math.random() * 6 );
+			dice2 = (int) Math.ceil( Math.random() * 6 );
+			System.out.printf("Dice 1: %d\tDice2: %d\n",
+				dice1, dice2);
+		} while (dice1 + dice2 < 12);
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{do while} Statement}
+	\begin{block}{\texttt{do-while} Loop}
+		The \texttt{do-while} loop is a variation of \texttt{while} loop which evaluates iteration condition after execution of block of statements.
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+			do {
+				statement(s);
+			} while (condition);
+		\end{minted}
+	\end{block}
+	\begin{block}{Remember}
+		Condition is evaluated once \textbf{all} statements are executed.
+
+		Statements are reexecuted \textbf{while} condition is evaluated as \texttt{true}.
+
+		Condition will be reevaluated once \textbf{all} statements are reexecuted.
+	\end{block}
+\end{frame}
+
+\section{\texttt{for} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{for} Statement}
+	\begin{block}{\texttt{HelloWorld100.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+int i = 0;
+while (i < 100) {
+	System.out.println("Hello World!");
+	i++;
+}
+		\end{minted}
+	\end{block}
+	\begin{block}{Anathomy of a Code}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+intitialize iteration counter;
+while (iteration counter has not reached threshold) {
+	execute block of statements;
+	increment iteration counter;
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{for} Statement}
+	\begin{block}{\texttt{HelloWorld100.java} (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class HelloWorld {
+	public static void main(String[] args) {
+		for (int i = 0; i < 100; i++)
+			System.out.println("Hello World!");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{for} Statement}
+	\begin{block}{\texttt{for} Loop}
+		The \texttt{for} loop is a special case of a \texttt{while} loop that executes a block of statements for a specified number of times. Any \texttt{for} loop can be converted to a \texttt{while} loop.
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		for (initialization, condition, afterthought) {
+			statement(s);
+		}
+		\end{minted}
+		\begin{enumerate}
+			\item Initialization\\Intitializes iteration counter
+			\item Condition\\Specifies iteration condition
+			\item Afterthought\\Increments/Decrements iteration counter
+		\end{enumerate}
+	\end{block}
+\end{frame}
+
+\section{Nested Loops}
+
+\begin{frame}[fragile]
+	\frametitle{Nested Loops}
+	\begin{block}{Objective}
+		Write a program \texttt{Triangle.java} that takes number $n$ from user and prints a traingle in $n$ lines using star characters, such that there are $k$ star characters in $k^{th}$ line.
+\begin{verbbox}
+*
+**
+***
+****
+*****
+\end{verbbox}
+		\begin{figure}[H]\centering
+		\theverbbox
+		\caption{Sample riangle generated for $n = 5$}
+		\end{figure}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Nested Loops}
+	\begin{block}{\texttt{Triangle.java}}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Triangle {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		int numRow = input.nextInt();
+		input.close();
+		for (int i = 0; i < numRow; i++) {
+			for (int j = 0; j <= i; j++)
+				System.out.print("*");
+			System.out.printf("\n");
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\plain{}{Branches}
+
+\section{\texttt{break} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{Objective}
+		Write a program \texttt{FindP.java} that takes a String as command-line argument and checks if it contains the letter \texttt{p} (case insensitive). Do not use method \texttt{String.contains()}.
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{FindP.java (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class FindP {
+	public static void main(String[] args) {
+		String phrase = args[0].toLowerCase();
+		char letter = 'p';
+		boolean found = false;
+		for (int i = 0; i < phrase.length(); i++) {
+			if (phrase.charAt(i) == letter)
+				found = true;
+		}
+		if (found)
+			System.out.println("Found some '" + letter "'.");
+		else
+			System.out.println("No '"+ letter +"' found.");
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{Result}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac FindP.java
+		> java FindP Hello
+			No 'p' Found.
+		> java FindP Pejman
+			Found Some 'p'.
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{FindP.java (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class FindP {
+	public static void main(String[] args) {
+		String phrase = args[0].toLowerCase();
+		char letter = 'p';
+		for (int i = 0; i < phrase.length(); i++) {
+			if (phrase.charAt(i) == letter)
+				System.out.print(letter);
+			else
+				System.out.print("-");
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{Result}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac FindP.java
+		> java FindP Happy
+			--pp-
+		> java FindP Pejman
+			p-----
+		\end{minted}
+	\end{block}
+	\begin{block}{Problem Statement}
+		There are as many loop iterations as \texttt{phrase.length()}. Are they really required?
+	\end{block}
+	\begin{block}{Proposed Solution}
+		\texttt{break} statement allows termination of a loop without execution of the entire block of statements.
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{FindP.java (v1.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+String phrase = args[0].toLowerCase();
+char letter = 'p';
+boolean found = false;
+for (int i = 0; i < phrase.length(); i++)
+	if (phrase.charAt(i) == letter) {
+		found = true;
+		break;
+	}
+if (found)
+	System.out.println("Found some '" + letter "'.");
+else
+	System.out.println("No '"+ letter +"' found.");
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{FindP.java (v2.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+String phrase = args[0].toLowerCase();
+char letter = 'p';
+for (int i = 0; i < phrase.length(); i++) {
+	if (phrase.charAt(i) == letter) {
+		System.out.print(letter);
+		break;
+	}
+	else
+		System.out.print("-");
+}
+		\end{minted}
+	\end{block}
+	\begin{block}{Result}
+		\begin{minted}[fontsize=\small,tabsize=8]{text}
+		> javac FindP.java
+		> java FindP Happy
+			--p
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{break} Statement}
+	\begin{block}{Note}
+	Unconditional branches can be avoided to enhance code readability.
+	\end{block}
+	\begin{block}{FindP.java (v3.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+String phrase = args[0].toLowerCase();
+char letter = 'p';
+boolean found = false;
+int i = 0;
+while (!found && i < phrase.length())
+	if (phrase.charAt(i++) == letter)
+		found = true;
+System.out.println(found ? "Found" : "Not Found");
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{\texttt{continue} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{continue} Statement}
+	\begin{block}{Objective}
+		Write a program \texttt{CountP.java} that takes a String as command-line argument and prints number of 'p' letters it contains. Comparison is case insensitive.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{continue} Statement}
+	\begin{block}{CountP.java (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class CountP {
+	public static void main(String[] args) {
+		String phrase = args[0].toLowerCase();
+		char letter = 'p';
+		int counter = 0;
+		for (int i = 0; i < phrase.length(); i++) {
+			if (phrase.charAt(i) != letter)
+				continue;
+			counter++;
+		}
+		System.out.printf("Found %d 'P'(s)\n", counter);
+	}
+}
+		\end{minted}
+	\end{block}
+	The continue statement skips the current iteration of a loop.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{continue} Statement}
+	\begin{block}{Note}
+	Unconditional branches can be avoided to enhance code readability.
+	\end{block}
+	\begin{block}{CountP.java (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+String phrase = args[0].toLowerCase();
+char letter = 'p';
+int counter = 0;
+for (int i = 0; i < phrase.length(); i++) {
+	if (phrase.charAt(i) == letter)
+		counter++;
+}
+System.out.printf("Found %d 'P'(s)\n", counter);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+
+\section{\texttt{return} Statement}
+
+\begin{frame}[fragile]
+	\frametitle{\texttt{return} Statement}
+	\begin{block}{Definition}
+	Exits from the current method, and control flow returns to where the method was invoked.
+	\end{block}
+	Will be discussed later.
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Practice}
+
+\end{document}

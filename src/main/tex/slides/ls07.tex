@@ -1,0 +1,390 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{7}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+	Assignment 2 deadline extended to Mar 5, 2015 at 17:30 PM.
+
+	All Submissions should contain only .java files.
+
+	Make sure your submission was sucessful by downloading it from server.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Overview}
+	\begin{itemize}
+		\item[] Arrays
+			\begin{itemize}
+				\item[] One-Dimensional Arrays
+				\item[] Multi-Dimensional Arrays
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\plain{}{Arrays}
+
+\section{One-Dimensional Arrays}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Objective}
+		Write a program \texttt{RandomCard.java} that randomly selects a card from a standard 52-card deck and prints its name.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{\texttt{RandomCard.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class RandomCard {
+	public static void main(String[] args) {
+		int numCard = 52;
+		int randNum = 1 +
+				(int) Math.floor( Math.random() * numCard );
+		// Now I have to print name of the card
+		switch (randNum) {
+			case 1 : cardName = "Ace of Spades"; break;
+			case 2 : cardName = "Two of Spades"; break;
+			//... seriously?
+			case 51 : cardName = "Queen of Hearts"; break;
+			case 52 : cardName = "King of Hearts"; break;
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{\texttt{RandomCard.java} (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=5]{java}
+suitNum = randNum / 13;
+switch (suitNum) {
+	case 1 : suitName = "Spades"; break;
+	case 2 : suitName = "Diamonds"; break;
+	case 3 : suidName = "Clubs"; break;
+	case 4 : suitName = "Hearts"; break;
+}
+switch cardNum = numCard % 13;
+switch (cardNum) {
+	case 1 : cardName = "Ace"; break;
+	case 2 : cardName = "Two"; break;
+	//... not cool!
+	case 12 : cardName = "Queen"; break;
+	case 13 : cardName = "King"; break;
+}
+System.out.println(cardName + " of " + suitName);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Problem Statement}
+		Access to names of values and suits are limited.
+
+		Same code should be executed every time name of card is needed.
+
+		Solution is not expandable.
+	\end{block}
+	\begin{block}{Clue}
+		All cases assign string literals to one single variable.
+
+		Name of $13^{th}$ card numbers for every suit is "King".
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Proposed Solution}
+		Define an ordered collection of card names and get name of a card by calling its position in collection.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+String[] SuitNames = {
+	"Spades", "Diamonds", "Clubs", "Hearts"};
+String[] CardNames = {
+	"Ace", "Two", "Three", "Four", "Five",
+	"Six", "Seven", "Eight", "Nine", "Ten",
+	"Soldier", "Queen", "King"};
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Definition}
+		Array is a data structure that holds a \texttt{fixed} number of elements of a \texttt{single} type.
+
+		Each array element is identified by its \texttt{numerical index}.
+
+		An array is stored based on position of its \texttt{first} element.
+
+		First element of an array has index 0.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Definition}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+int[] primes;
+primes = new int[4];
+primes[0] = 2;
+primes[1] = 3;
+primes[2] = 5;
+primes[3] = 7;
+for (int i = 0; i < 4; i++)
+	System.out.println("Prime " + (i+1) + " is " + primes[i]);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{\texttt{RandomCard.java} (v3.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=5]{java}
+String[] SuitNames = {
+	"Spades", "Diamonds", "Clubs", "Hearts"};
+String[] CardNames = {
+	"Ace", "Two", "Three", "Four", "Five",
+	"Six", "Seven", "Eight", "Nine", "Ten",
+	"Soldier", "Queen", "King"};
+suitNum = randNum / 13;
+cardNum = numCard % 13;
+suitName = suitNames[suitNum];
+cardName = cardNames[cardNum];
+System.out.println(cardName + " of " + suitName);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Advantages}
+		\begin{itemize}
+			\item[] Data is more organized.
+			\item[] Code reuse is now possible.
+			\item[] Solution is expandable.
+		\end{itemize}
+	\end{block}
+	\begin{block}{Disadvantages}
+		\begin{itemize}
+			\item[] Once declared, size of array is fixed.
+			\item[] Insertion and deletion are not possible.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Objective}
+		Write a program \texttt{PrimeNumber.java} that first prints all first 1000 prime numbers.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{\texttt{PrimeNumber.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+int counter = 0;
+int number = 2;
+boolean definitelyNotPrime;
+while (counter < 1000) {
+	definitelyNotPrime = false;
+	for (int i = 2; i < number/2; i++)
+		if (number % i == 0){
+			definitelyNotPrime = true;
+			break;
+		}
+	if (!definitelyNotPrime)
+		System.out.printf("%4d: %d\n",++counter,number);
+	number++;
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Problem Statement}
+		To check if number \texttt{N} is prime, it suffices to check whether it is devisible by at least one prime number less than or equal to \texttt{N/2}.
+		\begin{itemize}
+			\item[] Not necessary to check all numbers less than \texttt{N/2}.
+		\end{itemize}
+		What if we are asked to print $1^{st}$, $3^{rd}$, $5^{th}$, ... prime numbers, after printing all first 1000 prime numbers?
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{Objective}
+		Write a program \texttt{PrimeNumber.java} that first prints all first 1000 prime numbers then prints 500th prime number.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{One-Dimensional Arrays}
+	\begin{block}{\texttt{PrimeNumber.java} (v2.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=3]{java}
+int[] primeNumbers = new int[1000];
+int counter = 0;
+int number = 2;
+boolean definitelyNotPrime;
+while (counter < primeNumbers.length) {
+	definitelyNotPrime = false;
+	for (int i = 0; i < counter && !definitelyNotPrime; i++)
+		if (number % primeNumbers[i] == 0)
+			definitelyNotPrime = true;
+	if (!definitelyNotPrime) {
+		primeNumbers[counter++] = number;
+		System.out.printf("%4d: %d\n",counter,number);
+	}
+	number++;
+}
+System.out.printf("%4d: %d\n",500,primeNumbers[499]);
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Multi-Dimensional Arrays}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{Dimension Definition}
+		The dimension of an array is the number of indices needed to select an element.
+	\end{block}
+	\begin{block}{Initialization}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+int[][] matrix = new int[3][3];
+for (int i = 0; i < 3; i++)
+	for (int j = 0; j < 3; j++)
+		matrix[i][j] = 0;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{Objective}
+		Write a program \texttt{MagicMatrix.java} that takes number \texttt{N} and generates a magic matrix of size \texttt{N} using numbers $1$ to $N^2$.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{Simplification}
+		\begin{itemize}
+			\item[] Get matrix size N from user
+			\item[] Build an array of length $N^2$ from 1 to N
+			\item[] Shuffle the array
+			\item[] Convert 1-D Array to 2-D Array
+			\item[] Print elements of array
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{\texttt{MagicMatrix.java} (part 1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Array {
+	public static void main(String[] args) {
+		// get matrix size
+		Scanner input = new Scanner(System.in);
+		int num = input.nextInt();
+		input.close();
+
+		// initialize array
+		int[] numbers = new int[num * num];
+		for (int i = 0; i < numbers.length; i++)
+			numbers[i] = i+1;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{\texttt{MagicMatrix.java} (part 2)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=12]{java}
+		// shuffle array
+		for (int i = 0; i < numbers.length; i++) {
+			int j = (int) (i + (numbers.length-i)*Math.random());
+			int temp = numbers[j];
+			numbers[j] = numbers[i];
+			numbers[i] = temp;
+		}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{\texttt{MagicMatrix.java} (part 3)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=19]{java}
+		// convert shuffled array to matrix
+		int[][] matrix = new int[num][num];
+		for (int i = 0; i < numbers.length; i++) {
+			matrix[i/num][i%num] = numbers[i];
+		}
+
+		// show matrix
+		for (int i = 0; i < num; i++) {
+			for (int j = 0; j < num; j++)
+				System.out.print(matrix[i][j]);
+			System.out.println();
+		}
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{Higher Dimensional Arrays}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+int num = 1;
+int[][][] cubicMatrix = new int[3][3][3];
+for (int i = 1; i < 3; i++)
+	for (int j = 1; j < 3; j++)
+		for (int k = 1; k < 3; k++)
+			cubicMatrix[i][j][k] = num++;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Multi-Dimensional Arrays}
+	\begin{block}{Remember}
+		\begin{itemize}
+			\item[] Arrays are simple data structures for data organization
+			\item[] Arrays provide an efficient way to access data
+			\item[] Elements of array are of same type
+			\item[] Arrays have fixed-size
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Practice}
+
+\end{document}

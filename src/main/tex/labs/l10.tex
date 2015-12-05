@@ -1,0 +1,29 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 10}
+\hfill \textbf{April 23, 2015}
+
+A company has some employees some of which are interns. Employees work 5 days a week and are paid 200 dollars every day. Interns are paid on an hourly basis, \$20 per hour. Develop classes \texttt{Employee.java} and \texttt{Intern.java} such that both have a method \texttt{findSalary()} that outputs their pay for a 30-day month period. Use your classes in another program \texttt{TestCompany.java} to find salaries of 5 employees and 5 interns who work a random number of hours (between 3 to 8 hours) every day. Respect all object-oriented design principles (encapsulation, inheritance, abstraction, polymorphism).
+Propose a design in which additional methods can be developed for employees that are not intern, i.e. your additional methods should not be visible by interns. Make any modifications to your original design as you deem necessary.
+
+\end{document}

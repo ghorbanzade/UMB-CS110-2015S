@@ -1,12 +1,2 @@
-**/*.class
-**/*.o
-**/*.out
-**/*.log
-**/*.aux
-**/*.nav
-**/*.snm
-**/*.vrb
-**/*.pyg
-**/*.toc
-**/*.pdf
-template/fonts
+bin
+lib

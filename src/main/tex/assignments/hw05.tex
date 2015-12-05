@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Assignment 5}
+\doc{date-pub}{Apr 19, 2015 at 00:00 AM}
+\doc{date-due}{Apr 30, 2015 at 05:30 PM}
+\doc{points}{8}
+
+\prepare{header}
+
+\section*{Question 1}
+
+Write a program \texttt{FlightTest.java} that controls two airplanes, one \texttt{plane1} a commercial plane from \texttt{Eagle} company and one \texttt{plane2}, a fighter-bomber from \texttt{Dragon} company.  All airplanes fly at some altitude and with some speed. They take off and land. Just as bombers may drop bomb (if they have any) while they are in sky, commercials can board passengers (as much as their capacity allows) while grounded.
+
+Assuming all planes made by \texttt{Eagle} have 300 seats, fly at 39000 ft and 550 mph and all planes made by \texttt{Dragon} have 2 bomb bays and fly at 30000 ft and 1000 mph, develop classes \texttt{Aircraft}, \texttt{Bomber}, \texttt{Commercial}, \texttt{Eagle} and \texttt{Dragon} and use them in a program \texttt{FlightTest.java}.
+
+\section*{Question 2}
+
+Your manager has just learned basic concepts of interfaces and abstraction in Java and has asked you to implement the methods in the following interface in a class \texttt{ArraySort.java}. Write a program \texttt{ArraySortTest.java} to show him how to use your class to initialize, shuffle and sort an array. Attach a file \texttt{note.txt} to briefly explain why this is not a good practice and recommend a better alternative.
+
+\lstset{language=java}
+\begin{lstlisting}
+public interface sortAndUnsort {
+	// sorts the array using insertion sort
+	public int[] sortInsertion(int[] array);
+	// shuffles the array
+	public int[] shuffle(int[] array);
+	// prints the array elements
+	public void print(int[] array);
+	// initialize array from firstElement to lastElement
+	public int[] init(int firstElement, int lastElement);
+}
+\end{lstlisting}
+
+\prepare{footer}
+
+\end{document}

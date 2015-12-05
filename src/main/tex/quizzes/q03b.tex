@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Quiz 3(b)}
+\doc{date-pub}{Apr 02, 2015 at 01:00 PM}
+\doc{date-due}{Apr 03, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+The code given below is the main method of a program \texttt{EasyMatrix.java} that fills a two-dimensional array of 10 columns and 10 rows with distinct random integers in range 0 to 99. With no modification to the main method, develop the rest of this program.
+
+\lstset{language=java}
+\begin{lstlisting}
+public static void main(String[] args) {
+	int matrixSize = 10;
+	int[] array = arrayInitialize(matrixSize);
+	// shuffle array
+	arrayShuffle(array);
+	// convert shuffled array to square matrix
+	int[][] matrix = toMatrix(array);
+	// show matrix
+	showMatrix(matrix);
+}
+\end{lstlisting}
+
+\section*{Question 2}
+
+Write a class \texttt{UserProfile.java} with username, password, name, height, weight and blood type as attributes.
+
+Develop a program \texttt{MyProfile.java} with the following main method that uses \texttt{UserProfile} class to perform as described below.
+
+Upon execution, the user is brought into the main menu where he can select one of the following options.
+\begin{enumerate}[itemsep=0pt]
+\parskip=0pt \parsep=0pt
+\item Create new profile
+\item Show my profile
+\item Exit
+\end{enumerate}
+
+\lstset{language=java}
+\begin{lstlisting}
+public static void main(String[] args) {
+	while (true) {
+		int option = getMenuOption();
+		if (option == 1)
+			createProfile();
+		else if (option == 2)
+			showProfile();
+		else
+			break;
+	}
+	System.out.println("Goodbye!");
+}
+\end{lstlisting}
+
+When creating a new account, user first enters username and password. After creating his profile, user is asked to enter his name, height, weight and bloodtype. Upon initialization of all profile attributes, program should return to the main menu.
+
+To show a user profile, program will ask for a username and a password. If credentials are correct, program should prompt the information for that username. In any other case it would return to the main menu.
+
+For simplicity, assume there are no more than 100 profiles at one run time.
+
+\prepare{footer}
+
+\end{document}

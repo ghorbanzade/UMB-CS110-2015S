@@ -1,0 +1,136 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Solution to Quiz 2(a)}
+\doc{date-pub}{Mar 10, 2015 at 01:00 PM}
+\doc{date-due}{Mar 10, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+Write a program \texttt{PrimeRelative.java} that asks for \texttt{N} from the user and prints out an \texttt{N}-by-\texttt{N} table such that there is an \texttt{*} in row \texttt{i} and column \texttt{j}, if the greatest common divisor of \texttt{i} and \texttt{j} is 1, and a space in that position if otherwise.
+
+\subsection*{Solution}
+
+\lstset{language=Java,tabsize=2}
+\begin{lstlisting}
+// we use scanner to ask for number N
+import java.util.Scanner;
+public class PrimeRelative {
+	public static void main(String[] args)
+	{
+		int i; // 1st for loop (matrix row)
+		int j; // 2nd for loop (matrix col)
+		int k; // 3rd for loop (division checker)
+		int numberN;
+		boolean notPrimeRelative;
+		System.out.print("Please insert the number N: ");
+		Scanner input = new Scanner(System.in);
+		numberN = input.nextInt();
+		System.out.println("Your entered number is " + numberN + ".");
+		input.close(); // remember to close the scanner object
+		numberN++; // to compensate our sacrifice of first row and column
+		for (i = 0 ; i < numberN ; i++) {
+			for (j = 0 ; j < numberN ; j++) {
+				// if first row, print number of columns
+				if (i == 0) {
+					System.out.printf("%-2d ",j);
+				}
+				// else if first column, print number of rows
+				else if (j == 0) {
+					System.out.printf("%-2d ",i);
+				}
+				// for matrix elements
+				else {
+					// we initially assume gcd(i,j)=1
+					notPrimeRelative = false;
+					// now we check if a number k can be found
+					// that divides both i and j
+					for (k = 2; k <= Math.min(i, j); k++) {
+						// if it divides both i and j
+						// gcd(i,j) != 1 for sure
+						if (i % k == 0 && j % k == 0) {
+							// so they are not prime relative
+							notPrimeRelative = true;
+						}
+					}
+					if (notPrimeRelative) {
+						System.out.print("   ");
+					}
+					else {
+						System.out.print("*  ");
+					}
+				}
+			}
+			// after each row, a feed line is inserted
+			System.out.println();
+		}
+	}
+}
+\end{lstlisting}
+\newpage
+
+\section*{Question 2}
+
+Write a program \texttt{MatrixDeterminant.java} that asks for elements of a three-by-three matrix and prints its determinant.
+
+\subsection*{Solution}
+
+\lstset{language=Java,tabsize=2}
+\begin{lstlisting}
+// import Scanner class to use Scanner
+import java.util.Scanner;
+public class MatrixDeterminant {
+	public static void main(String[] args) {
+		int i; // 1st loop (row)
+		int j; // 2nd loop (col)
+		int[][] matrix = new int[3][3]; // array of int for 3x3 matrix
+		long determinant; // long is bigger than int
+		Scanner input = new Scanner(System.in); // we create scanner object
+		// ask user to initialize matrix
+		for (i = 0; i < 3; i++) {
+			for (j = 0; j < 3; j++) {
+				System.out.printf("Insert element in row %d and col %d: ",i,j);
+				matrix[i][j] = input.nextInt();
+			}
+		}
+		// close Scanner object as we don't need it anymore
+		input.close();
+		// show initialized matrix to user
+		System.out.println("Matrix is: ");
+		for (i = 0; i < 3; i++) {
+			for (j = 0; j < 3; j++) {
+				System.out.printf("%5d ",matrix[i][j]);
+			}
+			System.out.println();
+		}
+		// show determinant
+		System.out.print("Determinant for matrix is: ");
+		determinant = matrix[0][0]*matrix[1][1]*matrix[2][2]
+				+ matrix[1][0]*matrix[2][1]*matrix[1][2]
+				+ matrix[0][1]*matrix[1][2]*matrix[2][0]
+				- matrix[0][2]*matrix[1][1]*matrix[2][0]
+				- matrix[0][0]*matrix[1][2]*matrix[2][1]
+				- matrix[2][2]*matrix[1][0]*matrix[0][1];
+		System.out.println(determinant);
+	}
+}
+\end{lstlisting}
+
+\end{document}

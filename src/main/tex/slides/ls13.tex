@@ -1,0 +1,388 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\usepackage[school]{\texDirectory/template/pgf-umlcd/pgf-umlcd}
+\doc{number}{13}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+Deadline for Assignment 4 extended to April 18, 2015 at 11:59 PM.
+Assignment 5 to be released on April 19, 2015 at 12:00 AM.
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Overview}
+  \begin{itemize}
+    \item[] Interfaces
+  \end{itemize}
+\end{frame}
+
+\section{Interfaces}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{How Do You Think?}
+    How do we drive?\\
+    How do we ride a bike?\\
+    How do we use a computer?\\
+    How do we use a smart phone?
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Definition}
+    An interface is an abstract type developed to specify method signatures that classes must implement.
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public interface Controller {
+  // constants
+  // method signatures
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Implementation}
+    A class implementing an interface, either promises to implement all its method signatures or is declared as abstract.
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Television implements Controller {
+  // attributes and fields
+  // implementation of interface's method signatures
+  // other methods
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Objective}
+    Write a program \texttt{ControlTV.java} in which user can control a Samsung television using a remote controller.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Object-Oriented Design}
+    \begin{itemize}
+      \item[] Identify objects
+      \item[] Identify classes
+      \item[] Identify abstract classes
+      \item[] Identify interactions between objects
+      \item[] Design relation between classes
+      \item[] Implement methods
+      \item[] Instantiate objects
+      \item[] Use objects to achieve your goal
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Object-Oriented Design}
+    \begin{itemize}
+      \item[] \textbf{Objects}\\myTv
+      \item[] \textbf{Classes}\\Samsung
+      \item[] \textbf{Abstract Classes}\\Television
+      \item[] \textbf{Interfaces}\\Remote controller
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Class Relations}
+    Any television supports primary keys of a remote controller to change volume, current channel and whether it's on or off.
+    Although, any television knows what to do when client presses power button, different television companies may implement other keys differently.
+    Samsung is a television company from which our object is instantiated.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Controller.java}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public interface Controller {
+  public void keyPower();
+  public void keyRight();
+  public void keyLeft();
+  public void keyUp();
+  public void keyDown();
+  public void number(int input);
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Television .java (Page 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public abstract class Television implements Controller {
+  // fields and attributes
+  private int channel;
+  private int volume;
+  private boolean on = false;
+  // abstract methods
+  @Override
+  public void keyPower() {
+    on = on ? false : true;
+    System.out.print("TV turned ");
+    System.out.println( on ? "on." : "off.");
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Television.java (Page 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=13]{java}
+  // setters and getters
+  public boolean isOn() {
+    return on;
+  }
+  public void setChannel(int currentChannel) {
+    this.channel = currentChannel;
+  }
+  public int getChannel() {
+    return this.channel;
+  }
+  public void setVolume(int currentVolume) {
+    this.volume = currentVolume;
+  }
+  public int getVolume() {
+    return this.volume;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Samsung extends Television {
+  // Attributes
+  private final int channelUpperLimit = 100;
+  private final int channelLowerLimit = 0;
+  private final int volumeUpperLimit = 30;
+  private final int volumeLowerLimit = 0;
+    \end{minted}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=7]{java}
+  // Overriding Abstract Methods
+  @Override
+  public void keyRight() {
+    if (this.isOn()) {
+      if (this.getVolume() < volumeUpperLimit) {
+        this.setVolume(getVolume() + 1);
+        System.out.println("Samsung volume changed to "
+            +this.getVolume()+".");
+      }
+    }
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 3)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=18]{java}
+  @Override
+  public void keyLeft() {
+    if (this.isOn()) {
+      if (this.getVolume() > volumeLowerLimit) {
+        this.setVolume(getVolume() - 1);
+        System.out.println("Samsung volume changed to "
+            +this.getVolume()+".");
+      }
+    }
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 4)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=28]{java}
+  @Override
+  public void keyUp() {
+    if (this.isOn()) {
+      if (this.getChannel() == channelUpperLimit)
+        this.setChannel(channelLowerLimit);
+      else
+        this.setChannel(this.getChannel() + 1);
+      System.out.println("Samsung channel change to "
+          +this.getChannel()+".");
+    }
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 5)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=39]{java}
+  @Override
+  public void keyDown() {
+    if (this.isOn()) {
+      if (this.getChannel() == channelLowerLimit)
+        this.setChannel(channelUpperLimit);
+      else
+        this.setChannel(this.getChannel() - 1);
+      System.out.println("Samsung channel change to "
+          +this.getChannel()+".");
+    }
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Samsung.java (Page 6)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=50]{java}
+  @Override
+  public void number(int input) {
+    if (this.isOn()) {
+      this.setChannel(input);
+      System.out.println("Samsung channel change to "
+          +this.getChannel()+".");
+    }
+  }
+  // Constructors
+  public Samsung() {
+    setChannel(1);
+    setVolume(10);
+    System.out.println("Just bougth a new Samsung TV.");
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{ControlTV.java (Page 1)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+import java.util.Scanner;
+public class Main {
+  public static Scanner input = new Scanner(System.in);
+  public static void main(String[] args) {
+    Samsung myTv = new Samsung();
+    while (true)
+      if (showMenu(myTv))
+        break;
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{ControlTV.java (Page 2)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=10]{java}
+  public static boolean showMenu(Television myTv) {
+    System.out.printf("\n\nHere are the options:\n");
+    System.out.printf("\t1. Press Power Key\n");
+    System.out.printf("\t2. Press Right Key\n");
+    System.out.printf("\t3. Press Left Key\n");
+    System.out.printf("\t4. Press Up Key\n");
+    System.out.printf("\t5. Press Down Key\n");
+    System.out.printf("\t6. Enter a number\n");
+    System.out.printf("\t7. Put down remote controller\n");
+    System.out.printf("What do you want to do [1-7]? ");
+    return askOption(myTv);
+  }
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{ControlTV.java (Page 3)}
+    \begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=22]{java}
+  public static boolean askOption(Television myTv) {
+    switch (input.nextInt()) {
+      case 1: myTv.keyPower(); break;
+      case 2: myTv.keyRight(); break;
+      case 3: myTv.keyLeft(); break;
+      case 4: myTv.keyUp(); break;
+      case 5: myTv.keyDown(); break;
+      case 6:
+        System.out.printf("Enter number: ");
+        int num = input.nextInt();
+        myTv.number(num); break;
+      case 7: return true;
+      default: break;
+    }
+    return false;
+  }
+}
+    \end{minted}
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Achievement}
+    Our TV supports the controller user interface (as any other television would), with an implementation specific to its brand.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Design Advantage}
+    Any class implementing an interface is guaranteed to implement method signatures developed in that interface.
+    This helps organize structure of the program and facilitates interactions of objects of different classes.
+  \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Interfaces}
+  \begin{block}{Remember}
+    \begin{itemize}
+      \item[] \textbf{Interface vs Abstract Class}\\
+      Although a class may not extend multiple classes, it can implement multiple interfaces.
+
+      \item[] \textbf{Relation}\\
+      For a class to implement an interface, there must be an IS-A relationship from that class to the interface. Weird but true!
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Think Object-Oriented}
+
+\end{document}

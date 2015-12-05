@@ -1,0 +1,132 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Solution to Quiz 3(a)}
+\doc{date-pub}{Mar 31, 2015 at 01:00 PM}
+\doc{date-due}{Apr 01, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+You are asked to develop a simple ticket printing machine for box-office of a small cinema with a total of 50 seats, 10 seats in each row.
+Ticketing procedure is based on a few simple policies as follows:
+
+\begin{enumerate}[itemsep=-2mm,label={}]
+	\item Rows closer to screen are always prioritized.
+	\item Seats in a row are filled from the leftmost to the rightmost.
+	\item All seats assigned to a group of people must be in the same row.
+\end{enumerate}
+
+Develop a class \texttt{Theater.java} with class members that you think are required for this objective and use your class in a program \texttt{TicketSale.java} that prompts ticket seller for number of tickets to print, showing the number of total available seats at the same time.
+If sufficient number of seats are available in a single row, your program should print the list of seats assigned to the group.
+Otherwise, it should show a warning indicating tickets are not available for the group.
+Program terminates when all tickets are sold and no more seats are available.
+
+\subsection*{Solution}
+
+\begin{enumerate}
+\item Class \texttt{Theater.java}
+\lstset{language=java}
+\begin{lstlisting}
+public class Theater {
+	// First, let's define attributes of the Theater
+	// We use private access modifier to perform encapsulation
+	// Number of available seats
+	private static int availableSeats;
+	// State of seats of theater: true if available, false if already sold
+	private static boolean[][] seats = new boolean[5][10];
+	// Number of available seats in each row
+	private static int[] availableSeatsInRow = new int[seats.length];
+	// Now, it's time for Methods
+	// This method sets all seats to false and initializes available seats
+	public static void initialize() {
+		for (int i = 0; i < seats.length; i++) {
+			for (int j = 0; j < seats[i].length; j++) {
+				seats[i][j] = false;
+			}
+		}
+		for (int i = 0; i < seats.length; i++) {
+			availableSeatsInRow[i] = seats[0].length;
+		}
+		availableSeats = seats.length * seats[0].length;
+	}
+	// A public method that is called to sell tickets to 'num' people
+	public static boolean sellTicket(int num) {
+		for (int row = 0; row < seats.length; row++) {
+			if (sellTicket(num, row)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	// Let's define a private method to see if we can sell tickets for 'num' people from row 'row'
+	private static boolean sellTicket(int num, int row) {
+		// first check if 'num' seats are available for row 'row'
+		if (num <= availableSeatsInRow[row]) {
+			int i = 0;
+			// skip those seats that are already sold
+			while (seats[row][i]) {
+				i++;
+			}
+			// sell 'num' rows from this row
+			for (int j = 0; j < num; j++) {
+				seats[row][i+j] = true;
+				availableSeats --;
+				availableSeatsInRow[row] --;
+				System.out.printf("Sold seat %d of row %d\n", i+j+1, row+1);
+			}
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	// An accessor to get available seats
+	public static int getAvailableSeats() {
+		return availableSeats;
+	}
+	// As we have only one theater and we don't want to allow instantiation for this class, not only should we avoid developing constructors, we must only override the default constructor with private modifer
+	private Theater() {};
+}
+\end{lstlisting}
+\item Class \texttt{TicketSale.java}
+\lstset{language=java}
+\begin{lstlisting}
+import java.util.Scanner;
+public class TicketSale {
+	public static void main(String[] args) {
+		// First empty the theater
+		Theater.initialize();
+		Scanner input = new Scanner(System.in);
+		// Execute loop until all seats are sold
+		while (Theater.getAvailableSeats() > 0) {
+			System.out.println(Theater.getAvailableSeats()+" seats still available.");
+			System.out.print("Number of tickets to print? ");
+			int num = input.nextInt();
+			// Call Theater.sellTicket(num) method which returns true if tickets can be sold for the group and returns false if not
+			System.out.println(Theater.sellTicket(num) ? "" : "Tickets not available for group of "+num+".\n");
+		}
+		System.out.println("All seats sold out!");
+		input.close();
+	}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\end{document}

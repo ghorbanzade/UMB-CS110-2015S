@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 7}
+\hfill \textbf{March 26, 2015}
+
+Objective is to write a program that simulates an acquarium in which there are initially 100 fish and one shark. Scenario is simple: Each time the shark wants to eat, it eats some random number of fish (from zero to number of fish in acquarium). Each time the shark eats, the remaining fish in acquarium reproduce a random number of fish (from zero to number of remaining fish).
+\begin{enumerate}[itemsep=0pt]
+\item Develop a class \texttt{Shark.java} and its data members and methods as you think best fits this program.
+\item Develop another class \texttt{Acquarium.java} and its data memebrs and methods as you think best fits this program.
+\item Use your developed classes in \texttt{Simulation.java} to simulate what happens in your acquarium.
+\item Use your creativity to make it more fun!
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,194 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Solution to Quiz 1(b)}
+\doc{date-pub}{Feb 19, 2015 at 01:00 PM}
+\doc{date-due}{Feb 19, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+According to National Weather Serivce, the \textit{Wind Chill} can be computed as given in Equation \ref{eq1}, where $t$ is the temperature in Fahrenheit and $v$ is the wind speed in miles per hour.
+
+\begin{equation}
+w = 35.74 + 0.6215 t + (0.4275t-35.75)v^{0.16}
+\label{eq1}
+\end{equation}
+
+Write a program \texttt{WindChill.java} that takes temperature in Celsius and using Equation \ref{eq1} gives the wind chill in Celsius.
+Fahrenheit to Celsius conversion formula is given in Equation \ref{eq2}.
+
+\begin{equation}
+t_F = 1.8 \times t_C + 32
+\label{eq2}
+\end{equation}
+
+\begin{figure}[H]\centering
+	\includegraphics[width=8cm]{\texDirectory/template/images/windchill.png}
+\end{figure}
+
+\subsection*{Solution}
+
+\lstset{language=Java}
+\begin{lstlisting}
+public class WindChill {
+	public static void main (String[] args) {
+
+		// Given command-line arguments are of String nature.
+		// So we have to convert them to double type to perform our calculations.
+		// Remember that first argument is args[0].
+		double tempCelsius = Double.parseDouble(args[0]);
+		double windVelocity = Double.parseDouble(args[1]);
+
+		// Converting Temperature from Celsius to Fahrenheit
+		double tempFahrenheit = 1.8 * tempCelsius + 32;
+
+		// Calculating The Wind Chill In Fahrenheits
+		double windChillFahrenheit = 35.74 + 0.6215*tempFahrenheit + (0.4275*tempFahrenheit - 5.75)*Math.pow(windVelocity,0.16);
+
+		// Converting Wind Chill from Fahrenheit to Celsius
+		double windChillCelsius = 9/5*(windChillFahrenheit - 32);
+		int windChill = (int) Math.round(windChillCelsius);
+		System.out.print("When temperature is " + tempCelsius + " Celsius and wind is " + windVelocity + " Miles per hour, ");
+		System.out.println("Wind chill is " + windChill + " degrees Fahrenheit.");
+	}
+}
+\end{lstlisting}
+
+\section*{Question 2}
+
+Write a program \textit{Maximum.java} that takes three integer numbers as command line arguments and prints their maximum, minimum and mean values.
+
+\subsection*{Solution}
+
+\lstset{language=Java}
+\begin{lstlisting}
+public class Maximum {
+	public static void main (String[] args) {
+
+		// Converting command-line arguments to integer numbers
+		int num1 = Integer.parseInt(args[0]);
+		int num2 = Integer.parseInt(args[1]);
+		int num3 = Integer.parseInt(args[2]);
+
+		// Maximum number
+		// We used conditional ternary operations to make our code more concise, elegant and easy to read
+		// The following conditional ternary operation is equivalent to
+		// if (num1 > num2) { max = num1; } else {	max = num2; }
+		int max = (num1 > num2) ? num1 : num2;
+		max = (max > num3) ? max : num3;
+		System.out.println("Maximum number is " + max);
+
+		// Minimum number
+		int min = (num1 > num2) ? num2 : num1;
+		min = (min > num3) ? num3 : min;
+		System.out.println("Minimum numer is " + min);
+
+		// Mean Value
+		double mean = (num1 + num2 + num3)/3;
+		System.out.printf("Mean value is %.2f\n", mean);
+	}
+}
+\end{lstlisting}
+\section*{Question 1}
+
+According to National Weather Serivce, the \textit{Wind Chill} can be computed as given in Equation \ref{eq1}, where $t$ is the temperature in Fahrenheit and $v$ is the wind speed in miles per hour.
+
+\begin{equation}
+w = 35.74 + 0.6215 t + (0.4275t-35.75)v^{0.16}
+\label{eq1}
+\end{equation}
+
+Write a program \texttt{WindChill.java} that takes temperature in Celsius and using Equation \ref{eq1} gives the wind chill in Celsius.
+Fahrenheit to Celsius conversion formula is given in Equation \ref{eq2}.
+
+\begin{equation}
+t_F = 1.8 \times t_C + 32
+\label{eq2}
+\end{equation}
+
+\begin{figure}[H]\centering
+	\includegraphics[width=8cm]{\texDirectory/template/images/windchill.png}
+\end{figure}
+
+\subsection*{Solution}
+
+\lstset{language=Java}
+\begin{lstlisting}
+public class WindChill {
+	public static void main (String[] args) {
+
+		// Given command-line arguments are of String nature.
+		// So we have to convert them to double type to perform our calculations.
+		// Remember that first argument is args[0].
+		double tempCelsius = Double.parseDouble(args[0]);
+		double windVelocity = Double.parseDouble(args[1]);
+
+		// Converting Temperature from Celsius to Fahrenheit
+		double tempFahrenheit = 1.8 * tempCelsius + 32;
+
+		// Calculating The Wind Chill In Fahrenheits
+		double windChillFahrenheit = 35.74 + 0.6215*tempFahrenheit + (0.4275*tempFahrenheit - 5.75)*Math.pow(windVelocity,0.16);
+
+		// Converting Wind Chill from Fahrenheit to Celsius
+		double windChillCelsius = 9/5*(windChillFahrenheit - 32);
+		int windChill = (int) Math.round(windChillCelsius);
+		System.out.print("When temperature is " + tempCelsius + " Celsius and wind is " + windVelocity + " Miles per hour, ");
+		System.out.println("Wind chill is " + windChill + " degrees Fahrenheit.");
+	}
+}
+\end{lstlisting}
+
+\section*{Question 2}
+
+Write a program \textit{Maximum.java} that takes three integer numbers as command line arguments and prints their maximum, minimum and mean values.
+
+\subsection*{Solution}
+
+\lstset{language=Java}
+\begin{lstlisting}
+public class Maximum {
+	public static void main (String[] args) {
+
+		// Converting command-line arguments to integer numbers
+		int num1 = Integer.parseInt(args[0]);
+		int num2 = Integer.parseInt(args[1]);
+		int num3 = Integer.parseInt(args[2]);
+
+		// Maximum number
+		// We used conditional ternary operations to make our code more concise, elegant and easy to read
+		// The following conditional ternary operation is equivalent to
+		// if (num1 > num2) { max = num1; } else {	max = num2; }
+		int max = (num1 > num2) ? num1 : num2;
+		max = (max > num3) ? max : num3;
+		System.out.println("Maximum number is " + max);
+
+		// Minimum number
+		int min = (num1 > num2) ? num2 : num1;
+		min = (min > num3) ? num3 : min;
+		System.out.println("Minimum numer is " + min);
+
+		// Mean Value
+		double mean = (num1 + num2 + num3)/3;
+		System.out.printf("Mean value is %.2f\n", mean);
+	}
+}
+\end{lstlisting}
+
+\end{document}

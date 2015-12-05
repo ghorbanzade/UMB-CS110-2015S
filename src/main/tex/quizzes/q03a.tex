@@ -1,0 +1,43 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Quiz 3(a)}
+\doc{date-pub}{Mar 31, 2015 at 01:00 PM}
+\doc{date-due}{Apr 01, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+You are asked to develop a simple ticket printing machine for box-office of a small cinema with a total of 50 seats, 10 seats in each row.
+Ticketing procedure is based on a few simple policies as follows:
+
+\begin{enumerate}[itemsep=-2mm,label={}]
+  \item Rows closer to screen are always prioritized.
+  \item Seats in a row are filled from the leftmost to the rightmost.
+  \item All seats assigned to a group of people must be in the same row.
+\end{enumerate}
+
+Develop a class \texttt{Theater.java} with class members that you think are required for this objective and use your class in a program \texttt{TicketSale.java} that prompts ticket seller for number of tickets to print, showing the number of total available seats at the same time.
+If sufficient number of seats are available in a single row, your program should print the list of seats assigned to the group.
+Otherwise, it should show a warning indicating tickets are not available for the group.
+Program terminates when all tickets are sold and no more seats are available.
+
+\prepare{footer}
+
+\end{document}

@@ -1,0 +1,400 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\usepackage[school]{\texDirectory/template/pgf-umlcd/pgf-umlcd}
+
+\begin{document}
+
+\doc{title}{Solution to Final Exam Practice}
+\doc{points}{20}
+
+\prepare{header}
+
+\subsection*{Question 1}
+
+The following code snippet either do not compile or do not run as expected. There are five \textbf{distinct} problems. You are expected to find and fix all errors so that given command-line argument will lead to expected output as indicated.
+
+\lstset{language=java, tabsize=2}
+Execution Script \hfill Expected Output\\
+\texttt{java Factorial 5} \hfill \texttt{5! is 120}
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (i = a: i >= 0: i--) {
+			product *= a;
+		}
+		System.out.println(a! + " is " + product );
+	}
+}
+\end{lstlisting}
+
+\subsubsection*{Solution}
+
+Following is the list of errors in original code snippet and changes made to fix them.
+
+\begin{enumerate}[label=\arabic*.]
+\item Line 5: Variable \texttt{i} is not declared. All variables should first be declared before use. Keyword \texttt{int} was added to Initialization component of the \texttt{for} loop.
+\item Line 5: Components of the \texttt{for} loop in Java are separated by character \texttt{;}. Character \texttt{:} was replaced by character \texttt{;}.
+\item Line 5: Specifying condition of \texttt{for} loop as \texttt{i >= 0} will always cause \texttt{0} to be printed in output. Condition was changed to \texttt{i > 0}.
+\item Line 6: Variable \texttt{a} is constant and the statement will produce $a^a$ instead of $a!$. \texttt{product *= a} was changed to \texttt{product *= i}.
+\item Line 9: \texttt{!} should be enclosed with double quotation marks to be printed as output. \texttt{!} was changed to \texttt{"!"}. A \texttt{+} operand is also used to concatenate strings.
+\end{enumerate}
+
+Corrected code snippet is as follows.
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (int i = a; i > 0; i--) {
+			product *= i;
+		}
+		System.out.println(a + "! is " + product );
+	}
+}
+\end{lstlisting}
+
+\subsection*{Question 2}
+
+The following code snippet compiles and runs without error. Determine the output of the program and support your answer by explaining how the program works.
+
+\begin{enumerate}[label=(\alph*)]
+\item \texttt{Loops.java}
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Loops {
+	public static void main(String[] args) {
+		int num = 0;
+		for (int i = 1; i <= 4; i++) {
+			for (int j = 1; j <= i; j++) {
+				System.out.print(++num +" ");
+			}
+			System.out.println();
+		}
+	}
+}
+\end{lstlisting}
+\item \texttt{Arrays.java}
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Arrays {
+	public static void main(String[] args) {
+		int[][] array = new int[5][4];
+		for (int i = 0; i < array.length; i++)
+			for (int j = 0; j < array[0].length; j++)
+				array[i][j] = i*j;
+		for (int i = 0; i < array[0].length; i++)
+			System.out.print(array[i][2]*array[2][i]+" ");
+	}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsubsection*{Solution}
+
+\begin{enumerate}[label=(\alph*)]
+\item \texttt{Loops.java}
+
+The program \texttt{Loops.java} contains a nested for loop. Outer loop iterates four times. Each iteration $i$, will execute the inner loop for $i$ times and follows by printing a carriage return (next line) on the screen. What will be shown on the screen is shown in Fig. \ref{fig1}.
+
+\begin{verbbox}
+1
+2 3
+4 5 6
+7 8 9 10
+\end{verbbox}
+\begin{figure}[H]\centering
+\theverbbox
+\caption{Output of program \texttt{Loops.java}} \label{fig1}
+\end{figure}
+
+\item \texttt{Arrays.java}
+The program \texttt{Arrays.java} contains a nested loop that initializes a two-dimensional array of type Integer with 5 rows and 4 columns such that element \texttt{array[i][j]} will store value $i*j$. What is shown as output is generated via the for loop in line 7 which iterates over columns the array and prints \texttt{array[i][2]*array[2][i]} on the screen. Using \texttt{array[i][j]=i*j}, each iteration $i$ would print $i\times 2\times 2\times i = 4 i^2$ as output.
+
+\end{enumerate}
+
+\newpage
+
+\subsection*{Question 3}
+
+Your manager has called for an urgent meeting to announce that a recent patch to the project code was reported to have caused several crashes to the project software in some cases.
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+import java.util.Scanner;
+public class Patch {
+	public static void main(String[] args) {
+		Scanner scnr = new Scanner(System.in);
+		int num = scnr.nextInt();
+		scnr.close();
+		int[] matrix = new int[num];
+		for (int i = 0; i <= num; i++)
+			matrix[i] = i;
+		System.out.println((Math.sqrt(matrix[num/2]));
+	}
+}
+\end{lstlisting}
+
+He has asked you to explain the cause(s) of error and attach a new version of the patch that maintains control flow of the program regardless of user inputs.
+
+\subsubsection*{Solution}
+
+The major problem with the given code snippet is the for loop in line 8 which iterates from 0 to the number entered by the user. The bug which results in runtime crashes is the for loop will try to assign $i$ to index $n$ of an array of size $n$ whose indices are from 0 to $n-1$. This can easily be fixed by changing line 8 to the following.
+\lstset{language=java, tabsize=2, firstnumber=8}
+\begin{lstlisting}
+		for (int i = 0; i < num; i++)
+\end{lstlisting}
+
+Vulnerabilities of the given code lie in the fact that no restriction has been imposed in what the user enters as input. If client enters a non-integer or a non-positive integer, the \texttt{nextInt()} method of class \texttt{Scanner} will throw an exception and no effort has been made to catch them. Following is the revised code snippet which catches all possible errors.
+
+\lstset{language=java, tabsize=2, firstnumber=1}
+\begin{lstlisting}
+import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.lang.NegativeArraySizeException;
+public class PatchRevised {
+		public static void main(String[] args) {
+				Scanner scnr = new Scanner(System.in);
+				while (true) {
+						try {
+								System.out.print("Enter a number: ");
+								int num = scnr.nextInt();
+								int[] matrix = new int[num];
+								for (int i = 0; i < num; i++)
+										matrix[i] = i;
+								System.out.println(Math.sqrt(matrix[num/2]));
+								break;
+						}
+						catch (InputMismatchException e) {
+								scnr.next();
+								System.out.println("Enter an Integer Number.");
+						}
+						catch (NegativeArraySizeException e) {
+								System.out.println("Enter a Positive Integer.");
+						}
+				}
+				scnr.close();
+		}
+}
+\end{lstlisting}
+
+\subsection*{Question 4}
+
+Develop a simple method \texttt{findPow(int num, int pow)} that can recursively calculate any power of a given number \texttt{num} by using built-in Java arithmetic operators.
+
+\subsubsection*{Solution}
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class PowerCalculator {
+		public static void main(String[] args) {
+				System.out.println(findPow(2,8));
+		}
+		public static long findPow(int num, int pow) {
+				if (pow == 0)
+						return 1;
+				return num*findPow(num, pow-1);
+		}
+}
+\end{lstlisting}
+
+\newpage
+
+\subsection*{Question 5}
+
+A fridge can be plugged or unplugged and can be set to operate at a desired temperature between $43$F to $68$F. You can store items as much as its capacity allows (assuming dimensions of items can be changed as desired). You can also take items out (based on their capacity) as long as the fridge is not empty.
+You can always read a fridge's inner temperature and set your desired temperature. The inner temperature is fixed on the desired temperature while plugged and on room temperature (68F) while unplugged.
+
+\begin{enumerate}[label=(\alph*)]
+\item Draw the UML diagram for class \texttt{Fridge.java}.
+\item Develop the class \texttt{Fridge.java} based on assumptions provided in question, respecting all object-oriented concepts.
+\item Develop a class \texttt{FridgeTest.java} to instantiate a fridge of capacity 15 cubic feet and keep 5 cubic feet of food in 50F.
+\end{enumerate}
+
+\subsubsection*{Solution}
+
+\begin{enumerate}[label=(\alph*)]
+
+\item UML Diagram for class \texttt{Fridge.java} is depicted in Figure \ref{fig2}.
+	\begin{figure}[H]
+	\centering
+		\begin{tikzpicture}
+			\begin{class}[text width=8cm]{Fridge}{0, 0}
+				\attribute{- plugged: boolean}
+				\attribute{- temperature: int}
+				\attribute{- maxCapacity: int}
+				\attribute{- capacity: int}
+				\operation{+ Fridge(maxCapacity: int)}
+				\operation{+ refrigerate(food: int): void}
+				\operation{+ plug(): void}
+				\operation{+ unplug(): void}
+				\operation{+ isPlugged(): boolean}
+				\operation{+ getTemperature(): int}
+				\operation{+ setTemperature(int temperature): void}
+			\end{class}
+		\end{tikzpicture}
+	\caption{UML Diagram for Question 5}\label{fig2}
+	\end{figure}
+
+\item File \texttt{Fridge.java}
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Fridge {
+		private boolean plugged;
+		private int temperature;
+		private int maxCapacity;
+		private int capacity;
+		// Constructor
+		public Fridge(int maxCapacity) {
+				plugged = false;
+				temperature = 68;
+				this.maxCapacity = maxCapacity;
+				capacity = maxCapacity;
+		}
+		// methods
+		public void refrigerate(int food) {
+				if (capacity - food >= 0)
+						capacity -= food;
+		}
+		public void plug() {
+				plugged = true;
+		}
+		public void unplug() {
+				temperature = 68;
+				plugged = false;
+		}
+		// setters and getters
+		public boolean isPlugged() {
+				return plugged;
+		}
+		public int getTemperature() {
+				return temperature;
+		}
+		public void setTemperature(int temperature) {
+				this.temperature = temperature;
+		}
+}
+\end{lstlisting}
+
+\item File \texttt{FridgeTest.java}
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class FridgeTest {
+		public static void main(String[] args) {
+				Fridge myFridge = new Fridge(15);
+				myFridge.plug();
+				myFridge.setTemperature(50);
+				myFridge.refrigerate(5);
+		}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\subsection*{Question 6}
+
+Researchers at Winko Inc. have invented a new generation of cellphone batteries that discharge only during phone calls and at a rate of 0.1\% per minute. To make most out of this technology, Winko has decided to manufacture its own phones, called \textit{Winkophone}. Like any other phone, you can \texttt{call()} with a \textit{Winkophone} while its \texttt{battery} is not empty. Upon purchase, the battery of Winkophone is fully charged.
+
+\begin{enumerate}[label=(\alph*)]
+\item Develop two classes \texttt{Phone.java} and \texttt{Winkophone.java} to be used in another class in which one can instantiate a Winkophone and use it.
+\item Draw the UML diagram for classes \texttt{Phone.java} and \texttt{Winkophone.java} and show relations between the two classes.
+\end{enumerate}
+
+\subsubsection*{Solution}
+
+\begin{enumerate}[label=(\alph*)]
+\item Following are the classes developed based on given instructions.
+\begin{enumerate}[label=\arabic*.]
+\item File \texttt{Phone.java}
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public abstract class Phone {
+	private int battery;
+	private int maxBattery;
+	public Phone(int maxBattery) {
+		this.maxBattery = maxBattery;
+		this.battery = maxBattery;
+	}
+	public abstract void call(int minutes);
+	public void charge() {
+		battery = maxBattery;
+	}
+	public int getBattery() {
+		return battery;
+	}
+	public void setBattery(int battery) {
+	this.battery = battery;
+	}
+}
+\end{lstlisting}
+
+\item File \texttt{Winkophone.java}
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class Winkophone extends Phone {
+	public Winkophone() {
+		super(1000);
+	}
+	@Override
+	public void call(int minutes) {
+		int max = Math.max(this.getBattery()-minutes, 0);
+		this.setBattery(max);
+	}
+}
+\end{lstlisting}
+
+\item File \texttt{WinkophoneTest.java}
+
+\lstset{language=java, tabsize=2}
+\begin{lstlisting}
+public class WinkophoneTest {
+	public static void main(String[] args) {
+		Winkophone myPhone = new Winkophone();
+		System.out.println(myPhone.getBattery());
+		myPhone.call(100);
+		System.out.println(myPhone.getBattery());
+	}
+}
+\end{lstlisting}
+\end{enumerate}
+
+\item Figure \ref{fig3} shown below depicts the UML diagram for classes \texttt{Phone.java} and \texttt{Winkophone.java}.
+	\begin{figure}[H]
+	\centering
+		\begin{tikzpicture}
+			\begin{abstractclass}[text width=6cm]{Phone}{0, 0}
+				\attribute{- battery: int}
+				\attribute{- maxBattery: int}
+				\operation{+ Phone(maxBattery: int)}
+				\operation[0]{+ charge(): void}
+				\operation{+ getBattery(): int}
+				\operation{+ setBattery(int battery): void}
+			\end{abstractclass}
+			\begin{class}[]{Winkophone}{7, 0}
+				\inherit{Phone}
+				\operation{+ Winkophone()}
+				\operation{+ call(minutes: int): void}
+			\end{class}
+		\end{tikzpicture}
+	\caption{UML Diagram for Question 6}\label{fig3}
+	\end{figure}
+\end{enumerate}
+
+\end{document}

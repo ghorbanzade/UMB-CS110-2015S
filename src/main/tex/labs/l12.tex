@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 12}
+\hfill \textbf{May 07, 2015}
+
+Write a recursive method \texttt{isAchievable()} with following method signature that returns true if there is a group of elements in the array \texttt{array} such that sum of its values is equal to the value of parameter \texttt{target}.
+
+\lstset{language=java,tabsize=2,numbers=none}
+\begin{lstlisting}
+private static boolean isAchievable(int startIndex, double[] array, double target);
+\end{lstlisting}
+
+Table \ref{tab2} represents output of the method for different sets of parameters.
+
+\begin{table}[H]\centering
+\begin{tabular}{cccc}
+\hline
+start & array & target & output\\
+\hline
+$0$ & $\{1, 2, 8\}$ & $11$ & true\\
+$0$ & $\{1, 2, 8\}$ & $9$  & true\\
+$1$ & $\{1, 2, 8\}$ & $9$  & false\\
+$0$ & $\{1, 2, 8\}$ & $5$  & false\\
+$0$ & $\{1\}$       & $1$  & true\\
+$0$ & $\{\} $       & $0$  & true\\
+\hline
+\end{tabular}
+\caption{Output of method \texttt{isAchievable()} for different parameter lists}\label{tab2}
+\end{table}
+
+For simplicity, suppose the number of elements in the set \texttt{array} is no more than 1000.
+
+\end{document}

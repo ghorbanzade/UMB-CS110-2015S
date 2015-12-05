@@ -1,0 +1,3 @@
+[submodule "src/main/tex/template/pgf-umlcd"]
+	path = src/main/tex/template/pgf-umlcd
+	url = https://github.com/xuyuan/pgf-umlcd.git

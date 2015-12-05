@@ -1,0 +1,451 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{8}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+Quiz 1(b) Released. Due on Mar 04, 2015 at 11:00 PM.
+
+Quiz 1(a) Released. Due on Mar 10, 2015 at 11:00 PM.
+
+Submission online. Include your .java files only.
+
+Midterm to be held on Mar 12, 2015 at 17:30 PM.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Overview}
+	\begin{itemize}
+		\item[] Object-Oriented Programming
+		\item[] Objects
+		\item[] Classes
+		\item[] Data Members
+		\item[] Methods
+	\end{itemize}
+\end{frame}
+
+\section{Object-Oriented Programming}
+
+\begin{frame}[fragile]
+	\frametitle{Object-Oriented Programming}
+	\begin{block}{Key Programming Paradigms}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Procedural
+					\item[] Imperative
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Declarative
+					\item[] Object-Oriented
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+	\begin{block}{History}
+		\begin{itemize}
+			\item[] Simula (1967)
+			\item[] Smalltalk (1972)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Object-Oriented Programming}
+	\begin{center}
+		"You will see something new.\\
+		Two things. And I call them\\
+		Thing One and Thing Two."\\
+		- Theodor Seuss Geisel
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Object-Oriented Programming}
+	\begin{center}
+		How Do We Think?
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Object-Oriented Programming}
+	\begin{center}
+		We Think Object-Oriented!
+	\end{center}
+\end{frame}
+
+\section{Objects}
+
+\begin{frame}[fragile]
+	\frametitle{Objects}
+	\begin{center}
+		Everything is an object.\\
+		Seriously?
+	\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Objects}
+	\begin{block}{Definition}
+	An object is a location in memory having a value and possibly referenced by an identifier. Objects are implemented with a unique ID whose value is not visible to the external user. Unique ID is used internally by the JVM for identification purposes.
+	\end{block}
+	\begin{block}{Components of an Object}
+		\begin{itemize}
+			\item[] States (data)
+			\item[] Behaviors (code)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Objects}
+	\begin{block}{Objects are Everywhere}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Planet Earth
+					\item[] Human
+					\item[] Dog
+					\item[] Bicycle
+					\item[] Car
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Lamp
+					\item[] Television
+					\item[] Elevator
+					\item[] Student
+					\item[] Zombie
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Objects}
+	\begin{block}{Possible Attributes of a Dog (states)}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Gender
+					\item[] Size
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Breed
+					\item[] Age
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+	\begin{block}{Possible Methods of a Dog (behaviors)}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Sleep
+					\item[] Growl
+					\item[] Walk
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Bark
+					\item[] Wagging Tail
+					\item[] Eat
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\section{Classes}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Definition}
+	A class is an extensible code-template for creating objects, providing initial values for state (member variables) and implementations of behavior (member functions). Classes are blueprints from which objects are created. An Object is an instance of a Class.
+	\end{block}
+	\begin{block}{Components of a Class}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Instance Variables
+					\item[] Methods
+					\item[] Constructors
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Blocks
+					\item[] Classes
+					\item[] Interfaces
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{\texttt{HelloWorld.java} Revisitied}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+		\end{minted}
+	\end{block}
+	\begin{block}{Anatomy of \texttt{HelloWorld.java}}
+		\begin{itemize}
+			\item[] One Class \texttt{HelloWorld}
+			\item[] Not all programs have only one class.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Objective}
+	Write a program \texttt{Cat1Dtest.java} that controls position of a cat named kitty on the x-axis.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Procedural Programming Approach}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat1Dtest {
+	public static void main(String[] args) {
+		String catName = "kitty";
+		double catPosition = 0;
+		while (true) {
+			Scanner input = new Scanner(System.in);
+			System.out.print("Distance to walk [0 to exit]: ");
+			double dist = input.nextDouble();
+			catPosition += dist;
+			System.out.println(catName + "'s current pos: " + dist);
+			if (dist == 0)
+				break;
+		}
+		input.close();
+	}
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Problem Statement}
+	Variables \texttt{catName} and \texttt{catPosition} are independant.
+
+	Distribution of data is different with how humans think.
+
+	Revise the entire code even if goal is slightly modified.
+	\end{block}
+	\begin{block}{Proposed Solution}
+	Move \alert{kitty} instead of changing \texttt{catPosition}.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Object-Oriented Approach}
+	\begin{enumerate}
+		\item[] Identify the objects of concern.
+		\item[] Identify states of objects.
+		\item[] Identify behavior of objects.
+		\item[] Make blueprints of objects (Classes).
+		\item[] Instantiate objects from blueprints.
+		\item[] Declare attributes of objects.
+		\item[] Use objects to achieve programming goal.
+	\end{enumerate}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{Object-Oriented Approach}
+	\begin{description}
+		\item[Objects of Concern] Kitty.
+		\item[States of Objects] Name, Position.
+		\item[Behavior of Objects] Move.
+		\item[Required Classes] Cat.
+	\end{description}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Classes}
+	\begin{block}{\texttt{Cat.java} (v1.0)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	// specify attributes
+	// specify methods
+	// specify constructors
+	// etc.
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Data Members}
+
+\begin{frame}[fragile]
+	\frametitle{Data Members}
+	\begin{block}{Data Members}
+		Data Members are variables inside Classes in which data is stored. Sometimes value of these variables represent properties of specific objects (states) and sometimes they represent general properties of the class (fields).
+	\end{block}
+	\begin{block}{Classification}
+	\begin{itemize}
+		\item[] Class Members (fields)
+		\item[] Instance Members (states)
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Members}
+	\begin{block}{Class Members}
+	Class members are variables that are common to all objects. They are declared with keyword \texttt{static} and thus are sometimes called \emph{static fields}.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Members}
+	\begin{block}{\texttt{Cat.java} (v1.1)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	// specify instance variables
+	// specify methods
+	// specify constructors
+	// etc.
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Members}
+	\begin{block}{Instance Variables}
+	Instance variable is a variable that defines states of an object. Instance variables are created inside the class but outside the method. They don't get memory at compile time but at runtime when object is instantiated.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Members}
+	\begin{block}{\texttt{Cat.java} (v1.2)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	public String name;
+	public double position;
+	// specify methods
+	// specify constructors
+	// etc.
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Methods}
+
+\begin{frame}[fragile]
+	\frametitle{Methods}
+	\begin{block}{Definition}
+	A method is a collection of statements that are grouped together to perform an operation. Methods are almost like subprograms that act on data and often return a value.
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Methods}
+	\begin{block}{Structure}
+	Method declarations have six components:
+	\begin{itemize}
+		\item[] modifier
+		\item[] \emph{return type}
+		\item[] \emph{method name}
+		\item[] \emph{parameter list}
+		\item[] \emph{method body}
+		\item[] exception list
+	\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Methods}
+	\begin{block}{\texttt{HelloWorld.java} Revisitied}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class HelloWorld {
+	public static void main(String[] args) {
+		System.out.println("Hello World!");
+	}
+}
+		\end{minted}
+	\end{block}
+	\begin{block}{Anatomy of \texttt{HelloWorld.java}}
+		\begin{itemize}
+			\item[] One Method \texttt{void main(String[] args)}
+			\item[] Not all programs have only one method.
+			\item[] Not all classes need a \texttt{main(String[] args)} method.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Methods}
+	\begin{block}{\texttt{Cat.java} (v1.3)}
+		\begin{minted}[fontsize=\small,tabsize=8, linenos, firstnumber=1]{java}
+public class Cat {
+	public static int numCats = 0;
+	public String name;
+	public double position;
+	public void move(int dist) {
+		this.position += dist;
+	}
+	// specify constructors
+	// etc.
+}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Methods}
+	\begin{block}{Signature}
+		Java can distinguish between methods with different method signatures. Signature of a method is defined by its \emph{method name} and \emph{parameter list}.
+	\end{block}
+	\begin{block}{Naming Convention}
+		By Java rules there is no bound for naming methods. By convention, method names should be a verb in lowercase or a multi-word name that begins with a verb in lowercase.
+	\end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Think Object-Oriented}
+
+\end{document}

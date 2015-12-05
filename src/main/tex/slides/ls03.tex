@@ -1,0 +1,411 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{3}
+%\setbeamertemplate{footline}[text line]{}
+
+\begin{document}
+\prepareCover
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+	\frametitle{Course Administration}
+	\begin{itemize}
+		\item[] 50/64 student account so far at \href{http://ghorbanzade.com/}{course website}.
+		\item[] 12/64 online questionnaire submissions so far.
+		\item[] Assignment 1 released. Due on Feb 19 at 5:30 PM.
+		\item[] Course Forum now available. Use it. Please.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Overview}
+	\frametitle{Course Administration}
+	\begin{itemize}
+		\item[] Hello Java Program
+		\item[] Command-line Arguments
+		\item[] Data Types
+		\item[] Operators
+	\end{itemize}
+\end{frame}
+
+\section{"Hello World!"}
+
+\begin{frame}[fragile]
+	\frametitle{Hello Java Program}
+	\begin{block}{HelloWorld.java}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			public class HelloWorld {
+			    public static void main(String[] args) {
+			        System.out.println("Hello World!");
+			    }
+			}
+		\end{minted}
+	\end{block}
+	\begin{block}{Key Words}
+		\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item[] Classes
+				\item[] Methods
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item[] Statements
+				\item[] Arguments
+			\end{itemize}
+		\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Hello Java Program}
+	\begin{block}{HelloWorld.java}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			public class HelloWorld {
+			    public static void main(String[] args) {
+			        System.out.println("Hello World!");
+			    }
+			}
+		\end{minted}
+	\end{block}
+	\begin{block}{Terminal}
+		\begin{minted}[fontsize=\small,tabsize=8]{bash}
+			\$ javac HelloWorld.java
+			\$ java HelloWorld
+			Hello World!
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Command-line Arguments}
+
+\begin{frame}[fragile]
+	\frametitle{Command-line Arguments}
+	\begin{block}{SayHello.java}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			public class SayHello {
+			    public static void main(String[] args) {
+			        System.out.println("Hello! How are you?");
+			    }
+			}
+		\end{minted}
+	\end{block}
+	\begin{block}{Terminal}
+		\begin{minted}[fontsize=\small,tabsize=8]{bash}
+			\$ javac SayHello.java
+			\$ java SayHello
+			Hello! How are you?
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Command-line Arguments}
+	\begin{block}{SayHello.java}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			public class SayHello {
+			    public static void main(String[] args) {
+			        System.out.println("Hello " + args[0] + "! ");
+			        System.out.println("How are you?");
+			    }
+			}
+		\end{minted}
+	\end{block}
+	\begin{block}{Terminal}
+		\begin{minted}[fontsize=\small,tabsize=8]{bash}
+			\$ javac SayHello.java
+			\$ java SayHello Pejman
+			Hello Pejman! How are you?
+			\$ java SayHello 12@#1
+			Hello 12@#1! How are you?
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Command-line Arguments}
+	\begin{block}{Motivation}
+		\begin{itemize}
+			\item[] Efficient Interthread Communication in JVM by means of piping and redirection
+		\end{itemize}
+	\end{block}
+	\begin{block}{Advantages}
+		\begin{itemize}
+			\item[] Provides a way to give input to program
+			\item[] Simple to begin with
+		\end{itemize}
+	\end{block}
+	\begin{block}{Disadvantages}
+		\begin{itemize}
+			\item[] All user-specified arguments to be given before execution of program
+			\item[] All arguments are of type String
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\section{Data Types}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	\begin{block}{Variables}
+		A variable is a name for a location in memory used to hold a data value. All variables in java should be declared. Once.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int a = 123;
+			int b = 99;
+			int c = a + b;
+			a = 25;
+		\end{minted}
+	\end{block}
+	\begin{block}{Constants}
+		A constant is a special variable that holds a data whose value does not change throughout the program.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			final int d = 2015;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	\begin{block}{Identifiers}
+		An identifier is a sequence of letters, digits, underscore signs and dollar signs; the first of which is not a digit.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int HeLlO = 123;
+			int $_Q2d$o = 99;
+			int _ASc = HeLlO + $_Q2d$o;
+			$_Q2d$o = 25;
+		\end{minted}
+	\end{block}
+	\begin{itemize}
+		\item[] Identifiers are case sensitive.
+		\item[] You cannot use Java \textbf{reserved} words for identifiers
+		\item[] Using dollar and underscore signs are discouraged.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	Java is statically-typed: all \textbf{variables} must first be declared.
+	\begin{block}{Primitive Data Types}
+		\begin{columns}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item[] boolean
+				\item[] byte
+				\item[] short
+				\item[] int
+			\end{itemize}
+		\end{column}
+		\begin{column}{0.5\textwidth}
+			\begin{itemize}
+				\item[] long
+				\item[] float
+				\item[] double
+				\item[] char
+			\end{itemize}
+		\end{column}
+		\end{columns}
+	\end{block}
+	\begin{block}{Built-in Data Types}
+		\begin{itemize}
+			\item[] Primitive Data Types
+			\item[] String
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	\begin{block}{Declaration}
+		A declaration associates a variable with a type at compile time.
+
+		Declaration should be made before first use of variable.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int a, b;
+			a = 13;
+			b = 25;
+			int c = 10;
+			int d = b - c;
+			d = d - c;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	\begin{block}{Declaration}
+		Declared data type should be consistent with the value assigned.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			boolean snowDay = false;
+			byte numStudentClass = 64;
+			short numStudentTotal = 15741;
+			int populationWorld = 318881992;
+			long gangnamYoutube = 2238643747;
+			float snowHeight = 19.75;
+			double avogadro = 6.022e23;
+			char letter = 'Q';
+			String word = "Beacons";
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Data Types}
+	\begin{block}{Assignment}
+		An assignment associates a data type value with a variable.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			double discriminant = b*b - 4*a*c;
+		\end{minted}
+		The meaning of = is decidedly \textbf{not} the same as in mathematical equations.
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int a, b, c;
+			a = 23;
+			b = 25;
+			c = a;
+			a = b;
+			b = c;
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Operators}
+
+\begin{frame}[fragile]
+	\frametitle{Operators}
+	An operation is an action performed on one or more values either to modify the value or to produce a new one.
+	\begin{block}{Classification}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Arithmetic Operators
+					\item[] Relational Operators
+					\item[] Bitwise Operators
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] Logical Operators
+					\item[] Assignment Operators
+					\item[] Ternary Operators
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Operators}
+	\begin{block}{Arithmetic Operators}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int A = 10;
+			int B = 25;
+		\end{minted}
+		\begin{table}
+			\begin{tabular}{lcc}
+				\toprule
+				Operator & Example & Output\\
+				\midrule
+				Addition & A + B & 35 \\
+				Subtraction & A - B & -15\\
+				Multiplication & A * B & 250\\
+				Division & B / A & 2\\
+				Modulus & B \% A & 5\\
+				Increment & A++ & 11\\
+				Decrement & B-{}- & 24\\
+				\bottomrule
+			\end{tabular}
+			\caption{Arithmetic Operators}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Operators}
+	\begin{block}{Relational Operators}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int A = 10;
+			int B = 25;
+		\end{minted}
+		\begin{table}
+			\begin{tabular}{lcc}
+				\toprule
+				Operator & Example & Output\\
+				\midrule
+				Equality & A == B & false\\
+				Inequality & A != B & true\\
+				Greater than & A > B & false\\
+				Less than & A < B & true\\
+				Greater than or equal to & A >= B & false\\
+				Less than or equal to & A <= B & true\\
+				\bottomrule
+			\end{tabular}
+			\caption{Relational Operators}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Operators}
+	\begin{block}{Bitwise Operators}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			int A = 0b11111111;
+			int B = 0b00001010;
+		\end{minted}
+		\begin{table}
+			\begin{tabular}{lcc}
+				\toprule
+				Operator & Example & Output\\
+				\midrule
+				Binary AND & A \& B & 0b00001010\\
+				Binary OR & A | B & 0b11111111\\
+				Binary XOR & A \textasciicircum B & 0b11110101\\
+				Binary Ones Complement & \textasciitilde B & 0b11110101\\
+				Binary Left Shift & B <{}< 2 & 0b00101000\\
+				Binary Right Shift & B >{}> 2 & 0b10000010\\
+				Shift Right Zero Fill & A >{}>{}> 2 & 0b00000010 \\
+				\bottomrule
+			\end{tabular}
+			\caption{Bitwise Operators}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Operators}
+	\begin{block}{Logical Operators}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			boolean A = true;
+			boolean B = false;
+		\end{minted}
+		\begin{table}
+			\begin{tabular}{lcc}
+				\toprule
+				Operator & Example & Output\\
+				\midrule
+				Logical AND & A \&\& B & false\\
+				Logical OR & A || B & true\\
+				Logical NOT & !B & true\\
+				\bottomrule
+			\end{tabular}
+			\caption{Logical Operators}
+		\end{table}
+	\end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\and\\Learn Java}
+
+\end{document}

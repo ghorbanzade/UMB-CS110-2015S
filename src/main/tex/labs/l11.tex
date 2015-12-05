@@ -1,0 +1,34 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 11}
+\hfill \textbf{April 30, 2015}
+
+Write a program \texttt{GunFight.java} in which you can use two different guns of class \texttt{Gun.java}; one double-barreled shotgun of class \texttt{Shotgun.java} and one semi-automatic pistol of class \texttt{Pistol.java}.
+Both guns fire as long as they have enough ammunition.
+Once they run out of ammo, they need to reload.
+Shotgun takes between 2 to 3 seconds to reload while the pistol takes between 5 to 7 seconds as you should replace the entire ammo belt which has 10 bullets.
+The pistol can fire at a rate of 4 bullets per second but at the best case, chance of hitting the target is only 50\%.
+Shotgun on the other hand takes 1 second to fire (you can fire both barrels at the same time) but can hit the target by up to 80\%.
+Assumming both guns are preloaded, your program \texttt{GunFight.java} should find how many successful hits can be achieved with each gun in 1 minute.
+
+\end{document}

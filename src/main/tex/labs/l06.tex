@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 6}
+\hfill \textbf{March 12, 2015}
+
+Write a class \texttt{Cat.java} with two instance variables position and name and a method \texttt{move(int dist}). Method \texttt{move(int dist)} changes position of the object on which it is invoked and at every call will print a message of the following form. At this point, you are not required to use constructors, accessors or modifiers.
+
+\begin{verbatim}
+object.name moved dist forward.
+Current posiion of object.name: object.position
+\end{verbatim}
+
+Use your class \texttt{Cat.java} in another class \texttt{Cat1Dtest.java} following the steps below.
+
+\begin{enumerate}[itemsep=0pt]
+\item Create a cat object and name it kitty.
+\item Initialize position of kitty to 0 of the x-axis.
+\item Use the move method as you like to change position of kitty.
+\item Modify your class \texttt{Cat.java} so that you can use it in another class \texttt{Cat2Dtest.java} where you can control position of kitty in Cartesian Coordinates.
+\end{enumerate}
+
+\end{document}

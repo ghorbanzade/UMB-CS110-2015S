@@ -1,0 +1,9 @@
+<ivy-module version="2.0">
+	<info organisation="org.apache" module="UMB-CS110-2015S"/>
+	<configurations>
+		<conf name="build"/>
+	</configurations>
+	<dependencies>
+		<dependency org="ant-contrib" name="ant-contrib" rev="1.0b3" conf="build->default"/>
+	</dependencies>
+</ivy-module>

@@ -1,0 +1,42 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Quiz 5}
+\doc{date-pub}{May 05, 2015 at 01:00 PM}
+\doc{date-due}{May 08, 2015 at 11:00 PM}
+\doc{points}{4}
+
+\prepare{header}
+
+\section*{Question 1}
+
+Write a program \texttt{QuadraticSolver.java} that asks for three real numbers $a$, $b$ and $c$ from the user and uses a method \texttt{findSolution()} with given method signature to solve for $x$ with three digits of precision, the quadratic expression shown in Equation \ref{eq2}.
+\begin{equation}
+ax^2+bx+c=0
+\label{eq2}
+\end{equation}
+
+\lstset{language=java,tabsize=2,numbers=none}
+\begin{lstlisting}
+private static double[] findSolution(double[] coefficients) throws NegativeDiscriminantException, ArithmeticException;
+\end{lstlisting}
+
+Your program is expected to maintain its control flow regardless of the user entries. User should be asked for inputs as long as his previous entries are not acceptable or result in a negative discriminant.
+
+\prepare{footer}
+
+\end{document}

@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Midterm Exam}
+\doc{points}{20}
+
+\prepare{header}
+
+\section*{Question 1}
+
+The following code snippets either do not compile or do not run as expected. There are five \textbf{distinct} problems in each code snippet. You are expected to find and fix all errors so that given command-line arguments will lead to expected output as indicated.
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Execution Script \hfill Expected Output\\
+\texttt{java HelloWorld President} \hfill \texttt{Hello President!}
+\begin{lstlisting}
+public class HelloWorld {
+	public static void main(String args) {
+		System.out.printn("Hello" + args[0]!)
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Divisible 15 4} \hfill \texttt{15 not divisible by 4}
+
+\begin{lstlisting}
+public class Divisible.java {
+	public static void main(String args) {
+		int b;
+		int a = args[0];
+		b = args[1];
+		if (a % b = 0) {
+			System.out.println(a + " divisible by " + b);
+		}
+		elseif {
+			System.out.print(a + " not divisible by " + b);
+		}
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java Quadratic 1 -2 -4} \hfill \texttt{-1.236 and 3.237}
+
+\begin{lstlisting}
+public class Quadratic {
+	public static void main(String[] args) {
+		int a = Integer.parseInt(args[0]);
+		int b = Integer.parseInt(args[1]);
+		int c = Integer.parseInt(args[2]);
+		double discriminant = b^2 - 4*a*c;
+		if (double discriminant > 0) {
+			double 1sol = (- b + sqrt(discriminant))/(2*a);
+			double 2sol = (- b - sqrt(discriminant))/(2*a);
+			System.out.printf("%f and %f\n", sol1, sol2);
+		}
+	}
+}
+\end{lstlisting}
+
+\item Execution Script \hfill Expected Output\\
+\texttt{java IdentityMatrix 2} \hfill \texttt{1 0}\\ \raggedleft \texttt{0 1}
+
+\begin{lstlisting}
+public class IdentityMatrix {
+	public static void main(String[] args) {
+		int i, j;
+		int row = Integer.parseInt(args[0]);
+		int[][] matrix = int[row][row];
+		for (i = 1; i < row; i++) {
+			matrix[i,i] = 1;
+		}
+		for (i = 1; i < row; i++) {
+			for (j = 1; j < row; j++) {
+				System.out.print(matrix[i,j] + " ");
+			}
+		}
+	}
+}
+\end{lstlisting}
+\newpage
+\item Execution Script \hfill Expected Output\\
+\texttt{java Factorial 5} \hfill \texttt{5! is 120}
+
+\begin{lstlisting}
+public class Factorial {
+	public static void main(String[] args) {
+		long product = 1;
+		long a = Long.parseLong(args[0]);
+		for (i = a: i >= 0: i--) {
+			product *= a;
+		}
+		System.out.println(a! + " is " + product );
+	}
+}
+\end{lstlisting}
+
+\end{enumerate}
+
+\section*{Question 2}
+
+Determine the output of the following code snippet and support your answer by explaining how the program works. No assumption about user input can be made except that the input is an integer.
+
+\begin{enumerate}[label=\textbf{(\alph*)}]
+\item Execution Script \hfill \texttt{java CoolArray}
+
+\begin{lstlisting}
+import java.util.Scanner;
+public class CoolArray {
+	public static void main(String[] args) {
+		Scanner input = new Scanner(System.in);
+		System.out.print("Enter array size: ");
+		int size = input.nextInt();
+		input.close();
+		double array[] = new double[2*size];
+		for (int i = 0; i < size; i++) {
+			int num = (int) (Math.random() * 10);
+			array[i] = num;
+			array[2*size - i - 1] = 10 - num;
+		}
+		double sum = 0;
+		for (int i = 0; i < 2*size; i++) {
+			sum += array[i];
+		}
+		System.out.println(sum/size/2);
+		System.out.println();
+	}
+}
+
+\end{lstlisting}
+
+\end{enumerate}
+
+\section*{Question 3}
+
+Write a program \texttt{GPAcalculator.java} that asks a student for \texttt{N} grades - where \texttt{N} is given by student - and number of credits corresponding to each and prints his GPA based on entered information. You are expected to use Class Scanner to get input from user.
+
+\prepare{footer}
+
+\end{document}

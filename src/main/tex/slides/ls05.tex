@@ -1,0 +1,225 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {../..}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[10pt, compress]{beamer}
+
+\usepackage{\texDirectory/template/style/directives}
+\input{\texDirectory/template/config}
+\usepackage{\texDirectory/template/style/beamerthemeUmassLecture}
+\doc{number}{5}
+%\setbeamertemplate{footline}[text line]{}
+
+%\usepackage{xeCJK}
+%\setCJKmainfont{SimSun}
+\usepackage{alltt}
+
+\begin{document}
+\prepareCover
+
+\plain{}{Happy New Lunar Year}
+%\plain{}{祝贺大家新年好\\Happy New Lunar Year}
+
+\section{Course Administration}
+
+\begin{frame}[fragile]
+\frametitle{Course Administration}
+	Quiz 1(b) Released for Section 6 and 8 Students.
+
+	Due Feb 19 at 11:00 PM. Submission is online.
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Overview}
+	\begin{itemize}
+		\item[] Conditionals
+		\item[] Class Scanner
+	\end{itemize}
+\end{frame}
+
+\section{Conditionals}
+
+\begin{frame}[fragile]
+	\frametitle{Conditionals}
+	\begin{block}{Control Flow}
+		Control Flow (Statement Sequencing) refers to the order in which statements are executed in a program.
+	\end{block}
+	\begin{block}{Control Flow Types}
+		\begin{itemize}
+			\item[] Unconditional Branch
+			\item[] Conditional Branch
+			\item[] Subroutine
+			\item[] Interrupts
+			\item[] Uncondigtional Halt
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conditionals}
+	\begin{block}{Unconditional Branch}
+		\begin{alltt}
+						ORG		 R00
+						IN			R26, P
+						LSL		 R26
+						\alert{BRCC}		POSITIVE
+						LDI		 R27, \$00
+						OUT		 P, R27
+						JMP		 END
+POSITIVE:	 LDI		 R27, \$ff
+						OUT		 P, R27
+						JMP		 END
+END:				NOP
+		\end{alltt}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conditionals}
+	\begin{block}{Unconditional Branch}
+		\begin{minted}[fontsize=\small,tabsize=8]{c}
+	include <stdio.h>
+	int main() {
+		int number = scanf("%d", &n);
+		if (number > 0)
+			goto JUMP;
+		elseif (number < 0)
+			printf("number negative");
+		else
+			printf("number zeor");
+		return 0;
+	JUMP:
+		printf("number positive");
+		return 0;
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conditionals}
+	\begin{block}{Minimal Structured Control Flow}
+		Böhm-Jacopini theorem states that any computing application can be realized using \emph{conditional branches} and \emph{subroutines}.
+	\end{block}
+	\begin{block}{Conditional Branch}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+	if (a > b)
+		System.out.println(a);
+	else if (a < b)
+		System.out.println(b);
+	else
+		System.out.println("Equal");
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Conditionals}
+	\begin{block}{Conditional Branch}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+	public class SignDetector {
+		public static void main(String[] args) {
+			int number = Integer.parseInt(args[0]);
+			if (number > 0) {
+				System.out.println("Number is positive");
+			}
+			else if (number < 0) {
+				System.out.println("Number is negative");
+			}
+			else {
+				System.out.println("Number is zero");
+			}
+		}
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\section{Class Scanner}
+
+\begin{frame}[fragile]
+	\frametitle{Class Scanner}
+	\begin{block}{Problem Definition}
+		\begin{itemize}
+			\item[] Command-line arguments to be given before program execution.
+				\begin{itemize}
+					\item[] What if we want to get input when certain conditions are met?
+				\end{itemize}
+		\end{itemize}
+	\end{block}
+	\begin{block}{Solution}
+		\begin{itemize}
+			\item[] Scanner class provides a simple yet powerful way to ask for inputs during execution of program.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Class Scanner}
+	\begin{block}{Example}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+	public class SignDetector {
+		public static void main(String[] args) {
+			Scanner input = new Scanner(System.in);
+			System.out.print("a = ");
+			int a = input.nextInt();
+			System.out.print("b = ");
+			int b = input.nextInt();
+			input.close();
+			System.out.println("a + b = " + (a + b));
+		}
+	}
+		\end{minted}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Class Scanner}
+	\begin{block}{Instantiation}
+		\begin{minted}[fontsize=\small,tabsize=8]{java}
+			Scanner input = new Scanner(System.in);
+		\end{minted}
+	\end{block}
+	\begin{block}{Methods}
+		\begin{columns}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] reset()
+					\item[] skip()
+					\item[] match()
+					\item[] useDelimiter()
+					\item[] close()
+				\end{itemize}
+			\end{column}
+			\begin{column}{0.5\textwidth}
+				\begin{itemize}
+					\item[] next()
+					\item[] nextLine()
+					\item[] nextInt()
+					\item[] nextDouble()
+					\item[] hasNext()
+				\end{itemize}
+			\end{column}
+		\end{columns}
+	\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+	\frametitle{Class Scanner}
+	\begin{block}{Final Note}
+		\begin{itemize}
+			\item[] It is a good practice to use the \texttt{close()} method to close once you are sure you will no longer use it. This helps you avoid memory leakage and releases system resources.
+			\item[] Once \texttt{Scanner} object is closed, you will no longer be able to ask for inputs from \texttt{System.in}. To avoid this issue, you must have another Scanner object on which \texttt{close()} method is not invoked yet.
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+\plain{}{Keep Calm\\ and\\ Practice}
+
+\end{document}

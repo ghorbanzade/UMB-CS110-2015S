@@ -1,0 +1,52 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Assignment 6 (Optional)}
+\doc{date-pub}{Apr 19, 2015 at 12:00 AM}
+\doc{date-due}{May 14, 2015 at 05:30 PM}
+\doc{points}{8}
+
+\prepare{header}
+
+\section*{Question 1}
+
+\begin{wrapfigure}{r}{0.3\textwidth}
+\centering
+\includegraphics[width=0.3\textwidth]{\texDirectory/template/images/zombies.png}
+\end{wrapfigure}
+
+The 1st International Conference on Cool Programming Questions (CPQ2015) was held in Boston, MA in a rectangular-shaped conference room of 30 meters width, 50 meters length and seats in 6 rows and 10 columns. 50 people (including organizers and keynote speakers) registered for the conference and were seated in the conference room for the opening ceremony, when suddenly the author in row 2 and column 4 turned into a Zombie.
+
+Reports suggest that at the time of incident, all attendees began to run for their lives but all doors were unfortunately locked. Sadly, they were all bitten eventually and turned into zombies.
+
+Write a program \texttt{Simulation.java} that, using the following assumptions, simulates how long it took (in seconds) for all authors to turn into Zombies. Develop as many additional classes as you think best fits the objective.
+
+\begin{itemize}[itemsep=1mm]\parskip=0pt
+\item[] Seats are scattered evenly in the room.
+\item[] Seats do not block the way for authors or zombies.
+\item[] Authors not yet bitten move randomly in the conference room.
+\item[] Authors within 1 meter proximity of a zombie will be bitten.
+\item[] Authors will turn into zombies, once bitten.
+\item[] Zombies move towards the author closest to them.
+\item[] Zombies bite in an instant.
+\item[] All attendees walk 5 meters per second.
+\item[] Time granularity is 0.2 second.
+\end{itemize}
+
+\prepare{footer}
+
+\end{document}

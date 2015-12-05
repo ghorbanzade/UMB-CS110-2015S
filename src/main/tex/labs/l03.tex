@@ -1,0 +1,32 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CS110: Introduction to Computing
+% Copyright 2015 Pejman Ghorbanzade <mail@ghorbanzade.com>
+% Creative Commons Attribution-ShareAlike 4.0 International License
+% https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \topDirectory {.}
+\def \texDirectory {\topDirectory/src/main/tex}
+
+\documentclass[12pt,letterpaper,twoside]{article}
+\usepackage{\texDirectory/template/style/directives}
+\usepackage{\texDirectory/template/style/assignment}
+\input{\texDirectory/template/config}
+
+\begin{document}
+
+\doc{title}{Lab Session Problems}
+\doc{points}{0}
+
+\prepare{header}
+
+\subsection*{Week 3}
+\hfill \textbf{February 24, 2015}
+
+\begin{enumerate}\itemsep=0pt
+\item Write a program that rolls two 6-side standard dice to get two numbers $A$ and $B$ until $A = B$ and both greater than $4$. If they are, it would roll the two dice $(A + B)$ times and prints the total sum of numbers that would appear. Students should show numbers that appear as well.
+\item Write a program that takes number $A$ as command-line argument and generates a random number between $A$ and $10*A$.
+\item Write a program that takes polar coordinates as command-line argument and converts them to Cartesian coordinates.
+\end{enumerate}
+
+\end{document}
