@@ -104,7 +104,7 @@ $(SLIDES_PDF): $(SLIDES_TEX)
 
 binder:
 	@echo -n "  Binding documents... "
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(BIN_DIR)/course-material.pdf $(ALL_PDF)
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(DOC_DIR)/cs110.pdf $(ALL_PDF)
 	@echo "Done."
 
 code:
