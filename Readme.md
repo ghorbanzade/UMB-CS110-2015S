@@ -19,7 +19,6 @@ Instructions for building source codes and documents are described in details in
 ## Contribution
 To keep it as taught in Spring 2015, content of this repository is **not** subject to change.
 Bug reports however are immensely appreciated.
-If you are willing to further contribute to developing course material for an introductory course to programming in Java, please checkout [Java 101] repository.
 
 ## License
 All documents are licensed under [Creative Commons Attribution-ShareAlike 4.0 International License].
@@ -34,7 +33,6 @@ For questions or further information please contact [Pejman Ghorbanzade].
 [Pejman Ghorbanzade]: http://www.ghorbanzade.com
 [`Syllabus`]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/src/main/md/syllabus.md
 [Dependencies]: https://github.com/ghorbanzade/UMB-CS110-2015S/wiki/Dependencies
-[Java 101]: https://github.com/ghorbanzade/java-101/
 [Creative Commons Attribution-ShareAlike 4.0 International License]: https://github.com/ghorbanzade/UMB-CS110-2015S/blob/master/LICENSE
 [Public Domain]: http://en.wikipedia.org/wiki/Public_Domain
 [Introduction to Java]: https://github.com/ghorbanzade/UMB-CS114-2015F
