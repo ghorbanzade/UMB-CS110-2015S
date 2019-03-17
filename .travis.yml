@@ -7,7 +7,7 @@ script:
 after_success:
   - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
       echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
-      docker push ghorbanzade/umb-cs114-2015f;
+      docker push ghorbanzade/umb-cs110-2015s;
     fi
 notifications:
   email:
