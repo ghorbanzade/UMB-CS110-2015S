@@ -1,35 +1,17 @@
-language: java
-sudo: false
-env:
-  global:
-    - secure: "UNZlg+7PuV41s+OaxBMKNSQtGz8riW1gCfO1HaXgoh+lwxuVWaLE7/5rTq+yXWlZy74DLYfNpREwmrn9r/fTiSJU36Oyhnb1qAGEbnwdF1mkPJl5Fow4ltd1k1gMGNGkcJKJigAE4bPGt5gtaIKv3XiD4mI7GbOiuRw/bueZvcg8SK7znfzBiZ8rAa0YI2BrBTc9I9A9YK/WjMmWFDELV+XMDulf+oqHwD42eSs9h9Ich5MZM8WDZxef2HxW6sOBYAxe3u4d9BhOn+k/cjiweA9ZJMwbYploqE8O6ztHNyrG5Ix1wwozNO4rxd43LXZYAK+O2whPy1+gMLbfb6SKGNbCDLhA+F8Kc40ofB9KYAy6SDK+M6DybL3VqyrtsmweTIjJJihdbtbSLcg6tOBNi2sunMzbYk4W7VUUPyon/OO6UVbKHPnYPhthh0WPtjQnDOu5BBuGDXcfBF8UAJqvp2D6gOCTHmvgmoqVpEnld7UEMD0IfV+jh0pd2036PrQW+qec1jWGA1NjEBaBGUP3+KJFxcaneInuSBv9HwPIYxePPMMz9727mUJ22MAyybXRC0nRygJ3dXWeTdEgSlr5Uj6huQ/y1wIdKg7bm1qq0N7u6XDOakceBqke4GUS+OaUOuEJDKMkmzZ+v3/4vQJa6W3YnSDSnrqph85b6ui6PpY="
-addons:
-  coverity_scan:
-    project:
-      name: "ghorbanzade/UMB-CS110-2015S"
-      description: "Released source for CS110 introduction to computing course"
-    notification_email: mail@ghorbanzade.com
-    build_command_prepend: "make clean"
-    build_command: "make code"
-    branch_pattern: master
-  apt:
-    packages:
-    - texlive-latex-base
-    - texlive-latex-extra
-    - texlive-fonts-recommended
-    - texlive-xetex
-    - texlive-humanities
-    - latex-beamer
-    - lmodern
-    - pgf
-    - python-pygments
-    - ghostscript
+language: generic
+services:
+  - docker
 script:
-  - make clean
-  - make code
+  - bash cfg/build.sh build
+  - bash cfg/build.sh stage
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin;
+      docker push ghorbanzade/umb-cs114-2015f;
+    fi
 notifications:
   email:
     recipients:
-      - mail@ghorbanzade.com
+      - pejman@ghorbanzade.com
     on_success: always
     on_failure: always

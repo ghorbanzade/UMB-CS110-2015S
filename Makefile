@@ -3,7 +3,7 @@ BIN_DIR = $(TOP_DIR)/bin
 SRC_DIR = $(TOP_DIR)/src
 TEX_DIR = $(SRC_DIR)/main/tex
 FONT_DIR= $(TEX_DIR)/template/fonts
-DOC_DIR = $(BIN_DIR)/documents
+DOC_DIR = $(BIN_DIR)/doc
 SYLLABUS_DIR = $(TEX_DIR)/syllabus
 ASSIGNMENTS_DIR = $(TEX_DIR)/assignments
 QUIZ_DIR = $(TEX_DIR)/quizzes
@@ -21,90 +21,99 @@ SLIDES = ls01 ls02 ls03 ls04 ls05 ls06 ls07 ls08 ls09 ls10 ls11 ls12 ls13 ls14 l
 ALL_DOC = $(SYLLABUS) $(ASSIGNMENTS) $(QUIZ) $(LAB) $(EXAMS) $(SLIDES)
 ALL_PDF = $(foreach NUM, $(ALL_DOC), $(DOC_DIR)/$(NUM).pdf)
 
-SYLLABUS_TEX = $(foreach NUM, $(SYLLABUS), $(TEX_DIR)/syllabus/$(NUM).tex)
+SYLLABUS_TEX = $(foreach NUM, $(SYLLABUS), $(SYLLABUS_DIR)/$(NUM).tex)
 SYLLABUS_PDF = $(foreach NUM, $(SYLLABUS), $(DOC_DIR)/$(NUM).pdf)
-ASSIGNMENTS_TEX = $(foreach NUM, $(ASSIGNMENTS), $(TEX_DIR)/assignments/$(NUM).tex)
+ASSIGNMENTS_TEX = $(foreach NUM, $(ASSIGNMENTS), $(ASSIGNMENTS_DIR)/$(NUM).tex)
 ASSIGNMENTS_PDF = $(foreach NUM, $(ASSIGNMENTS), $(DOC_DIR)/$(NUM).pdf)
 QUIZ_TEX = $(foreach NUM, $(QUIZ), $(QUIZ_DIR)/$(NUM).tex)
 QUIZ_PDF = $(foreach NUM, $(QUIZ), $(DOC_DIR)/$(NUM).pdf)
 LAB_TEX = $(foreach NUM, $(LAB), $(LAB_DIR)/$(NUM).tex)
 LAB_PDF = $(foreach NUM, $(LAB), $(DOC_DIR)/$(NUM).pdf)
-EXAMS_TEX = $(foreach NUM, $(EXAMS), $(TEX_DIR)/exams/$(NUM).tex)
+EXAMS_TEX = $(foreach NUM, $(EXAMS), $(EXAMS_DIR)/$(NUM).tex)
 EXAMS_PDF = $(foreach NUM, $(EXAMS), $(DOC_DIR)/$(NUM).pdf)
-SLIDES_TEX = $(foreach NUM, $(SLIDES), $(TEX_DIR)/slides/$(NUM).tex)
+SLIDES_TEX = $(foreach NUM, $(SLIDES), $(SLIDES_DIR)/$(NUM).tex)
 SLIDES_PDF = $(foreach NUM, $(SLIDES), $(DOC_DIR)/$(NUM).pdf)
 
 .PHONY: clean code docs syllabus assignments quizzes labs exams slides bind tidy all
 
-all: code
-
-docs: directories code build
+all: directories code docs
 
 directories:
 	@mkdir -p $(BIN_DIR)
 	@mkdir -p $(DOC_DIR)
 
-build: syllabus assignments quizzes labs exams slides binder tidy
+docs: syllabus assignments quizzes labs exams slides binder tidy
 
-syllabus: $(SYLLABUS_PDF)
-
-$(SYLLABUS_PDF): $(SYLLABUS_TEX)
-	@echo -n "  $(@F)... " && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(SYLLABUS_DIR)/$(@F:.pdf=.tex) > /dev/null && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(SYLLABUS_DIR)/$(@F:.pdf=.tex) > /dev/null
-	@echo "Done."
-
-assignments: $(ASSIGNMENTS_PDF)
-
-$(ASSIGNMENTS_PDF): $(ASSIGNMENTS_TEX)
-	@echo -n "  $(@F)... " && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(ASSIGNMENTS_DIR)/$(@F:.pdf=.tex) > /dev/null && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(ASSIGNMENTS_DIR)/$(@F:.pdf=.tex) > /dev/null
-	@echo "Done."
-
-quizzes: $(QUIZ_PDF)
+quizzes: directories $(QUIZ_PDF)
 
 $(QUIZ_PDF): $(QUIZ_TEX)
-	@echo -n "  $(@F)... " && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(QUIZ_DIR)/$(@F:.pdf=.tex) > /dev/null && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(QUIZ_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@printf "  $(@F)... "
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(QUIZ_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(QUIZ_DIR)/$(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 
-labs: $(LAB_PDF)
+labs: directories $(LAB_PDF)
 
 $(LAB_PDF): $(LAB_TEX)
-	@echo -n "  $(@F)... " && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(LAB_DIR)/$(@F:.pdf=.tex) > /dev/null && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(LAB_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@printf "  $(@F)... "
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(LAB_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(LAB_DIR)/$(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 
-exams: $(EXAMS_PDF)
+syllabus: directories $(SYLLABUS_PDF)
+
+$(SYLLABUS_PDF): $(SYLLABUS_TEX)
+	@printf "  $(@F)... "
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(SYLLABUS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(SYLLABUS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@echo "Done."
+
+assignments: directories $(ASSIGNMENTS_PDF)
+
+$(ASSIGNMENTS_PDF): $(ASSIGNMENTS_TEX)
+	@printf "  $(@F)... "
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(ASSIGNMENTS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(ASSIGNMENTS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@echo "Done."
+
+exams: directories $(EXAMS_PDF)
 
 $(EXAMS_PDF): $(EXAMS_TEX)
-	@echo -n "  $(@F)... " && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(EXAMS_DIR)/$(@F:.pdf=.tex) > /dev/null && \
-	pdflatex -halt-on-error -output-directory $(DOC_DIR) $(EXAMS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@printf "  $(@F)... "
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(EXAMS_DIR)/$(@F:.pdf=.tex) > /dev/null
+	@pdflatex -halt-on-error -output-directory $(DOC_DIR) \
+						$(EXAMS_DIR)/$(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 
-slides: prepare $(SLIDES_PDF)
+slides: directories prepare $(SLIDES_PDF)
 
 prepare:
 	@rm -rf "$(FONT_DIR)"
-	@echo -n "  Extracting fonts... "
+	@printf "  Extracting fonts... "
 	@mkdir -p $(FONT_DIR)
 	@tar -zxf $(FONT_DIR).tar.gz -C $(FONT_DIR) --strip-component=1
 	@echo "Done."
 
 $(SLIDES_PDF): $(SLIDES_TEX)
-	@echo -n "  $(@F)... "
+	@printf "  $(@F)... "
 	@cd $(DOC_DIR) && \
 	xelatex -halt-on-error -shell-escape ../../$(SLIDES_DIR)/$(@F:.pdf=.tex) > /dev/null && \
 	xelatex -halt-on-error -shell-escape ../../$(SLIDES_DIR)/$(@F:.pdf=.tex) > /dev/null
 	@echo "Done."
 
 binder:
-	@echo -n "  Binding documents... "
-	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=$(DOC_DIR)/cs110.pdf $(ALL_PDF)
+	@printf "  Binding documents... "
+	@gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite \
+			-sOutputFile=$(DOC_DIR)/cs110.pdf $(ALL_PDF)
 	@echo "Done."
 
 code:

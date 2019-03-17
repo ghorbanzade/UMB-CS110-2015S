@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:ac="antlib:net.sf.antcontrib" name="UMB-CS110-2015S" default="dist" basedir="." >
+<project xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:ant="antlib:net.sf.antcontrib" name="UMB-CS110-2015S" default="dist" basedir="." >
 
 	<property file="build.properties"/>
 
@@ -15,7 +15,7 @@
 	</path>
 
 	<path id="classpath.lib">
-		<fileset dir="${lib.dir}" includes="**/*.jar"/>
+		<fileset dir="${antlib.dir}" includes="**/*.jar"/>
 	</path>
 
 	<target name="download-ivy" unless="offline">
@@ -31,7 +31,7 @@
 	</target>
 
 	<target name="resolve" depends="init-ivy">
-		<ivy:retrieve/>
+		<ivy:retrieve pattern="${antlib.dir}/[artifact]-[revision].[ext]"/>
 		<ivy:cachepath pathid="build.path" conf="build"/>
 	</target>
 
@@ -40,25 +40,49 @@
 	</target>
 
 	<target name="compile" depends="taskdefs">
-		<mkdir dir="${class.bin.dir}"/>
-		<ac:for list="${java.main.src.subdirs}" param="java.main.src.subdir" trim="yes">
+		<mkdir dir="${class.dir}"/>
+		<ant:for list="${package-list}" param="package" trim="yes">
 			<sequential>
-				<javac srcdir="${java.main.src.dir}/@{java.main.src.subdir}" destdir="${class.bin.dir}" includeantruntime="false" classpathref="classpath.main"/>
+				<javac srcdir="${java.main.src.dir}/@{package}" destdir="${class.dir}" debug="on" debuglevel="lines,vars,source" includeantruntime="false" classpathref="classpath.main"/>
 			</sequential>
-		</ac:for>
+		</ant:for>
 	</target>
 
 	<target name="jar" depends="compile">
-		<mkdir dir="${jar.bin.dir}"/>
+		<mkdir dir="${jar.dir}"/>
+				<ant:for list="${package-list}" param="package" trim="yes">
+			<sequential>
+				<jar destfile="${jar.dir}/${project-name}-@{package}.jar">
+					<fileset dir="${class.dir}"
+						includes="${organization-path}/@{package}/**/*.class"
+						excludes="**/*Test.class"/>
+				</jar>
+			</sequential>
+		</ant:for>
 	</target>
 
-	<target name="dist" depends="clean, jar">
+	<target name="zip" depends="jar">
+		<mkdir dir="${zip.dir}"/>
+		<ant:for list="${package-list}" param="package" trim="yes">
+			<sequential>
+				<zip destfile="${zip.dir}/${project-name}-@{package}.zip">
+					<zipfileset dir="${jar.dir}"
+						includes="${project-name}-@{package}.jar"
+						prefix="${project-name}/@{package}/jar" />
+					<zipfileset dir="${class.dir}/${organization-path}/@{package}"
+						prefix="${project-name}/@{package}/classes/${organization-path}/@{package}" />
+				</zip>
+			</sequential>
+		</ant:for>
+	</target>
+
+	<target name="dist" depends="clean, jar, zip">
 	</target>
 
 	<target name="clean">
-		<delete dir="${lib.dir}"/>
-		<delete dir="${jar.bin.dir}"/>
-		<delete dir="${class.bin.dir}"/>
+		<delete dir="${antlib.dir}"/>
+		<delete dir="${jar.dir}"/>
+		<delete dir="${class.dir}"/>
 	</target>
 
 	<target name="clean-all" depends="clean">
